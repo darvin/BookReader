@@ -42,7 +42,7 @@ enum GutenFormat: String, Codable {
     case mobi = "application/x-mobipocket-ebook"
 }
 
-public struct GutenBook: Codable, BookMetadatable {
+public struct GutenBook: Codable {
     let id: Int
     let title: String
     let authors: [GutenAuthor]
@@ -54,4 +54,30 @@ public struct GutenBook: Codable, BookMetadatable {
     let copyright: Bool
     let media_type: GutenMediaType
     let download_count: Int
+}
+
+
+extension GutenBook: BookMetadatable {
+    public static func == (lhs: GutenBook, rhs: GutenBook) -> Bool {
+        return lhs.id == rhs.id
+    }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    
+    var author: String {
+        return authors.map { author in
+            author.name
+        }.joined(separator: ", ")
+    }
+    
+    var thumbnailURL: URL {
+        guard let urlString = formats[GutenFormat.jpeg.rawValue] else {
+            return URL(string: "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg")!
+        }
+        return URL(string: urlString)!
+    }
+    
+    
 }

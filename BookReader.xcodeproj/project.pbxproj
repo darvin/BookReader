@@ -18,6 +18,10 @@
 		9A586C89299394AD0001A1EA /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C88299394AD0001A1EA /* DequeModule */; };
 		9A586C8B299394AD0001A1EA /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C8A299394AD0001A1EA /* OrderedCollections */; };
 		9A586C8E299394BD0001A1EA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C8D299394BD0001A1EA /* Algorithms */; };
+		9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864CC2993BCF900E418F8 /* BookView.swift */; };
+		9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864CE2993BD0500E418F8 /* BookshelfView.swift */; };
+		9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864D12993C66A00E418F8 /* GutenBookshelfViewModel.swift */; };
+		9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864D32993C9A300E418F8 /* Bookshelfable.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -54,6 +58,10 @@
 		9A586C71299393CB0001A1EA /* BookReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9AA864CC2993BCF900E418F8 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		9AA864CE2993BD0500E418F8 /* BookshelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfView.swift; sourceTree = "<group>"; };
+		9AA864D12993C66A00E418F8 /* GutenBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GutenBookshelfViewModel.swift; sourceTree = "<group>"; };
+		9AA864D32993C9A300E418F8 /* Bookshelfable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookshelfable.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -115,7 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				9AC2F7A12993A3F70053EA37 /* Info.plist */,
-				9A586C902993956A0001A1EA /* Services */,
+				9AA864CB2993BCD200E418F8 /* Views */,
+				9AA864D02993C64600E418F8 /* ViewModel */,
 				9A586C8F2993955A0001A1EA /* Model */,
 				9A586C59299393CA0001A1EA /* BookReaderApp.swift */,
 				9A586C5B299393CA0001A1EA /* ContentView.swift */,
@@ -155,6 +164,7 @@
 		9A586C8F2993955A0001A1EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9A586C902993956A0001A1EA /* Services */,
 				9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */,
 			);
 			path = Model;
@@ -176,6 +186,24 @@
 				9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */,
 			);
 			path = Gutenberg;
+			sourceTree = "<group>";
+		};
+		9AA864CB2993BCD200E418F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9AA864CC2993BCF900E418F8 /* BookView.swift */,
+				9AA864CE2993BD0500E418F8 /* BookshelfView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9AA864D02993C64600E418F8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9AA864D12993C66A00E418F8 /* GutenBookshelfViewModel.swift */,
+				9AA864D32993C9A300E418F8 /* Bookshelfable.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,8 +351,12 @@
 				9AC2F7A32993A97F0053EA37 /* GutenFetcher_Preview.swift in Sources */,
 				9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */,
 				9AC2F7A02993A1680053EA37 /* HTTPService.swift in Sources */,
+				9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */,
 				9A586C5C299393CA0001A1EA /* ContentView.swift in Sources */,
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
+				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
+				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
+				9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

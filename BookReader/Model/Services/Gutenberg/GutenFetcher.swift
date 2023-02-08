@@ -12,12 +12,13 @@ import Foundation
 import Combine
 
 
-public class GutenFetcher {
+public actor GutenFetcher {
     public init() {}
 
-    public func fetchBooks(urlString: String = "http://gutendex.com/books/") -> AsyncThrowingStream<GutenBook, Error> {
+    public func fetchBooks(urlString: String = "http://gutendex.com/books/", limitBooks: Int = 100) -> AsyncThrowingStream<GutenBook, Error> {
         return AsyncThrowingStream { continuation in
             Task {
+                var i = 0
                 var currentPageUrl = urlString
                 while (true) {
                     do {
@@ -25,13 +26,20 @@ public class GutenFetcher {
                         
                         let gutenResp: GutenResponse = try await fetchJSONDecodableAPI(url: url)
                         for book in gutenResp.results {
+                            i += 1
                             continuation.yield(book)
+                            
+                        }
+                        if (i>=limitBooks) {
+                            continuation.finish(throwing: nil)
+                            break
                         }
                         
                         guard let nextPageUrl = gutenResp.next else {
                             continuation.finish(throwing: nil)
                             break
                         }
+                        
                         currentPageUrl = nextPageUrl
                     } catch {
                         continuation.finish(throwing: error)

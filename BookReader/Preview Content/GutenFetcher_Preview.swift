@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
+
+
+class GutenPreviewViewModel : Bookshelfable {
+    @State
+    var books = GutenFetcher.dummyBooks
+}
 
 extension GutenFetcher {
-    static let dummyBooks1700: [GutenBook] = [
+    static let dummyBooks: [GutenBook] = [
     
         GutenBook(id: 19573, title: "Alice\'s Adventures in Wonderland", authors: [BookReader.GutenAuthor(name: "Carroll, Lewis", birth_year: Optional(1832), death_year: Optional(1898))], translators: [], subjects: ["Alice (Fictitious character from Carroll) -- Juvenile fiction", "Children\'s stories", "Fantasy fiction", "Imaginary places -- Juvenile fiction"], bookshelves: ["Children\'s Literature"], formats: ["application/rdf+xml": "http://www.gutenberg.org/ebooks/19573.rdf", "text/html": "http://www.gutenberg.org/files/19573/19573-index.html", "audio/mpeg": "http://www.gutenberg.org/files/19573/mp3/19573-05.mp3", "application/zip": "http://www.gutenberg.org/files/19573/19573-ogg.zip", "audio/mp4": "http://www.gutenberg.org/files/19573/m4b/19573-10.m4b", "text/plain; charset=us-ascii": "http://www.gutenberg.org/files/19573/19573.txt", "audio/ogg": "http://www.gutenberg.org/files/19573/ogg/19573-08.ogg"], languages: ["en"], copyright: false, media_type: BookReader.GutenMediaType.sound, download_count: 138), // 📓 Book #4929
         GutenBook(id: 19846, title: "Encyclopaedia Britannica, 11th Edition, \"Bulgaria\" to \"Calgary\": Volume 4, Part 4", authors: [BookReader.GutenAuthor(name: "Various", birth_year: nil, death_year: nil)], translators: [], subjects: ["Encyclopedias and dictionaries"], bookshelves: ["Reference"], formats: ["text/html": "https://www.gutenberg.org/ebooks/19846.html.images", "application/epub+zip": "https://www.gutenberg.org/ebooks/19846.epub3.images", "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/19846.kf8.images", "text/html; charset=iso-8859-1": "https://www.gutenberg.org/files/19846/19846-h/19846-h.htm", "text/plain": "https://www.gutenberg.org/ebooks/19846.txt.utf-8", "text/plain; charset=us-ascii": "https://www.gutenberg.org/files/19846/19846.txt", "text/plain; charset=iso-8859-1": "https://www.gutenberg.org/files/19846/19846-8.txt", "application/rdf+xml": "https://www.gutenberg.org/ebooks/19846.rdf", "image/jpeg": "https://www.gutenberg.org/cache/epub/19846/pg19846.cover.medium.jpg"], languages: ["en"], copyright: false, media_type: BookReader.GutenMediaType.text, download_count: 138), // 📔 Book #4930

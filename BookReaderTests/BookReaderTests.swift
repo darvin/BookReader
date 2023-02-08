@@ -22,9 +22,9 @@ final class BookReaderTests: XCTestCase {
     func testBookFetching() async throws {
         let g = GutenFetcher()
 
-        let books = g.fetchBooks()
+        let books = await g.startFetchingBooks()
         var emojisIterator = ["📓", "📔", "📗", "📘", "📙", "📕", "📒"].cycled().makeIterator()
-        var indexIterator = (1...5000).makeIterator()
+        var indexIterator = (1...100).makeIterator()
 
         print("📚 Fetching bunch of books ")
         
