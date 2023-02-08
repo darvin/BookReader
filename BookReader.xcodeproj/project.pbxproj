@@ -54,7 +54,6 @@
 		9A586C71299393CB0001A1EA /* BookReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		9A586C842993941E0001A1EA /* GutenPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GutenPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 		9A586C4D299393CA0001A1EA = {
 			isa = PBXGroup;
 			children = (
-				9A586C842993941E0001A1EA /* GutenPlayground.playground */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
 				9A586C74299393CB0001A1EA /* BookReaderUITests */,
