@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+
+struct NavigationLazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
+    }
+}
+
 struct BookshelfView<Book: BookMetadatable, BookshelfViewModel: Bookshelfable>: View {
     @ObservedObject
     var viewModel: BookshelfViewModel
@@ -17,8 +28,11 @@ struct BookshelfView<Book: BookMetadatable, BookshelfViewModel: Bookshelfable>: 
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(viewModel.books, id: \.self) { book in
                         NavigationLink {
-                            let openBookVM = OpenBookViewModel(book: book as! (any BookPDFable))
-                            OpenPDFBookView(viewModel: openBookVM)
+                            NavigationLazyView<OpenPDFBookView>(
+                                OpenPDFBookView(viewModel: OpenBookViewModel(book: book as! (any BookPDFable)))
+
+                            
+                            )
                         } label: {
                             BookView(book: book)
                                 .frame(width: geometryProxy.size.width, height: 100)
