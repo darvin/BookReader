@@ -20,7 +20,7 @@ class GutenBookshelfViewModel : Bookshelfable {
         await MainActor.run {
             books = []
         }
-        let booksAsyncSequence = await api.fetchBooks()
+        let booksAsyncSequence = await api.fetchBooks(limitBooks: 30)
         do {
             for try await book in booksAsyncSequence {
                 await MainActor.run {

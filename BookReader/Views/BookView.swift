@@ -12,8 +12,14 @@ struct BookView<Book: BookMetadatable>: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: book.thumbnailURL)
-                .frame(width: 200, height: 200)
+            AsyncImage(url: book.thumbnailURL) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
 
             VStack {
                 Text("\(book.title)")
