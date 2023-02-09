@@ -39,6 +39,7 @@ enum GutenFormat: String, Codable {
     case octetStream = "application/octet-stream"
     case html = "text/html"
     case epub = "application/epub+zip"
+    case pdf = "application/pdf"
     case mobi = "application/x-mobipocket-ebook"
 }
 
@@ -54,6 +55,16 @@ public struct GutenBook: Codable {
     let copyright: Bool
     let media_type: GutenMediaType
     let download_count: Int
+}
+
+extension GutenBook: BookPDFable {
+    var pdfURL: URL? {
+        guard let pdfURLString = formats[GutenFormat.pdf.rawValue] else { return nil }
+        return URL(string: pdfURLString)
+        
+    }
+    
+    
 }
 
 

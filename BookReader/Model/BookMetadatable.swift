@@ -13,3 +13,8 @@ protocol BookMetadatable: Hashable, Equatable {
     var author: String { get }
     var thumbnailURL: URL { get }
 }
+
+
+protocol BookPDFable: BookMetadatable {
+    var pdfURL: URL? { get }
+}

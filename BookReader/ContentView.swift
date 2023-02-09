@@ -7,14 +7,26 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
     @StateObject
-    var viewModel = GutenBookshelfViewModel()
+    var viewModel = ManyBookshelvesViewModel()
+    
+
     var body: some View {
-        BookshelfView<GutenBook, GutenBookshelfViewModel>(viewModel: viewModel)
-            .task {
-                await viewModel.getFirstHundred()
+        NavigationView {
+            List(viewModel.bookshelfs) { bookshelf in
+                NavigationLink {
+                    try? viewModel.view(bookshelf:bookshelf)
+                } label: {
+                    BookshelfRow(bookshelf: bookshelf)
+                }
             }
+            .navigationTitle("Bookshelfs")
+
+            
+        }
     }
 }
 

@@ -40,5 +40,6 @@ struct BookView_Previews: PreviewProvider {
             BookView(book: GutenFetcher.dummyBooks[3])
             BookView(book: GutenFetcher.dummyBooks[33])
         }
+        .previewLayout(.fixed(width: 300, height: 70))
     }
 }

@@ -17,10 +17,19 @@ class GutenBookshelfViewModel : Bookshelfable {
     var books = [GutenBook]()
     
     func getFirstHundred() async {
+        await fetchBooks()
+    }
+    
+    func getAnotherHundred() async {
+        await fetchBooks(query: ["page": "30"])
+
+    }
+    
+    func fetchBooks(query: [String: String] = [String: String](), limitBooks: Int = 100) async {
         await MainActor.run {
             books = []
         }
-        let booksAsyncSequence = await api.fetchBooks(limitBooks: 30)
+        let booksAsyncSequence = await api.fetchBooks(query: query, limitBooks: limitBooks)
         do {
             for try await book in booksAsyncSequence {
                 await MainActor.run {

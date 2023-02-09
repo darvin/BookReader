@@ -14,15 +14,27 @@ import Combine
 
 public actor GutenFetcher {
     public init() {}
+    
+    public func fetchBooks(query: [String: String] = [String: String](), limitBooks: Int = 100)  -> AsyncThrowingStream<GutenBook, Error>  {
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "gutendex.com"
+        components.path = "/books/"
+        components.queryItems = query.map({ (key: String, value: String) in
+            return URLQueryItem(name: key, value: value)
+        })
+        let url = components.url!
+        return fetchBooks(url: url, limitBooks: limitBooks)
+    }
 
-    public func fetchBooks(urlString: String = "http://gutendex.com/books/", limitBooks: Int = 100) -> AsyncThrowingStream<GutenBook, Error> {
+    private func fetchBooks(url: URL, limitBooks: Int) -> AsyncThrowingStream<GutenBook, Error> {
         return AsyncThrowingStream { continuation in
             Task {
                 var i = 0
-                var currentPageUrl = urlString
+                var currentPageUrl = url
                 while (true) {
                     do {
-                        let url = URL(string: currentPageUrl)!
+                        let url = currentPageUrl
                         
                         let gutenResp: GutenResponse = try await fetchJSONDecodableAPI(url: url)
                         for book in gutenResp.results {
@@ -40,7 +52,7 @@ public actor GutenFetcher {
                             break
                         }
                         
-                        currentPageUrl = nextPageUrl
+                        currentPageUrl = URL(string:nextPageUrl)!
                     } catch {
                         continuation.finish(throwing: error)
                         break
