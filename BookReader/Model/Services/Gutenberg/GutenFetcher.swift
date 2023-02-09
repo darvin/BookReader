@@ -20,11 +20,15 @@ public actor GutenFetcher {
         components.scheme = "http"
         components.host = "gutendex.com"
         components.path = "/books/"
+//        let allowedCharacters = CharacterSet.urlQueryAllowed.subtracting(CharacterSet(charactersIn: "/"))
+
         components.queryItems = query.map({ (key: String, value: String) in
-            return URLQueryItem(name: key, value: value)
+            return URLQueryItem(name: key, value: value) //.addingPercentEncoding(withAllowedCharacters: allowedCharacters))
         })
         let url = components.url!
-        return fetchBooks(url: url, limitBooks: limitBooks)
+        let fixedURL = URL(string: "\(url.absoluteString)&mime_type=application%2Fpdf")!
+        
+        return fetchBooks(url: fixedURL, limitBooks: limitBooks)
     }
 
     private func fetchBooks(url: URL, limitBooks: Int) -> AsyncThrowingStream<GutenBook, Error> {

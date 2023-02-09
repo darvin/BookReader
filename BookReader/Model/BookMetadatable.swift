@@ -8,7 +8,8 @@
 import Foundation
 
 
-protocol BookMetadatable: Hashable, Equatable {
+protocol BookMetadatable: Hashable, Equatable, Identifiable {
+    
     var title: String { get }
     var author: String { get }
     var thumbnailURL: URL { get }

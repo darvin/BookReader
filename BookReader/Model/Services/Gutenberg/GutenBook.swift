@@ -29,6 +29,7 @@ enum GutenMediaType: String, Codable {
     case stillImage = "StillImage"
     case dataset = "Dataset"
     case collection = "Collection"
+    case image = "Image"
 }
 
 
@@ -43,8 +44,8 @@ enum GutenFormat: String, Codable {
     case mobi = "application/x-mobipocket-ebook"
 }
 
-public struct GutenBook: Codable {
-    let id: Int
+public struct GutenBook: Codable, Identifiable {
+    public let id: Int
     let title: String
     let authors: [GutenAuthor]
     let translators: [GutenAuthor]
@@ -69,6 +70,7 @@ extension GutenBook: BookPDFable {
 
 
 extension GutenBook: BookMetadatable {
+
     public static func == (lhs: GutenBook, rhs: GutenBook) -> Bool {
         return lhs.id == rhs.id
     }

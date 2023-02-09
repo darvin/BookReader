@@ -16,8 +16,15 @@ struct BookshelfView<Book: BookMetadatable, BookshelfViewModel: Bookshelfable>: 
             ScrollView(.vertical) {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(viewModel.books, id: \.self) { book in
-                        BookView(book: book)
-                            .frame(width: geometryProxy.size.width, height: 100)
+                        NavigationLink {
+                            let openBookVM = OpenBookViewModel(book: book as! (any BookPDFable))
+                            OpenPDFBookView(viewModel: openBookVM)
+                        } label: {
+                            BookView(book: book)
+                                .frame(width: geometryProxy.size.width, height: 100)
+                        }
+
+                        
                     }
                 }
             }

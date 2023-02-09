@@ -21,7 +21,8 @@ class GutenBookshelfViewModel : Bookshelfable {
     }
     
     func getAnotherHundred() async {
-        await fetchBooks(query: ["page": "30"])
+        await fetchBooks(query: [
+                                 "page": "30"])
 
     }
     
@@ -31,7 +32,9 @@ class GutenBookshelfViewModel : Bookshelfable {
         }
         let booksAsyncSequence = await api.fetchBooks(query: query, limitBooks: limitBooks)
         do {
-            for try await book in booksAsyncSequence {
+            for try await book in booksAsyncSequence.filter({ book in
+                book.formats[GutenFormat.pdf.rawValue] != nil
+            }) {
                 await MainActor.run {
                     books.append(book)
                     print("BOOKS: \(books.count)")
