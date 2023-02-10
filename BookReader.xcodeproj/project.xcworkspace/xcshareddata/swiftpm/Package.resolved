@@ -1,6 +1,60 @@
 {
   "pins" : [
     {
+      "identity" : "google-mlkit-swiftpm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/d-date/google-mlkit-swiftpm",
+      "state" : {
+        "revision" : "68b34cc1a4f090aeab61f1ef625a2edb1e753a16",
+        "version" : "3.2.1"
+      }
+    },
+    {
+      "identity" : "googledatatransport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleDataTransport.git",
+      "state" : {
+        "revision" : "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
+        "version" : "9.2.1"
+      }
+    },
+    {
+      "identity" : "googleutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleUtilities.git",
+      "state" : {
+        "revision" : "0543562f85620b5b7c510c6bcbef75b562a5127b",
+        "version" : "7.11.0"
+      }
+    },
+    {
+      "identity" : "gtm-session-fetcher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/gtm-session-fetcher.git",
+      "state" : {
+        "revision" : "4e9bbf2808b8fee444e84a48f5f3c12641987d3e",
+        "version" : "1.7.2"
+      }
+    },
+    {
+      "identity" : "nanopb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/nanopb.git",
+      "state" : {
+        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
+        "version" : "2.30909.0"
+      }
+    },
+    {
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
+        "version" : "2.1.1"
+      }
+    },
+    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",

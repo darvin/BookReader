@@ -29,7 +29,7 @@ struct BookshelfView<Book: BookMetadatable, BookshelfViewModel: Bookshelfable>: 
                     ForEach(viewModel.books, id: \.self) { book in
                         NavigationLink {
                             NavigationLazyView<OpenPDFBookView>(
-                                OpenPDFBookView(viewModel: OpenBookViewModel(book: book as! (any BookPDFable)))
+                                OpenPDFBookView(book: book as! (any BookPDFable))
 
                             
                             )
