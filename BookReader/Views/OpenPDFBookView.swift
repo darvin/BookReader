@@ -10,6 +10,8 @@ import PDFKit
 import AVFoundation
 
 struct OpenPDFBookView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject
     var viewModel: OpenBookViewModel
     
@@ -22,6 +24,29 @@ struct OpenPDFBookView: View {
         //FIXME causes cycle error, fixme
         if let data = viewModel.pdfData {
             PDFKitRepresentedView(data)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                .background(Color.red)
+                .edgesIgnoringSafeArea(.all)
+                .navigationBarHidden(true)
+                .onAppear {
+                            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+                            AppDelegate.orientationLock = .landscape
+                }
+                .onDisappear {
+                    
+
+                    AppDelegate.orientationLock = .portrait
+//                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+                    UIApplication.navigationTopViewController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
+
+
+                }
+                .onShake {
+                    self.presentationMode.wrappedValue.dismiss()
+
+                }
         } else {
             ProgressView().task {
                 await viewModel.load()
