@@ -38,15 +38,22 @@ struct OpenPDFBookView: View {
     weak var pdfPage: PDFPage?
 
     func makeCircle(_ point : CGPoint) {
+//        let v = UIView()
+//        v.frame = CGRect(origin: point, size: CGSize(width: 20, height: 20))
+//        v.layer.backgroundColor = UIColor.red.cgColor
+//        addSubview(v)
+    }
+    func makeHighlight(_ frame : CGRect) {
         let v = UIView()
-        v.frame = CGRect(origin: point, size: CGSize(width: 20, height: 20))
-        v.layer.backgroundColor = UIColor.red.cgColor
+        v.frame = frame
+        v.layer.backgroundColor = UIColor.yellow.cgColor
         addSubview(v)
     }
     
-    func convert(point: CGPoint) -> CGPoint {
-        return CGPoint(x: point.x, y: frame.height - point.y)
-    }
+    
+//    func convert(point: CGPoint) -> CGPoint {
+//        return CGPoint(x: point.x, y: frame.height - point.y)
+//    }
 
 }
 
@@ -111,12 +118,17 @@ struct OpenPDFBookView: View {
             let pageOverlay = pageOverlays(page: page)
             //convert point from pdfView coordinate system to page coordinate system
             let convertedPoint = pdfView.convert(point, to: page)
-            pageOverlay.makeCircle(pageOverlay.convert(point: convertedPoint))
+            pageOverlay.makeCircle(pdfView.convert(point, to: pageOverlay))
             //ensure that there is no link/url at this point
             if page.annotation(at: convertedPoint) == nil {
                 //get word at this point
                 if let selection = page.selectionForWord(at: convertedPoint) {
+                
                     if let wordTouched = selection.string {
+                        let pageBounds = selection.bounds(for: page)
+                        let pageOverlayOrigin = pdfView.convert(pdfView.convert(pageBounds.origin, from: page), to: pageOverlay)
+                        let pageOverlayBounds = CGRect(origin: pageOverlayOrigin, size: pageBounds.size)
+                        pageOverlay.makeHighlight(pageOverlayBounds)
                         //pronounce word
 //                        let utterance = AVSpeechUtterance(string: wordTouched)
 //                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
