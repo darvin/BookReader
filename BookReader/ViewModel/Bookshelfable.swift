@@ -8,6 +8,6 @@
 import Foundation
 
 protocol Bookshelfable: ObservableObject {
-    associatedtype Book: BookMetadatable
+    associatedtype Book: BookMetadatable & BookPDFable
     var books: [Book] { get }
 }

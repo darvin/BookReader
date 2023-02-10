@@ -54,13 +54,13 @@ class ManyBookshelvesViewModel : ObservableObject {
         switch (bookshelf) {
         case bookshelfs[0]:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return BookshelfView<GutenBook, GutenBookshelfViewModel>(viewModel:vm)
+            return BookshelfView<GutenBookshelfViewModel>(viewModel:vm)
                         .task {
                             await vm.getFirstHundred()
                         }
         case bookshelfs[1]:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return BookshelfView<GutenBook, GutenBookshelfViewModel>(viewModel:vm)
+            return BookshelfView<GutenBookshelfViewModel>(viewModel:vm)
                         .task {
                             await vm.getAnotherHundred()
                         }
