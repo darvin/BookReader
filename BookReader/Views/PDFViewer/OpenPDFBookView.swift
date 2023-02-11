@@ -12,6 +12,7 @@ extension CGPoint: HashableSynthesizable { }
 extension CGRect: HashableSynthesizable { }
 
 
+
 struct OpenPDFBookView: View {
     @Environment(\.presentationMode) var presentationMode
 
@@ -27,12 +28,16 @@ struct OpenPDFBookView: View {
     private let pdfView = {
         
         let p = PDFView()
-
+        
         p.autoScales = true
         p.pageShadowsEnabled = false
+        p.backgroundColor = UIColor.gray
+        let scrollView = p.subviews[0] as! UIScrollView
 
-        #if true
-            p.backgroundColor = UIColor.gray
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInsetAdjustmentBehavior = .never
+
+        #if false
             p.pageBreakMargins = UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
         #else
             p.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -47,6 +52,17 @@ struct OpenPDFBookView: View {
     
     private func nextPage() {
         print("next page")
+        if let currentPage = pdfView.currentPage {
+            let visibleRect = CGRect(origin: CGPointZero, size: pdfView.bounds.size)
+            let currentRect = pdfView.convert(visibleRect, to: currentPage)
+            let nextRect = CGRect(origin:
+                                    CGPoint(x: currentRect.origin.x, y: currentRect.origin.y)
+                                    , size: currentRect.size)
+            print("CURR: \(currentRect)")
+            print("NEXT: \(nextRect)")
+            pdfView.go(to: nextRect, on: currentPage)
+        }
+        
     }
     
     private func prevPage() {
