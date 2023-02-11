@@ -22,7 +22,7 @@ struct PDFKitRepresentedView: UIViewRepresentable {
         self.data = data
         self.singlePage = singlePage
     }
-
+    
     func makeUIView(context _: UIViewRepresentableContext<PDFKitRepresentedView>) -> UIViewType {
 
         
@@ -31,6 +31,14 @@ struct PDFKitRepresentedView: UIViewRepresentable {
 
         pdfView.document = PDFDocument(data: data)
         pdfView.autoScales = true
+        pdfView.pageShadowsEnabled = false
+
+        #if true
+            pdfView.backgroundColor = UIColor.red
+            pdfView.pageBreakMargins = UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
+        #else
+            pdfView.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        #endif
         if singlePage {
             pdfView.displayMode = .singlePage
         }
