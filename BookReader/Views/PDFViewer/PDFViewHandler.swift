@@ -1,142 +1,13 @@
 //
-//  OpenPDFBookView.swift
+//  PDFViewHandler.swift
 //  BookReader
 //
-//  Created by standard on 2/9/23.
+//  Created by standard on 2/11/23.
 //
 
-import SwiftUI
+import UIKit
 import PDFKit
-import AVFoundation
-extension CGPoint: HashableSynthesizable { }
-extension CGRect: HashableSynthesizable { }
-
-
-struct OpenPDFBookView: View {
-    @Environment(\.presentationMode) var presentationMode
-
-    @StateObject
-    var viewModel: OpenBookViewModel
-    
-    
-    init(book: any BookPDFable) {
-        _viewModel = StateObject(wrappedValue: OpenBookViewModel(book: book))
-    }
-
-    var body: some View {
-        //FIXME causes cycle error, fixme
-        if let data = viewModel.pdfData {
-            PDFKitRepresentedView(data)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .background(Color.red)
-                .edgesIgnoringSafeArea(.all)
-                .navigationBarHidden(true)
-                .onAppear {
-                            UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                            AppDelegate.orientationLock = .landscape
-                }
-                .onDisappear {
-                    
-
-                    AppDelegate.orientationLock = .portrait
-//                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                    windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-                    UIApplication.navigationTopViewController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
-
-
-                }
-                .onShake {
-                    self.presentationMode.wrappedValue.dismiss()
-
-                }
-        } else {
-            ProgressView().task {
-                await viewModel.load()
-            }
-        }
-        
-    }
-}
-
-@objc class PopupView : UIView {
-    init(frame: CGRect, text: String) {
-        super.init(frame: frame)
-        let labelOffsetY = -frame.size.height - 2.0
-        let l = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: labelOffsetY), size: frame.size))
-        l.text = text.translate()
-        l.textAlignment = .center
-//        layer.backgroundColor = CGColor(red: 0.3, green: 0.2, blue: 0.2, alpha: 0.8)
-        l.textColor = UIColor.brown
-        l.adjustsFontSizeToFitWidth = true
-        l.backgroundColor = UIColor.gray
-        addSubview(l)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-@objc class HighlightView : UIView {
-    
-    private var popupView: UIView
-    
-    init(frame: CGRect, text: String) {
-        popupView = PopupView(frame: CGRect(origin: CGPointZero, size: frame.size), text: text)
-        
-        super.init(frame: frame)
-        layer.backgroundColor = CGColor(red: 0, green: 0.3, blue: 0.1, alpha: 0.4)
-        addSubview(popupView)
-
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    func togglePopupView() {
-        popupView.isUserInteractionEnabled = !popupView.isUserInteractionEnabled
-        popupView.isHidden = !popupView.isHidden
-
-    }
-
-}
-
-
-
-@objc class PageOverlay : UIView {
-    
-    weak var pdfView: PDFView?
-    weak var pdfPage: PDFPage?
-
-    
-    var highlights = [CGRect : HighlightView]()
-    
-    func highlight(at: CGRect) -> HighlightView? {
-        let smallerRect = at.inset(by: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
-        let rectsFiltered = highlights.keys.filter { r in
-            r.contains(smallerRect)
-        }
-        if let rect = rectsFiltered.first {
-            return highlights[rect]
-        } else {
-            return nil
-        }
-        
-    }
-    
-    func touched(_ text: String, at: CGRect) {
-        if let highlightView = highlight(at: at) {
-            highlightView.togglePopupView()
-        } else {
-            let v = HighlightView(frame: at, text: text)
-            highlights[at] = v
-            addSubview(v)
-        }
-        
-
-
-    }
-}
+import SwiftUI
 
 
 extension String {
@@ -277,10 +148,3 @@ struct PDFKitRepresentedView: View {
 #else
 
 #endif
-
-
-struct OpenPDFBookView_Previews: PreviewProvider {
-    static var previews: some View {
-        OpenPDFBookView(book: GutenFetcher.dummyBooks[33])
-    }
-}
