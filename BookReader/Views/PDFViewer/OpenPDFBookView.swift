@@ -205,6 +205,6 @@ struct OpenPDFBookView: View {
 
 struct OpenPDFBookView_Previews: PreviewProvider {
     static var previews: some View {
-        OpenPDFBookView(book: GutenFetcher.dummyBooks[33])
+        OpenPDFBookView(book: LocalBook(url: Bundle.main.url(forResource: "highlightjs", withExtension: "pdf")!))
     }
 }

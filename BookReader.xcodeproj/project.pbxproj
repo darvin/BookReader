@@ -14,10 +14,6 @@
 		9A586C6C299393CB0001A1EA /* BookReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C6B299393CB0001A1EA /* BookReaderTests.swift */; };
 		9A586C76299393CB0001A1EA /* BookReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C75299393CB0001A1EA /* BookReaderUITests.swift */; };
 		9A586C78299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */; };
-		9A586C87299394AD0001A1EA /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C86299394AD0001A1EA /* Collections */; };
-		9A586C89299394AD0001A1EA /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C88299394AD0001A1EA /* DequeModule */; };
-		9A586C8B299394AD0001A1EA /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C8A299394AD0001A1EA /* OrderedCollections */; };
-		9A586C8E299394BD0001A1EA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 9A586C8D299394BD0001A1EA /* Algorithms */; };
 		9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864CC2993BCF900E418F8 /* BookView.swift */; };
 		9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864CE2993BD0500E418F8 /* BookshelfView.swift */; };
 		9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864D12993C66A00E418F8 /* GutenBookshelfViewModel.swift */; };
@@ -38,6 +34,10 @@
 		9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F52997C4C400E418F8 /* LocalBook.swift */; };
 		9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */; };
 		9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F92997CBB300E418F8 /* LocalBookFetcher.swift */; };
+		9AA864FF2998558A00E418F8 /* highlightjs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FB2998558900E418F8 /* highlightjs.pdf */; };
+		9AA865002998558A00E418F8 /* pytorch.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FC2998558900E418F8 /* pytorch.pdf */; };
+		9AA865012998558A00E418F8 /* html.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FD2998558900E418F8 /* html.pdf */; };
+		9AA865022998558A00E418F8 /* higlightr.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FE2998558A00E418F8 /* higlightr.pdf */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -94,6 +94,10 @@
 		9AA864F52997C4C400E418F8 /* LocalBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBook.swift; sourceTree = "<group>"; };
 		9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookshelfViewModel.swift; sourceTree = "<group>"; };
 		9AA864F92997CBB300E418F8 /* LocalBookFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookFetcher.swift; sourceTree = "<group>"; };
+		9AA864FB2998558900E418F8 /* highlightjs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = highlightjs.pdf; sourceTree = "<group>"; };
+		9AA864FC2998558900E418F8 /* pytorch.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pytorch.pdf; sourceTree = "<group>"; };
+		9AA864FD2998558900E418F8 /* html.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = html.pdf; sourceTree = "<group>"; };
+		9AA864FE2998558A00E418F8 /* higlightr.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = higlightr.pdf; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -107,10 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A586C8E299394BD0001A1EA /* Algorithms in Frameworks */,
-				9A586C87299394AD0001A1EA /* Collections in Frameworks */,
-				9A586C89299394AD0001A1EA /* DequeModule in Frameworks */,
-				9A586C8B299394AD0001A1EA /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +171,10 @@
 		9A586C60299393CB0001A1EA /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				9AA864FB2998558900E418F8 /* highlightjs.pdf */,
+				9AA864FE2998558A00E418F8 /* higlightr.pdf */,
+				9AA864FD2998558900E418F8 /* html.pdf */,
+				9AA864FC2998558900E418F8 /* pytorch.pdf */,
 				9A586C61299393CB0001A1EA /* Preview Assets.xcassets */,
 				9AC2F7A22993A97F0053EA37 /* GutenFetcher_Preview.swift */,
 			);
@@ -295,10 +299,6 @@
 			);
 			name = BookReader;
 			packageProductDependencies = (
-				9A586C86299394AD0001A1EA /* Collections */,
-				9A586C88299394AD0001A1EA /* DequeModule */,
-				9A586C8A299394AD0001A1EA /* OrderedCollections */,
-				9A586C8D299394BD0001A1EA /* Algorithms */,
 			);
 			productName = BookReader;
 			productReference = 9A586C56299393CA0001A1EA /* BookReader.app */;
@@ -373,9 +373,6 @@
 			);
 			mainGroup = 9A586C4D299393CA0001A1EA;
 			packageReferences = (
-				9A586C85299394AD0001A1EA /* XCRemoteSwiftPackageReference "swift-collections" */,
-				9A586C8C299394BD0001A1EA /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				9AA864DF2995435200E418F8 /* XCRemoteSwiftPackageReference "google-mlkit-swiftpm" */,
 			);
 			productRefGroup = 9A586C57299393CA0001A1EA /* Products */;
 			projectDirPath = "";
@@ -393,8 +390,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA865002998558A00E418F8 /* pytorch.pdf in Resources */,
 				9A586C62299393CB0001A1EA /* Preview Assets.xcassets in Resources */,
+				9AA864FF2998558A00E418F8 /* highlightjs.pdf in Resources */,
 				9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */,
+				9AA865012998558A00E418F8 /* html.pdf in Resources */,
+				9AA865022998558A00E418F8 /* higlightr.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,56 +806,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9A586C85299394AD0001A1EA /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		9A586C8C299394BD0001A1EA /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		9AA864DF2995435200E418F8 /* XCRemoteSwiftPackageReference "google-mlkit-swiftpm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/d-date/google-mlkit-swiftpm";
-			requirement = {
-				kind = exactVersion;
-				version = 3.2.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9A586C86299394AD0001A1EA /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A586C85299394AD0001A1EA /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		9A586C88299394AD0001A1EA /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A586C85299394AD0001A1EA /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		9A586C8A299394AD0001A1EA /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A586C85299394AD0001A1EA /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		9A586C8D299394BD0001A1EA /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A586C8C299394BD0001A1EA /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9A586C4E299393CA0001A1EA /* Project object */;
 }
