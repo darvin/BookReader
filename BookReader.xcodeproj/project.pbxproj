@@ -37,6 +37,7 @@
 		9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F22997AD7600E418F8 /* ClearButton.swift */; };
 		9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F52997C4C400E418F8 /* LocalBook.swift */; };
 		9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */; };
+		9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F92997CBB300E418F8 /* LocalBookFetcher.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -92,6 +93,7 @@
 		9AA864F22997AD7600E418F8 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		9AA864F52997C4C400E418F8 /* LocalBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBook.swift; sourceTree = "<group>"; };
 		9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookshelfViewModel.swift; sourceTree = "<group>"; };
+		9AA864F92997CBB300E418F8 /* LocalBookFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookFetcher.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				9AA864F52997C4C400E418F8 /* LocalBook.swift */,
+				9AA864F92997CBB300E418F8 /* LocalBookFetcher.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
+				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,
 				9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

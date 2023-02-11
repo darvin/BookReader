@@ -16,11 +16,13 @@ class LocalBookshelfViewModel: Bookshelfable {
     @Published
     var books: [LocalBook] = []
     
-    
+    let fetcher = LocalBookFetcher()
     public init() {}
 
     func fetch() async {
-        
+        await MainActor.run {
+            books = fetcher.fetch()
+        }
     }
     
 }

@@ -40,6 +40,25 @@ class OpenBookViewModel : ObservableObject {
     }
     
     private func loadData(url:URL) async -> Data? {
+        if url.scheme == "file" {
+            return await loadLocalData(url: url)
+        } else {
+            return await loadRemoteData(url: url)
+        }
+    }
+    
+    private func loadLocalData(url:URL) async -> Data? {
+        do {
+            return try Data(contentsOf: url)
+        } catch {
+            print ("loading file error")
+            return nil
+        }
+    }
+
+
+    
+    private func loadRemoteData(url:URL) async -> Data? {
         do {
             let request = URLRequest(url: url)
             if let cachedResponse = self.cache.cachedResponse(for: request) {
