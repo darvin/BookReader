@@ -32,7 +32,7 @@ struct OpenPDFBookView: View {
         p.pageShadowsEnabled = false
 
         #if true
-            p.backgroundColor = UIColor.red
+            p.backgroundColor = UIColor.gray
             p.pageBreakMargins = UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
         #else
             p.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -44,6 +44,33 @@ struct OpenPDFBookView: View {
         self.presentationMode.wrappedValue.dismiss()
 
     }
+    
+    private func nextPage() {
+        print("next page")
+    }
+    
+    private func prevPage() {
+        print("prev page")
+
+    }
+    
+    private func onTopTrailing() {
+        prevPage()
+    }
+    
+    
+    private func onBottomTrailing() {
+        nextPage()
+    }
+    
+    private func onBottomLeading() {
+        prevPage()
+    }
+
+    private func onTopLeading() {
+        nextPage()
+    }
+
     
     private func setOrientationPortrait() {
         AppDelegate.orientationLock = .portrait
@@ -68,22 +95,57 @@ struct OpenPDFBookView: View {
 
     var body: some View {
         if let data = viewModel.pdfData {
-            PDFKitRepresentedView(pdfView: pdfView)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .background(Color.red)
-                .edgesIgnoringSafeArea(.all)
-                .navigationBarHidden(true)
-                .onAppear {
-                    setOrientationLandscape()
-                    loadPDFData(data)
-                }
-                .onDisappear {
-                    setOrientationPortrait()
+            GeometryReader { r in
+                let buttonWidth = r.size.width / 19
+                let buttonHeight = r.size.height / 2.3
+                
+                ZStack(alignment: .topLeading) {
+                    PDFKitRepresentedView(pdfView: pdfView)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                        .background(Color.red)
+                        .edgesIgnoringSafeArea(.all)
+                        .navigationBarHidden(true)
+                        .onAppear {
+                            setOrientationLandscape()
+                            loadPDFData(data)
+                        }
+                        .onDisappear {
+                            setOrientationPortrait()
+                            
+                        }
+                        .onShake {
+                            onDissmiss()
+                        }
+                    VStack {
+                        
+                        HStack {
+                            ClearButton {
+                                onTopLeading()
+                            }.frame(width: buttonWidth)
+                            Spacer().frame(maxWidth: .infinity)
+                            ClearButton {
+                                onTopTrailing()
+                            }.frame(width: buttonWidth, alignment: .trailing)
 
+                        }.frame(height: buttonHeight)
+                        Spacer().frame(maxHeight: .infinity)
+                        HStack {
+                            ClearButton {
+                                onBottomLeading()
+                            }.frame(width: buttonWidth)
+                            Spacer().frame(maxWidth: .infinity)
+                            ClearButton {
+                                onBottomTrailing()
+                            }.frame(width: buttonWidth, alignment: .trailing)
+
+                        }.frame(height: buttonHeight, alignment: .bottomLeading)
+                        
+                    }.frame(maxHeight: .infinity)
+//                        .background(Color.green)
+                        .ignoresSafeArea()
+                    
                 }
-                .onShake {
-                    onDissmiss()
-                }
+            }
         } else {
             ProgressView().task {
                 await viewModel.load()
