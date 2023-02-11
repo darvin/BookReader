@@ -50,24 +50,44 @@ struct OpenPDFBookView: View {
 
     }
     
-    private func nextPage() {
-        print("next page")
-        if let currentPage = pdfView.currentPage {
+    
+    
+    private func turnPage(_ isForwardDirection: Bool = true) {
+        if let currentPage = pdfView.currentPage, let document = pdfView.document {
             let visibleRect = CGRect(origin: CGPointZero, size: pdfView.bounds.size)
             let currentRect = pdfView.convert(visibleRect, to: currentPage)
+            
+            let y = isForwardDirection ?
+                currentRect.origin.y - currentRect.size.height :
+                currentRect.origin.y + currentRect.size.height
+            
+            var newPage = currentPage
+            print ("y \(y) maxY \(currentPage.bounds(for: .mediaBox).size.height)")
+            if (y + 2.0) > currentPage.bounds(for: .mediaBox).size.height {
+                if let prevPage = document.page(at: document.index(for: currentPage)-1) {
+                    newPage = prevPage
+                    //fixme coords
+                }
+            }
+            
             let nextRect = CGRect(origin:
-                                    CGPoint(x: currentRect.origin.x, y: currentRect.origin.y)
+                                    CGPoint(
+                                        x: currentRect.origin.x,
+                                        y: y)
                                     , size: currentRect.size)
+            
             print("CURR: \(currentRect)")
             print("NEXT: \(nextRect)")
-            pdfView.go(to: nextRect, on: currentPage)
+            pdfView.go(to: nextRect, on: newPage)
         }
         
     }
     
     private func prevPage() {
-        print("prev page")
-
+        turnPage(false)
+    }
+    private func nextPage() {
+        turnPage()
     }
     
     private func onTopTrailing() {
