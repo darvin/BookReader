@@ -31,8 +31,9 @@ struct OpenPDFBookView: View {
         
         p.autoScales = true
         p.pageShadowsEnabled = false
-        p.backgroundColor = UIColor.gray
+        p.backgroundColor = UIColor.white
         let scrollView = p.subviews[0] as! UIScrollView
+        scrollView.backgroundColor  = UIColor.systemBackground
 
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -132,7 +133,7 @@ struct OpenPDFBookView: View {
     var body: some View {
         if let data = viewModel.pdfData {
             GeometryReader { r in
-                let buttonWidth = r.size.width / 19
+                let buttonWidth = r.size.width / 8
                 let buttonHeight = r.size.height / 2.3
                 
                 ZStack(alignment: .topLeading) {
@@ -181,7 +182,10 @@ struct OpenPDFBookView: View {
                         .ignoresSafeArea()
                     
                 }
-            }
+            }            .edgesIgnoringSafeArea(.all)
+                .statusBarHidden()
+                .persistentSystemOverlays(.hidden)
+
         } else {
             ProgressView().task {
                 await viewModel.load()

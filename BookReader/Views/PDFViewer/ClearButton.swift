@@ -13,8 +13,8 @@ struct ClearButton: View {
         self.action = action
     }
     var body: some View {
-        Color //.clear
-            .yellow.opacity(0.1)
+        Color .clear
+           // .yellow.opacity(0.1)
             .contentShape(Rectangle())
             .onTapGesture {
                 action()
