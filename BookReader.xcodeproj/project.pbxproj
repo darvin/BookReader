@@ -35,6 +35,8 @@
 		9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864EE2997A2A600E418F8 /* PDFViewHandler.swift */; };
 		9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F02997A31E00E418F8 /* PDFRepresentedView.swift */; };
 		9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F22997AD7600E418F8 /* ClearButton.swift */; };
+		9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F52997C4C400E418F8 /* LocalBook.swift */; };
+		9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -88,6 +90,8 @@
 		9AA864EE2997A2A600E418F8 /* PDFViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewHandler.swift; sourceTree = "<group>"; };
 		9AA864F02997A31E00E418F8 /* PDFRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRepresentedView.swift; sourceTree = "<group>"; };
 		9AA864F22997AD7600E418F8 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
+		9AA864F52997C4C400E418F8 /* LocalBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBook.swift; sourceTree = "<group>"; };
+		9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalBookshelfViewModel.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 		9A586C902993956A0001A1EA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9AA864F42997C4B500E418F8 /* Local */,
 				9AC2F79F2993A1680053EA37 /* HTTPService.swift */,
 				9A586C91299395760001A1EA /* Gutenberg */,
 			);
@@ -230,6 +235,7 @@
 		9AA864D02993C64600E418F8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9AA864F72997C6EC00E418F8 /* LocalBookshelfViewModel.swift */,
 				9AA864D12993C66A00E418F8 /* GutenBookshelfViewModel.swift */,
 				9AA864D32993C9A300E418F8 /* Bookshelfable.swift */,
 				9AA864D5299512AE00E418F8 /* OpenBookViewModel.swift */,
@@ -259,6 +265,14 @@
 				9AA864F22997AD7600E418F8 /* ClearButton.swift */,
 			);
 			path = PDFViewer;
+			sourceTree = "<group>";
+		};
+		9AA864F42997C4B500E418F8 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				9AA864F52997C4C400E418F8 /* LocalBook.swift */,
+			);
+			path = Local;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,12 +430,14 @@
 				9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */,
 				9A586C5C299393CA0001A1EA /* ContentView.swift in Sources */,
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
+				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,
 				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
 				9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */,
 				9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */,
 				9AA864ED2997A27600E418F8 /* PageOverlay.swift in Sources */,
 				9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */,
+				9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */,
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,

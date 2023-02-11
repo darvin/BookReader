@@ -8,23 +8,12 @@
 import Foundation
 import SwiftUI
 class ManyBookshelvesViewModel : ObservableObject {
-    
-//    let bookshelfs = [
-//        Bookshelf(id: 0, name: "Gutenberg 1"): BookshelfView<GutenBook, GutenBookshelfViewModel>(viewModel: viewModel)
-//            .task {
-//                await viewModel.getFirstHundred()
-//            },
-//        Bookshelf(id: 1, name: "Gutenberg 2"): BookshelfView<GutenBook, GutenBookshelfViewModel>(viewModel: viewModel)
-//            .task {
-//                await viewModel.getAnotherHundred()
-//            }
-//
-//    ]
   
     @Published
     var bookshelfs: [Bookshelf] = [
-        Bookshelf(id: 0, name: "Gutenberg 1"),
-        Bookshelf(id: 1, name: "Gutenberg 2")
+        .local,
+        .gutenberg1,
+        .gutenberg2
     ]
 
     
@@ -33,10 +22,13 @@ class ManyBookshelvesViewModel : ObservableObject {
     private func viewModel(bookshelf:Bookshelf) -> any Bookshelfable {
         if !viewModels.keys.contains(bookshelf) {
             switch (bookshelf) {
-            case bookshelfs[0]:
+            case .local:
+                viewModels[bookshelf] = LocalBookshelfViewModel()
+
+            case .gutenberg1:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
                 
-            case bookshelfs[1]:
+            case .gutenberg2:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
                 
 
@@ -49,21 +41,29 @@ class ManyBookshelvesViewModel : ObservableObject {
 
     }
 
-    
+//    @ViewBuilder
     func view(bookshelf:Bookshelf) throws -> some View {
         switch (bookshelf) {
-        case bookshelfs[0]:
+
+        case .gutenberg1:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return BookshelfView<GutenBookshelfViewModel>(viewModel:vm)
+            return AnyView(BookshelfView<GutenBookshelfViewModel>(viewModel:vm))
                         .task {
                             await vm.getFirstHundred()
                         }
-        case bookshelfs[1]:
+        case .gutenberg2:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return BookshelfView<GutenBookshelfViewModel>(viewModel:vm)
+            return AnyView(BookshelfView<GutenBookshelfViewModel>(viewModel:vm))
                         .task {
                             await vm.getAnotherHundred()
                         }
+        case .local:
+            let vm = viewModel(bookshelf: bookshelf) as! LocalBookshelfViewModel
+            return AnyView(BookshelfView<LocalBookshelfViewModel>(viewModel:vm))
+                .task {
+                    await vm.fetch()
+                }
+
 
         default:
             fatalError()

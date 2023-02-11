@@ -37,7 +37,7 @@ struct BookItemView<Book: BookMetadatable & BookPDFable>: View {
 
 }
 
-struct BookshelfView<BookshelfViewModel: Bookshelfable>: View {
+struct BookshelfView<BookshelfViewModel>: View where BookshelfViewModel: Bookshelfable {
     @ObservedObject
     var viewModel: BookshelfViewModel
     
