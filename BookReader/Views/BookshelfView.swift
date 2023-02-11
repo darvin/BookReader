@@ -40,18 +40,65 @@ struct BookItemView<Book: BookMetadatable & BookPDFable>: View {
 struct BookshelfView<BookshelfViewModel: Bookshelfable>: View {
     @ObservedObject
     var viewModel: BookshelfViewModel
+    
+    @State
+    var isGridLayout = true
+    
     var body: some View {
+
         GeometryReader { r in
-            
+
             ScrollView(.vertical) {
-                LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(viewModel.books, id: \.self) { book in
-                        BookItemView(book: book)
-                            .frame(height: 150)
-                        
+                if isGridLayout {
+                    let columnWidth: CGFloat = 100
+                    let columnSpacing: CGFloat = 10
+                    let columnCount: Int = Int(floor(r.size.width / (columnWidth + columnSpacing)))
+                    
+                    let columns = Array(repeating:
+                                            GridItem(.fixed(columnWidth), spacing: columnSpacing)
+                                        , count: columnCount)
+
+                    LazyVGrid(columns: columns) {
+                        ForEach(viewModel.books, id: \.self) { book in
+                            BookItemView(book: book)
+                                .frame(
+                                    width: columnWidth,
+                                    height: 150)
+                            
+                        }
+
+                    }
+                    
+                } else {
+                    LazyVStack(alignment: .leading, spacing: 10) {
+                        ForEach(viewModel.books, id: \.self) { book in
+                            BookItemView(book: book)
+                                .frame(height: 150)
+                            
+                        }
                     }
                 }
+                
             }
+            .toolbar {
+                Button(action: {
+                    isGridLayout = true
+                }) {
+                    Image(systemName: "rectangle.grid.3x2")
+                        .font(Font.system(.footnote,  weight: isGridLayout ? .bold : .regular))
+
+                }
+                Button(action: {
+                    isGridLayout = false
+
+                }) {
+                    Image(systemName: "rectangle.grid.1x2")
+                        .font(Font.system(.footnote, weight: !isGridLayout ? .bold : .regular))
+
+                }
+
+            }
+
         }
     }
 }
