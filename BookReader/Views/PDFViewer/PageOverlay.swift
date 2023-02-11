@@ -29,7 +29,7 @@ import PDFKit
         
     }
     
-    func touched(_ text: String, at: CGRect) {
+    func doubleTouched(_ text: String, at: CGRect) {
         if let highlightView = highlight(at: at) {
             highlightView.togglePopupView()
         } else {
@@ -37,9 +37,13 @@ import PDFKit
             highlights[at] = v
             addSubview(v)
         }
-        
-
-
     }
+    
+    func touched(_ text: String, at: CGRect) {
+        if let highlightView = highlight(at: at) {
+            highlightView.togglePopupView()
+        }
+    }
+
 }
 

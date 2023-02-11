@@ -28,6 +28,7 @@ extension String {
             _pdfView = newValue
             _pdfView?.pageOverlayViewProvider = self
             _pdfView?.addGestureRecognizer(tapGestureRecognizer)
+            _pdfView?.addGestureRecognizer(doubleTapGestureRecognizer)
 
         }
         get {
@@ -63,46 +64,49 @@ extension String {
     }
     
     
-    lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-        UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+    lazy var doubleTapGestureRecognizer: UITapGestureRecognizer = {
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGesture(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        return doubleTapGesture
     }()
     
+    lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.require(toFail: doubleTapGestureRecognizer)
+        return tapGesture
+    }()
     
-    
-    @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+    func selectedPageOverlayWordAndBounds(for gestureRecognizer: UITapGestureRecognizer) -> (PageOverlay, String, CGRect)? {
         let point = gestureRecognizer.location(in: pdfView)
         
-        guard let page = pdfView.page(for: point, nearest: true) else { return }
+        guard let page = pdfView.page(for: point, nearest: true) else { return nil }
         let pageOverlay = pageOverlays(page: page)
 
         let convertedPoint = pdfView.convert(point, to: page)
 
-        guard page.annotation(at: convertedPoint) == nil else { return }
-        guard let selection = page.selectionForWord(at: convertedPoint) else { return }
+        guard page.annotation(at: convertedPoint) == nil else { return nil }
+        guard let selection = page.selectionForWord(at: convertedPoint) else { return nil }
 
-        guard let wordTouched = selection.string else { return }
+        guard let wordTouched = selection.string else { return nil }
         let pageBounds = selection.bounds(for: page)
         let pageBoundsPdfView = pdfView.convert(pageBounds, from: page)
         let pageOverlayBounds = pdfView.convert(pageBoundsPdfView, to: pageOverlay)
-        
-        pageOverlay.touched(wordTouched, at:pageOverlayBounds)
-        
-        //pronounce word
-        //                        let utterance = AVSpeechUtterance(string: wordTouched)
-        //                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        //
-        //                        let synth = AVSpeechSynthesizer()
-        //                        synth.speak(utterance)
-        print("📖📖 \(wordTouched) 📖📖")
-        //                        let options = TranslatorOptions(sourceLanguage: .english, targetLanguage: .german)
-        //                        let englishGermanTranslator = Translator.translator(options: options)
 
-        /*
-        //if you also want to show selection of this word for one second
-        pdfView.currentSelection = selection
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-        pdfView.clearSelection()
-        */
+        return (pageOverlay, wordTouched, pageOverlayBounds)
+    }
+    
+    @objc func doubleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        if let (pageOverlay, wordTouched, pageOverlayBounds) = selectedPageOverlayWordAndBounds(for: gestureRecognizer) {
+            pageOverlay.doubleTouched(wordTouched, at:pageOverlayBounds)
+        }
+    }
+    
+    @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        if let (pageOverlay, wordTouched, pageOverlayBounds) = selectedPageOverlayWordAndBounds(for: gestureRecognizer) {
+            pageOverlay.touched(wordTouched, at:pageOverlayBounds)
+        }
+        
     }
 
 }
