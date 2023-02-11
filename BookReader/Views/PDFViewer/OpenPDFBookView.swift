@@ -39,37 +39,50 @@ struct OpenPDFBookView: View {
         #endif
         return p
     }()
+    
+    private func onDissmiss() {
+        self.presentationMode.wrappedValue.dismiss()
+
+    }
+    
+    private func setOrientationPortrait() {
+        AppDelegate.orientationLock = .portrait
+//                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+        UIApplication.navigationTopViewController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
+
+    }
+    
+    private func setOrientationLandscape() {
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
+        AppDelegate.orientationLock = .landscape
+
+    }
+    
+    private func loadPDFData(_ data: Data) {
+        pdfViewHandler.pdfView = pdfView
+        pdfView.document = PDFDocument(data: data)
+
+    }
 
     var body: some View {
-        //FIXME causes cycle error, fixme
         if let data = viewModel.pdfData {
-
             PDFKitRepresentedView(pdfView: pdfView)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 .background(Color.red)
                 .edgesIgnoringSafeArea(.all)
                 .navigationBarHidden(true)
                 .onAppear {
-                    UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-                    AppDelegate.orientationLock = .landscape
-                    pdfViewHandler.pdfView = pdfView
-                    pdfView.document = PDFDocument(data: data)
-
+                    setOrientationLandscape()
+                    loadPDFData(data)
                 }
                 .onDisappear {
-                    
-
-                    AppDelegate.orientationLock = .portrait
-//                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                    windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
-                    UIApplication.navigationTopViewController()?.setNeedsUpdateOfSupportedInterfaceOrientations()
-
+                    setOrientationPortrait()
 
                 }
                 .onShake {
-                    self.presentationMode.wrappedValue.dismiss()
-
+                    onDissmiss()
                 }
         } else {
             ProgressView().task {
