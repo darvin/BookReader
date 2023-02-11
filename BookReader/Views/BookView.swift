@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let ImageWidth: CGFloat = 150
+
 struct BookView<Book: BookMetadatable>: View {
     var book: Book
     
@@ -17,15 +19,18 @@ struct BookView<Book: BookMetadatable>: View {
                     .resizable()
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width:ImageWidth)
             } placeholder: {
                 ProgressView()
+                    .frame(width:ImageWidth)
             }
 
-            VStack {
+            VStack(alignment: .leading) {
                 Text("\(book.title)")
                     .lineLimit(2)
                 
                 Text("\(book.author)")
+                    .font(Font.system(size: 10).italic())
                     .multilineTextAlignment(.leading)
             }
         }

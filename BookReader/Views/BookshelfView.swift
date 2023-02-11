@@ -31,8 +31,7 @@ struct BookItemView<Book: BookMetadatable & BookPDFable>: View {
             )
         } label: {
             BookView(book: book)
-//                .frame(width: geometryProxy.size.width, height: 100)
-        }
+        }.buttonStyle(PlainButtonStyle())
 
     }
 
@@ -42,12 +41,13 @@ struct BookshelfView<BookshelfViewModel: Bookshelfable>: View {
     @ObservedObject
     var viewModel: BookshelfViewModel
     var body: some View {
-        GeometryReader { geometryProxy in
+        GeometryReader { r in
             
             ScrollView(.vertical) {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     ForEach(viewModel.books, id: \.self) { book in
                         BookItemView(book: book)
+                            .frame(height: 150)
                         
                     }
                 }
