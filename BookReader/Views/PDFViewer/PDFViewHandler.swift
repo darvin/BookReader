@@ -85,7 +85,9 @@ extension String {
     @objc func doubleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
         let pageOverlay = pageOverlays(page: page)
-        pageOverlay.doubleTouched(at:gestureRecognizer.location(in: pageOverlay))
+        let pdfViewPoint = gestureRecognizer.location(in: pdfView)
+        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to:pageOverlay)
+        pageOverlay.doubleTouched(at:pageOverlayPoint)
     }
     
     @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -93,7 +95,10 @@ extension String {
 
         guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
         let pageOverlay = pageOverlays(page: page)
-        pageOverlay.touched(at:gestureRecognizer.location(in: pageOverlay))
+        let pdfViewPoint = gestureRecognizer.location(in: pdfView)
+        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to:pageOverlay)
+
+        pageOverlay.touched(at:pageOverlayPoint)
     }
 
 }
