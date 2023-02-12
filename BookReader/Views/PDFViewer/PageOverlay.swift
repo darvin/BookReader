@@ -79,13 +79,8 @@ class ProgrammingOrNaturalPredictor {
     }
     
     private let scaleFactor:CGFloat = 2
-    func makeCodeHighlightsAsync() async {
-        let task = Task.init {
-            makeCodeHighlights()
-        }
-    }
 
-    private func makeCodeHighlights() {
+    func makeCodeHighlights() {
         guard codeHighlights == nil else { return makeCodeHighlightViewsFromArray() }
         guard let page else { return }
         let pageSize = page.bounds(for: .mediaBox).size
@@ -204,12 +199,8 @@ class ProgrammingOrNaturalPredictor {
     
     private func makeCodeHighlightViewsFromArray() {
         guard let codeHighlights else { return }
-        Task {
-            await MainActor.run {
-                codeHighlights.forEach { (key: CGRect, value: String) in
-                    makeCodeHighlight(pageBounds: key, code: value)
-                }
-            }
+        codeHighlights.forEach { (key: CGRect, value: String) in
+            makeCodeHighlight(pageBounds: key, code: value)
         }
         
     }

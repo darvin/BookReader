@@ -58,12 +58,8 @@ extension String {
         for page: PDFPage
     ) {
         if let pageOverlay = overlayView as? PageOverlay {
-            DispatchQueue.global(qos: .background).async {
-                
-                Task {
-                    await pageOverlay.makeCodeHighlightsAsync()
-                }
-            }
+            pageOverlay.makeCodeHighlights()
+              
         }
     }
     
