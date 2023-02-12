@@ -57,15 +57,18 @@ extension String {
         willDisplayOverlayView overlayView: UIView,
         for page: PDFPage
     ) {
+        print("WILLLL \(page)")
         if let pageOverlay = overlayView as? PageOverlay {
             pageOverlay.makeHighlights()
+            print("DID \(page)")
+
         }
     }
     
     func pdfView(_ pdfView: PDFView, willEndDisplayingOverlayView overlayView: UIView, for page: PDFPage) {
-        if let pageOverlay = overlayView as? PageOverlay {
-            pageOverlay.removeHighlights()
-        }
+//        if let pageOverlay = overlayView as? PageOverlay {
+//            pageOverlay.removeHighlights()
+//        }
     }
     
     

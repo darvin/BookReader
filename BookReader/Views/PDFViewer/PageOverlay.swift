@@ -35,17 +35,22 @@ import Vision
     }
     
     private let scaleFactor:CGFloat = 2
+    private var isHighlightsMade = false
     func makeHighlights() {
+        guard !isHighlightsMade else {return}
+        isHighlightsMade = true
         guard let page, let pdfView else {return }
         let pageSize = page.bounds(for: .mediaBox).size
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         let image = page.thumbnail(of: imageSize, for: .mediaBox)
         
-        
+        print("WILLLL 1 \(page)")
+
         guard let cgImage = image.cgImage else { return }
 
         // Create a new image-request handler.
         let requestHandler = VNImageRequestHandler(cgImage: cgImage)
+        print("WILLLL 2 \(page)")
 
         // Create a new request to recognize text.
         let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
@@ -56,6 +61,7 @@ import Vision
         } catch {
             print("Unable to perform the requests: \(error).")
         }
+        print("WILLLL 3 \(page)")
 
     }
     
@@ -87,10 +93,10 @@ import Vision
                                                 Int(pageSize.height)),
                     candidate.string)
         }.filter { (r:CGRect, s:String) in
-            s.contains("<") || s.contains(">") || (s.contains(":") && s.contains("-")) 
+            s.contains("<") || s.contains(">") || s.contains("}") || s.contains("{") || (s.contains(":") && s.contains("-")) || s.hasPrefix("//") || s.hasSuffix(";")
         }
         results.forEach { (r:CGRect, s:String) in
-            print(s)
+//            print(s)
             makeHighlight(pageBounds: r, color: UIColor.green.withAlphaComponent(0.2))
         }
 
@@ -163,7 +169,7 @@ import Vision
         } else {
             guard let page else {return}
             guard let selection = selection(at: at) else {return}
-            print(selection)
+//            print(selection)
             guard selection.numberOfTextRanges(on: page)>0 else {return}
             let r = selection.bounds(for: page) 
             makeHighlight(pageBounds: r, color: UIColor.red, popupView: PopupView(frame: CGRect(origin: CGPointZero, size: r.size), text: selection.string ?? "-----"))
