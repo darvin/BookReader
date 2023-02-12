@@ -17,7 +17,7 @@ extension String {
 }
 
 
-@objc class PDFViewHandler : NSObject, PDFPageOverlayViewProvider {
+@objc class PDFViewHandler : NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {
 
     private var _pdfView: PDFView?
     
@@ -29,6 +29,7 @@ extension String {
             _pdfView?.pageOverlayViewProvider = self
             _pdfView?.addGestureRecognizer(tapGestureRecognizer)
             _pdfView?.addGestureRecognizer(doubleTapGestureRecognizer)
+            _pdfView?.delegate = self
 
         }
         get {
@@ -43,9 +44,10 @@ extension String {
     func pdfView(_ view: PDFView, overlayViewFor page: PDFPage) -> UIView? {
         if !pageOverlays.keys.contains(page) {
             let pageOverlay = PageOverlay()
-            pageOverlay.pdfView = pdfView
-            pageOverlay.pdfPage = page
             pageOverlays[page] = pageOverlay
+
+            pageOverlay.pdfView = pdfView
+            pageOverlay.page = page
         }
         return pageOverlays(page: page)
     }
@@ -55,12 +57,15 @@ extension String {
         willDisplayOverlayView overlayView: UIView,
         for page: PDFPage
     ) {
-//        pdfView.addGestureRecognizer(tapGestureRecognizer)
-
+        if let pageOverlay = overlayView as? PageOverlay {
+            pageOverlay.makeHighlights()
+        }
     }
     
     func pdfView(_ pdfView: PDFView, willEndDisplayingOverlayView overlayView: UIView, for page: PDFPage) {
-//        pdfView.removeGestureRecognizer(tapGestureRecognizer)
+        if let pageOverlay = overlayView as? PageOverlay {
+            pageOverlay.removeHighlights()
+        }
     }
     
     

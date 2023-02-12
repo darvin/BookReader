@@ -15,7 +15,6 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     typealias UIViewType = PDFView
 
     let pdfView: PDFView
-    let pdfViewHandler = PDFViewHandler()
 
     func makeUIView(context _: UIViewRepresentableContext<PDFKitRepresentedView>) -> UIViewType {
 

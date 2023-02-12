@@ -38,6 +38,7 @@
 		9AA865002998558A00E418F8 /* pytorch.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FC2998558900E418F8 /* pytorch.pdf */; };
 		9AA865012998558A00E418F8 /* html.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FD2998558900E418F8 /* html.pdf */; };
 		9AA865022998558A00E418F8 /* higlightr.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FE2998558A00E418F8 /* higlightr.pdf */; };
+		9AA865052998588F00E418F8 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 9AA865042998588F00E418F8 /* Highlightr */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -111,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA865052998588F00E418F8 /* Highlightr in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +301,7 @@
 			);
 			name = BookReader;
 			packageProductDependencies = (
+				9AA865042998588F00E418F8 /* Highlightr */,
 			);
 			productName = BookReader;
 			productReference = 9A586C56299393CA0001A1EA /* BookReader.app */;
@@ -373,6 +376,7 @@
 			);
 			mainGroup = 9A586C4D299393CA0001A1EA;
 			packageReferences = (
+				9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */,
 			);
 			productRefGroup = 9A586C57299393CA0001A1EA /* Products */;
 			projectDirPath = "";
@@ -806,6 +810,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raspu/Highlightr.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9AA865042998588F00E418F8 /* Highlightr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */;
+			productName = Highlightr;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9A586C4E299393CA0001A1EA /* Project object */;
 }
