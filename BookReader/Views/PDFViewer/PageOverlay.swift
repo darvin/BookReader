@@ -35,10 +35,8 @@ import Vision
     }
     
     private let scaleFactor:CGFloat = 2
-    private var isHighlightsMade = false
+
     func makeHighlights() {
-        guard !isHighlightsMade else {return}
-        isHighlightsMade = true
         guard let page, let pdfView else {return }
         let pageSize = page.bounds(for: .mediaBox).size
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)

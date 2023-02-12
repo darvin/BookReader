@@ -66,9 +66,9 @@ extension String {
     }
     
     func pdfView(_ pdfView: PDFView, willEndDisplayingOverlayView overlayView: UIView, for page: PDFPage) {
-//        if let pageOverlay = overlayView as? PageOverlay {
-//            pageOverlay.removeHighlights()
-//        }
+        if let pageOverlay = overlayView as? PageOverlay {
+            pageOverlay.removeHighlights()
+        }
     }
     
     
