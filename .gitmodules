@@ -1,0 +1,3 @@
+[submodule "guesslang"]
+	path = guesslang
+	url = https://github.com/yoeo/guesslang.git

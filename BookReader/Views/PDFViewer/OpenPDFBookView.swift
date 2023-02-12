@@ -110,7 +110,7 @@ struct OpenPDFBookView: View {
 
     
     private func setOrientationPortrait() {
-        AppDelegate.orientationLock = .portrait
+        MyAppDelegate.orientationLock = .portrait
 //                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         windowScene?.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
@@ -120,7 +120,7 @@ struct OpenPDFBookView: View {
     
     private func setOrientationLandscape() {
         UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue, forKey: "orientation")
-        AppDelegate.orientationLock = .landscape
+        MyAppDelegate.orientationLock = .landscape
 
     }
     

@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-        
-    static var orientationLock = UIInterfaceOrientationMask.all 
-
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return AppDelegate.orientationLock
-    }
-}
 
 
 extension UIApplication {
@@ -24,13 +16,20 @@ extension UIApplication {
         }
 }
 
+
+
 @main
 struct BookReaderApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor(MyAppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Text("")  // << temporary placeholder
+                .withHostingWindow { window in
+                    window?.rootViewController =
+                         HostingController(rootView: MainView())
+                }
         }
+
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  BookReader
 //
 //  Created by standard on 2/8/23.
@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-struct ContentView: View {
+struct MainView: View {
     @StateObject
     var viewModel = ManyBookshelvesViewModel()
     
@@ -31,8 +31,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
