@@ -44,7 +44,8 @@
 		9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650D2998DED400E418F8 /* MyPDFView.swift */; };
 		9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */; };
 		9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */; };
-		9AA865142999063300E418F8 /* ProgrammingLanguageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865132999063300E418F8 /* ProgrammingLanguageClassifier.mlmodel */; };
+		9AA8651729991EB200E418F8 /* FontColorizationOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */; };
+		9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -110,7 +111,8 @@
 		9AA8650D2998DED400E418F8 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeOverlayView.swift; sourceTree = "<group>"; };
 		9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_ProgrammingLanguage.swift; sourceTree = "<group>"; };
-		9AA865132999063300E418F8 /* ProgrammingLanguageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ProgrammingLanguageClassifier.mlmodel; sourceTree = "<group>"; };
+		9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColorizationOverlayView.swift; sourceTree = "<group>"; };
+		9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighligtingTools.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -168,7 +170,6 @@
 		9A586C58299393CA0001A1EA /* BookReader */ = {
 			isa = PBXGroup;
 			children = (
-				9AA865132999063300E418F8 /* ProgrammingLanguageClassifier.mlmodel */,
 				9AA865062998882F00E418F8 /* Lifecycle */,
 				9AA864E0299692B800E418F8 /* Tools */,
 				9AC2F7A12993A3F70053EA37 /* Info.plist */,
@@ -271,6 +272,7 @@
 				9AA864E1299692C800E418F8 /* ShakeTools.swift */,
 				9AA864E32997A1B600E418F8 /* HashableSynthesizable.swift */,
 				9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */,
+				9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -287,6 +289,7 @@
 				9AA864F22997AD7600E418F8 /* ClearButton.swift */,
 				9AA8650D2998DED400E418F8 /* MyPDFView.swift */,
 				9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */,
+				9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */,
 			);
 			path = PDFViewer;
 			sourceTree = "<group>";
@@ -465,15 +468,16 @@
 				9AA864D6299512AE00E418F8 /* OpenBookViewModel.swift in Sources */,
 				9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */,
 				9A586C5C299393CA0001A1EA /* MainView.swift in Sources */,
+				9AA8651729991EB200E418F8 /* FontColorizationOverlayView.swift in Sources */,
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
 				9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */,
 				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,
+				9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */,
 				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
 				9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */,
 				9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */,
 				9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */,
-				9AA865142999063300E418F8 /* ProgrammingLanguageClassifier.mlmodel in Sources */,
 				9AA864ED2997A27600E418F8 /* PageOverlay.swift in Sources */,
 				9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */,
 				9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */,

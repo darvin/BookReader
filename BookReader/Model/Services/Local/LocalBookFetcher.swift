@@ -23,6 +23,10 @@ extension URL {
 
 class LocalBookFetcher {
     
+    func checkAndMakeThumbnailFile(for book:LocalBook) async {
+        
+    }
+    
     func fetch() -> [LocalBook] {
         do {
             // Get the document directory url
