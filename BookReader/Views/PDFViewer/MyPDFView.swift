@@ -20,6 +20,10 @@ class MyPDFView: PDFView {
         NotificationCenter.default.addObserver(self, selector:#selector(prevPage(notification:)), name:Self.pdfViewPrevPage, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func nextPage(notification: Notification) {
         turnPage()
     }

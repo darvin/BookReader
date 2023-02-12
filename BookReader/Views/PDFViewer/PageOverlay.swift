@@ -7,15 +7,8 @@
 
 import UIKit
 import PDFKit
-import Highlightr
 import Vision
 
-extension String {
-    func looksLikeProgrammingLanguage() -> Bool {
-        let s = self
-        return s.contains("<") || s.contains(">") || s.contains("}") || s.contains("{") || (s.contains(":") && s.contains("-")) || s.hasPrefix("//") || s.hasSuffix(";")
-    }
-}
 
 extension CGRect {
 
@@ -43,11 +36,7 @@ extension CGRect {
 }
 
 @objc class PageOverlay : UIView {
-    private static let highlightr = {
-        let highlightr = Highlightr()
-        highlightr?.setTheme(to: "routeros")
-        return highlightr
-    }()
+
 
     weak var pdfView: PDFView?
     private var _page: PDFPage?
@@ -102,10 +91,10 @@ extension CGRect {
         }
         
         
-        let results: [(CGRect, String)] = observations.compactMap { observation in
+        let tuples: [(String, CGRect)] = observations.compactMap { observation in
 
             // Find the top observation.
-            guard let candidate = observation.topCandidates(1).first else { return (.zero, "") }
+            guard let candidate = observation.topCandidates(1).first else { return ("", .zero) }
             
             // Find the bounding-box observation for the string range.
             let stringRange = candidate.string.startIndex..<candidate.string.endIndex
@@ -115,37 +104,56 @@ extension CGRect {
             let boundingBox = boxObservation?.boundingBox ?? .zero
             
             // Convert the rectangle from normalized coordinates to page coordinates.
-            return (VNImageRectForNormalizedRect(boundingBox,
+            return (
+                candidate.string,
+                VNImageRectForNormalizedRect(boundingBox,
                                                 Int(pageSize.width),
-                                                Int(pageSize.height)),
-                    candidate.string)
+                                                Int(pageSize.height))
+                    )
+        }
+        let tresholdForIndentationCountingX: CGFloat = 2.0
+
+
+        let processedTuples = tuples.map { (text, rect) -> (text: String, rect: CGRect, isProgrammingLanguage: Bool, indentation: Int) in
+            return (text, rect, text.looksLikeProgrammingLanguage(), 0)
         }
 
-        let processedTuples = results.map { (rect, text) -> (text: String, rect: CGRect, isProgrammingLanguage: Bool) in
-            return (text, rect, text.looksLikeProgrammingLanguage())
-        }
-
-        let groupedTuples = processedTuples.reduce([(String, CGRect, Bool)]()) { (result, tuple) -> [(String, CGRect, Bool)] in
+        let groupedTuples = processedTuples.reduce([(String, CGRect, Bool, Int)]()) { (result, tuple) -> [(String, CGRect, Bool, Int)] in
             guard let last = result.last else {
                 return [tuple]
             }
             
-            let (lastText, lastRect, lastIsProgrammingLanguage) = last
-            let (text, rect, isProgrammingLanguage) = tuple
+            let (lastText, lastRect, lastIsProgrammingLanguage, lastIndentation) = last
+            let (text, rect, isProgrammingLanguage, _) = tuple
             
-            if lastIsProgrammingLanguage && isProgrammingLanguage && rect.verticalDistance(from:lastRect) < 10 {
-                return result.dropLast() + [(lastText + "\n" + text, lastRect.union(rect), true)]
-            } else {
-                return result + [tuple]
+            var indentation: Int = 0
+            if lastIsProgrammingLanguage && isProgrammingLanguage {
+                let xDifference = abs(rect.minX - lastRect.minX)
+                if xDifference < tresholdForIndentationCountingX {
+                    indentation = lastIndentation
+                } else if rect.minX < lastRect.minX {
+                    indentation = max(lastIndentation - 2, 0)
+
+                } else {
+                    indentation = lastIndentation + 2
+
+                }
+                
+                let spaces = String(repeating: " ", count: indentation)
+                if rect.verticalDistance(from: lastRect) < 10 {
+                    return result.dropLast() + [(spaces + lastText + "\n" + spaces + text, lastRect.union(rect), true, indentation)]
+                }
             }
+            
+            return result + [(text, rect, isProgrammingLanguage, 0)]
         }
 
-        let filteredTuples = groupedTuples.filter { (text, rect, isProgrammingLanguage) -> Bool in
+        let filteredTuples = groupedTuples.filter { (text, rect, isProgrammingLanguage, indentation) -> Bool in
             return isProgrammingLanguage
         }
 
         codeHighlights = [CGRect: String]()
-        for (text, rect, _) in filteredTuples {
+        for (text, rect, _, _) in filteredTuples {
             codeHighlights![rect] = text
         }
         makeCodeHighlightViewsFromArray()
