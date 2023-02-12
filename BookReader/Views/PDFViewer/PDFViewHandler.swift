@@ -57,9 +57,13 @@ extension String {
         willDisplayOverlayView overlayView: UIView,
         for page: PDFPage
     ) {
-        print("WILLLL \(page)")
         if let pageOverlay = overlayView as? PageOverlay {
-            pageOverlay.makeCodeHighlights()
+            DispatchQueue.global(qos: .background).async {
+                
+                Task {
+                    await pageOverlay.makeCodeHighlightsAsync()
+                }
+            }
         }
     }
     

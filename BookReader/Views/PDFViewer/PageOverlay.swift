@@ -35,7 +35,30 @@ extension CGRect {
 
 }
 
+import CoreML
+import NaturalLanguage
+
+class ProgrammingOrNaturalPredictor {
+    var model:NLModel
+    init() {
+        let url = Bundle.main.url(forResource: "ProgrammingLanguageClassifier", withExtension: "mlmodelc")!
+        model = try! NLModel(contentsOf: url)
+
+    }
+    
+    func predict(text:String) -> String?  {
+        let h = model.predictedLabelHypotheses(for: text, maximumCount: 1)
+        guard let lang = h.keys.first else { return nil }
+        guard let confidence = h[lang] else { return nil }
+        print("AI! \(lang) \(confidence)")
+        return confidence > 0.12 ? lang : nil
+    }
+
+}
+
 @objc class PageOverlay : UIView {
+    
+    static var predictor = ProgrammingOrNaturalPredictor()
 
 
     weak var pdfView: PDFView?
@@ -56,8 +79,13 @@ extension CGRect {
     }
     
     private let scaleFactor:CGFloat = 2
+    func makeCodeHighlightsAsync() async {
+        let task = Task.init {
+            makeCodeHighlights()
+        }
+    }
 
-    func makeCodeHighlights() {
+    private func makeCodeHighlights() {
         guard codeHighlights == nil else { return makeCodeHighlightViewsFromArray() }
         guard let page else { return }
         let pageSize = page.bounds(for: .mediaBox).size
@@ -115,7 +143,10 @@ extension CGRect {
 
 
         let processedTuples = tuples.map { (text, rect) -> (text: String, rect: CGRect, isProgrammingLanguage: Bool, indentation: Int) in
-            return (text, rect, text.looksLikeProgrammingLanguage(), 0)
+            let label = Self.predictor.predict(text: text)
+            print("AI! \(label)  '\(text)' ")
+            let looksLikeProgrammingLanguage = label != nil
+            return (text, rect, looksLikeProgrammingLanguage, 0)
         }
 
         let groupedTuples = processedTuples.reduce([(String, CGRect, Bool, Int)]()) { (result, tuple) -> [(String, CGRect, Bool, Int)] in
@@ -173,9 +204,14 @@ extension CGRect {
     
     private func makeCodeHighlightViewsFromArray() {
         guard let codeHighlights else { return }
-        codeHighlights.forEach { (key: CGRect, value: String) in
-            makeCodeHighlight(pageBounds: key, code: value)
+        Task {
+            await MainActor.run {
+                codeHighlights.forEach { (key: CGRect, value: String) in
+                    makeCodeHighlight(pageBounds: key, code: value)
+                }
+            }
         }
+        
     }
     
     private func convertFromPage(_ rect:CGRect) -> CGRect? {
