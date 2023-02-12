@@ -10,6 +10,38 @@ import PDFKit
 import Highlightr
 import Vision
 
+extension String {
+    func looksLikeProgrammingLanguage() -> Bool {
+        let s = self
+        return s.contains("<") || s.contains(">") || s.contains("}") || s.contains("{") || (s.contains(":") && s.contains("-")) || s.hasPrefix("//") || s.hasSuffix(";")
+    }
+}
+
+extension CGRect {
+
+    func verticalDistance(from rect: CGRect) -> CGFloat {
+        if intersects(rect) {
+            return 0
+            
+        }
+
+        let mostLeft = origin.x < rect.origin.x ? self : rect
+        let mostRight = rect.origin.x < self.origin.x ? self : rect
+
+        var xDifference = mostLeft.origin.x == mostRight.origin.x ? 0 : mostRight.origin.x - (mostLeft.origin.x + mostLeft.size.width)
+        xDifference = CGFloat(max(0, xDifference))
+
+        let upper = self.origin.y < rect.origin.y ? self : rect
+        let lower = rect.origin.y < self.origin.y ? self : rect
+
+        var yDifference = upper.origin.y == lower.origin.y ? 0 : lower.origin.y - (upper.origin.y + upper.size.height)
+        yDifference = CGFloat(max(0, yDifference))
+
+        return yDifference
+    }
+
+}
+
 @objc class PageOverlay : UIView {
     private static let highlightr = {
         let highlightr = Highlightr()
@@ -42,13 +74,11 @@ import Vision
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         let image = page.thumbnail(of: imageSize, for: .mediaBox)
         
-        print("WILLLL 1 \(page)")
 
         guard let cgImage = image.cgImage else { return }
 
         // Create a new image-request handler.
         let requestHandler = VNImageRequestHandler(cgImage: cgImage)
-        print("WILLLL 2 \(page)")
 
         // Create a new request to recognize text.
         let request = VNRecognizeTextRequest(completionHandler: recognizeTextHandler)
@@ -59,14 +89,12 @@ import Vision
         } catch {
             print("Unable to perform the requests: \(error).")
         }
-        print("WILLLL 3 \(page)")
 
     }
     
     func recognizeTextHandler(request: VNRequest, error: Error?) {
-        guard let page, let pdfView else {return }
+        guard let page else {return }
         let pageSize = page.bounds(for: .mediaBox).size
-//        let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         guard let observations =
                 request.results as? [VNRecognizedTextObservation] else {
             return
@@ -90,12 +118,35 @@ import Vision
                                                 Int(pageSize.width),
                                                 Int(pageSize.height)),
                     candidate.string)
-        }.filter { (r:CGRect, s:String) in
-            s.contains("<") || s.contains(">") || s.contains("}") || s.contains("{") || (s.contains(":") && s.contains("-")) || s.hasPrefix("//") || s.hasSuffix(";")
         }
-        results.forEach { (r:CGRect, s:String) in
-//            print(s)
-            makeHighlight(pageBounds: r, color: UIColor.green.withAlphaComponent(0.2))
+
+        let processedTuples = results.map { (rect, text) -> (text: String, rect: CGRect, isProgrammingLanguage: Bool) in
+            return (text, rect, text.looksLikeProgrammingLanguage())
+        }
+
+        let groupedTuples = processedTuples.reduce([(String, CGRect, Bool)]()) { (result, tuple) -> [(String, CGRect, Bool)] in
+            guard let last = result.last else {
+                return [tuple]
+            }
+            
+            let (lastText, lastRect, lastIsProgrammingLanguage) = last
+            let (text, rect, isProgrammingLanguage) = tuple
+            
+            if lastIsProgrammingLanguage && isProgrammingLanguage && rect.verticalDistance(from:lastRect) < 10 {
+                return result.dropLast() + [(lastText + "\n" + text, lastRect.union(rect), true)]
+            } else {
+                return result + [tuple]
+            }
+        }
+
+        let filteredTuples = groupedTuples.filter { (text, rect, isProgrammingLanguage) -> Bool in
+            return isProgrammingLanguage
+        }
+
+        
+        filteredTuples.forEach { (text, rect, _) in
+            print("{{{{{{{{\(text)}}}}}}}}}")
+            makeHighlight(pageBounds: rect, color: UIColor.green.withAlphaComponent(0.2))
         }
 
     }
