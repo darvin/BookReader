@@ -87,11 +87,11 @@ import Vision
                                                 Int(pageSize.height)),
                     candidate.string)
         }.filter { (r:CGRect, s:String) in
-            s.contains("<")
+            s.contains("<") || s.contains(">") || (s.contains(":") && s.contains("-")) 
         }
         results.forEach { (r:CGRect, s:String) in
             print(s)
-            
+            makeHighlight(pageBounds: r, color: UIColor.green.withAlphaComponent(0.2))
         }
 
     }
