@@ -69,7 +69,10 @@ public extension UIImage {
         
         guard let colorizedPageText = Highlighter.shared.highlight(pageText.string) else {return}
         
-        colorizedPageText.removingIgnoredColors().removingColorsWithLowLineCoverage()
+        colorizedPageText
+            .removingIgnoredColors()
+//            .removingColorsWithLowLineCoverage()
+            .removeForegroundColorFromLongLines()
             .enumerateAttribute(.foregroundColor, in: NSRange(0..<colorizedPageText.length), options: .longestEffectiveRangeNotRequired) {
             color, range, stop in
             guard let color = color as? UIColor else { return }

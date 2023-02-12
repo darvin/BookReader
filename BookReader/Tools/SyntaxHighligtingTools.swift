@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 import Highlightr
 
+let RemovingColorsWithLowLineCoverageTreshold = 0.0
+let RemovingColorsFromLongLinesTreshold = 100
+
+
 public class Highlighter {
     static let shared = Highlighter()
     private var highlightr: Highlightr?
     private init() {
         self.highlightr = Highlightr()
-        highlightr?.setTheme(to: "routeros")
+        highlightr?.setTheme(to: "xcode")
     }
     
     func highlight(_ text:String) -> NSAttributedString? {
@@ -36,6 +40,22 @@ extension UIColor {
 }
 
 extension NSAttributedString {
+    func removeForegroundColorFromLongLines() -> NSAttributedString {
+          let mutableAttributedString = NSMutableAttributedString(attributedString: self)
+          let range = NSRange(location: 0, length: mutableAttributedString.length)
+          var lineRange = mutableAttributedString.lineRange(for: range)
+          while lineRange.location < NSMaxRange(range) {
+              if lineRange.length > RemovingColorsFromLongLinesTreshold {
+                  mutableAttributedString.removeAttribute(.foregroundColor, range: lineRange)
+              }
+              lineRange = NSRange(location: NSMaxRange(lineRange), length: NSMaxRange(range) - NSMaxRange(lineRange))
+              if lineRange.location >= NSMaxRange(range) {
+                  break
+              }
+              lineRange = mutableAttributedString.lineRange(for: lineRange)
+          }
+          return NSAttributedString(attributedString: mutableAttributedString)
+      }
     func removingIgnoredColors() -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString(attributedString: self)
         let range = NSRange(location: 0, length: mutableAttributedString.length)
@@ -59,7 +79,7 @@ extension NSAttributedString {
                     lineColorizedCount += range.length
                 }
             }
-            if Double(lineColorizedCount) / Double(lineRange.length) < 0.7 {
+            if Double(lineColorizedCount) / Double(lineRange.length) < RemovingColorsWithLowLineCoverageTreshold {
                 mutableAttributedString.removeAttribute(.foregroundColor, range: lineRange)
             }
             lineRange = NSRange(location: NSMaxRange(lineRange), length: NSMaxRange(range) - NSMaxRange(lineRange))

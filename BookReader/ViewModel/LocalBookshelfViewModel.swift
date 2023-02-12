@@ -17,12 +17,27 @@ class LocalBookshelfViewModel: Bookshelfable {
     var books: [LocalBook] = []
     
     let fetcher = LocalBookFetcher()
+    let thumbnailGenerator = PDFThumbnailGenerator()
+    
     public init() {}
 
     func fetch() async {
         await MainActor.run {
-            books = fetcher.fetch()
+            books = []
         }
+        let booksAsyncSequence = fetcher.fetch()
+        do {
+            for try await book in booksAsyncSequence  {
+                try await thumbnailGenerator.generateAndSaveThumbnail(for: book.url)
+                await MainActor.run {
+                    books.append(book)
+                    print("BOOKS: \(books.count)")
+                }
+            }
+        } catch {
+            print("error: ", error)
+        }
+
     }
     
 }

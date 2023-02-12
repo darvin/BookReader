@@ -17,6 +17,12 @@ extension LocalBook: BookPDFable {
     var pdfURL: URL? {
         return url
     }
+    
+    static func thumbnailURL(for url:URL) -> URL {
+        let fileName = url.lastPathComponent.replacingOccurrences(of: ".pdf", with: ".jpg")
+
+        return URL(fileURLWithPath: url.deletingLastPathComponent().path + "/." + fileName)
+    }
 }
 extension LocalBook: HashableSynthesizable { }
 
@@ -34,8 +40,7 @@ extension LocalBook: BookMetadatable {
     }
     
     var thumbnailURL: URL {
-        return URL(string: "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg")!
-        
+        return Self.thumbnailURL(for: url)
     }
     
     
