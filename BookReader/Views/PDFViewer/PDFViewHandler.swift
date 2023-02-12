@@ -89,10 +89,11 @@ extension String {
     }
     
     @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        print("tap")
+
         guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
         let pageOverlay = pageOverlays(page: page)
         pageOverlay.touched(at:gestureRecognizer.location(in: pageOverlay))
-
     }
 
 }

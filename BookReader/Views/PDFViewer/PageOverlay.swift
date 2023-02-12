@@ -98,6 +98,7 @@ import Highlightr
             highlightView.togglePopupView()
         } else {
             let atRect = rectForWord(at:at)
+            guard atRect != CGRectNull else { return }
             let v = HighlightView(frame: atRect, popupView:  PopupView(frame: CGRect(origin: CGPointZero, size: atRect.size), text: selection(at:at)?.string ?? "-----") )
             highlightsViews[atRect] = v
             addSubview(v)
