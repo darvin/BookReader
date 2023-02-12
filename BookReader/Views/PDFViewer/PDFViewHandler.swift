@@ -82,36 +82,17 @@ extension String {
         return tapGesture
     }()
     
-    func selectedPageOverlayWordAndBounds(for gestureRecognizer: UITapGestureRecognizer) -> (PageOverlay, String, CGRect)? {
-        let point = gestureRecognizer.location(in: pdfView)
-        
-        guard let page = pdfView.page(for: point, nearest: true) else { return nil }
-        let pageOverlay = pageOverlays(page: page)
-
-        let convertedPoint = pdfView.convert(point, to: page)
-
-        guard page.annotation(at: convertedPoint) == nil else { return nil }
-        guard let selection = page.selectionForWord(at: convertedPoint) else { return nil }
-
-        guard let wordTouched = selection.string else { return nil }
-        let pageBounds = selection.bounds(for: page)
-        let pageBoundsPdfView = pdfView.convert(pageBounds, from: page)
-        let pageOverlayBounds = pdfView.convert(pageBoundsPdfView, to: pageOverlay)
-
-        return (pageOverlay, wordTouched, pageOverlayBounds)
-    }
-    
     @objc func doubleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
-        if let (pageOverlay, wordTouched, pageOverlayBounds) = selectedPageOverlayWordAndBounds(for: gestureRecognizer) {
-            pageOverlay.doubleTouched(wordTouched, at:pageOverlayBounds)
-        }
+        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
+        let pageOverlay = pageOverlays(page: page)
+        pageOverlay.doubleTouched(at:gestureRecognizer.location(in: pageOverlay))
     }
     
     @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
-        if let (pageOverlay, wordTouched, pageOverlayBounds) = selectedPageOverlayWordAndBounds(for: gestureRecognizer) {
-            pageOverlay.touched(wordTouched, at:pageOverlayBounds)
-        }
-        
+        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
+        let pageOverlay = pageOverlays(page: page)
+        pageOverlay.touched(at:gestureRecognizer.location(in: pageOverlay))
+
     }
 
 }

@@ -48,21 +48,22 @@ import Highlightr
         }
     }
     
-    func makeHighlight(range:NSRange, color:UIColor) {
+    func makeHighlight(range:NSRange, color:UIColor, popupView: UIView? = nil) {
         guard let page, let pdfView else { return }
         guard let selection = page.selection(for: range) else { return }
         let pageBounds = selection.bounds(for: page)
         let pageBoundsPdfView = pdfView.convert(pageBounds, from: page)
         let pageOverlayBounds = pdfView.convert(pageBoundsPdfView, to: self)
         
-        let v = HighlightView(frame: pageOverlayBounds, color: color)
+        let v = HighlightView(frame: pageOverlayBounds, color: color, popupView: popupView)
         highlightsViews[pageOverlayBounds] = v
         addSubview(v)
 
     }
     
-    func highlightView(at: CGRect) -> HighlightView? {
-        let smallerRect = at.inset(by: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
+    func highlightView(at: CGPoint) -> HighlightView? {
+        let atRect = rectForWord(at: at)
+        let smallerRect = atRect.inset(by: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         let rectsFiltered = highlightsViews.keys.filter { r in
             r.contains(smallerRect)
         }
@@ -74,17 +75,36 @@ import Highlightr
         
     }
     
-    func doubleTouched(_ text: String, at: CGRect) {
+    func rectForWord(at: CGPoint) -> CGRect {
+        guard let page, let pdfView else { return CGRectNull }
+        guard let selection = selection(at: at) else { return CGRectNull }
+        let pageRect = selection.bounds(for: page)
+        let pdfViewRect = pdfView.convert(pageRect, from: page)
+        let overlayRect = pdfView.convert(pdfViewRect, to: self)
+        return overlayRect
+        
+    }
+    
+    func selection(at: CGPoint) -> PDFSelection? {
+        guard let page, let pdfView else { return nil }
+        let pdfViewPoint = pdfView.convert(at, from: self)
+        let pagePoint = pdfView.convert(pdfViewPoint, to: page)
+        let selection = page.selectionForWord(at: pagePoint)
+        return selection
+    }
+    
+    func doubleTouched(at: CGPoint) {
         if let highlightView = highlightView(at: at) {
             highlightView.togglePopupView()
         } else {
-            let v = HighlightView(frame: at, popupView:  PopupView(frame: CGRect(origin: CGPointZero, size: at.size), text: text))
-            highlightsViews[at] = v
+            let atRect = rectForWord(at:at)
+            let v = HighlightView(frame: atRect, popupView:  PopupView(frame: CGRect(origin: CGPointZero, size: atRect.size), text: selection(at:at)?.string ?? "-----") )
+            highlightsViews[atRect] = v
             addSubview(v)
         }
     }
     
-    func touched(_ text: String, at: CGRect) {
+    func touched(at: CGPoint) {
         if let highlightView = highlightView(at: at) {
             highlightView.togglePopupView()
         }
