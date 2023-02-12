@@ -24,28 +24,6 @@ struct OpenPDFBookView: View {
         _viewModel = StateObject(wrappedValue: OpenBookViewModel(book: book))
     }
     
-    private let pdfViewHandler = PDFViewHandler()
-    private let pdfView = {
-        
-        let p = PDFView()
-        
-        p.autoScales = true
-        p.pageShadowsEnabled = false
-        p.backgroundColor = UIColor.white
-        let scrollView = p.subviews[0] as! UIScrollView
-        scrollView.backgroundColor  = UIColor.systemBackground
-
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInsetAdjustmentBehavior = .never
-
-        #if false
-            p.pageBreakMargins = UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
-        #else
-            p.pageBreakMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        #endif
-        return p
-    }()
-    
     private func onDissmiss() {
         self.presentationMode.wrappedValue.dismiss()
 
@@ -53,42 +31,12 @@ struct OpenPDFBookView: View {
     
     
     
-    private func turnPage(_ isForwardDirection: Bool = true) {
-        if let currentPage = pdfView.currentPage, let document = pdfView.document {
-            let visibleRect = CGRect(origin: CGPointZero, size: pdfView.bounds.size)
-            let currentRect = pdfView.convert(visibleRect, to: currentPage)
-            
-            let y = isForwardDirection ?
-                currentRect.origin.y - currentRect.size.height :
-                currentRect.origin.y + currentRect.size.height
-            
-            var newPage = currentPage
-            print ("y \(y) maxY \(currentPage.bounds(for: .mediaBox).size.height)")
-            if (y + 2.0) > currentPage.bounds(for: .mediaBox).size.height {
-                if let prevPage = document.page(at: document.index(for: currentPage)-1) {
-                    newPage = prevPage
-                    //fixme coords
-                }
-            }
-            
-            let nextRect = CGRect(origin:
-                                    CGPoint(
-                                        x: currentRect.origin.x,
-                                        y: y)
-                                    , size: currentRect.size)
-            
-            print("CURR: \(currentRect)")
-            print("NEXT: \(nextRect)")
-            pdfView.go(to: nextRect, on: newPage)
-        }
-        
-    }
     
     private func prevPage() {
-        turnPage(false)
+        NotificationCenter.default.post(name: MyPDFView.pdfViewPrevPage, object: nil)
     }
     private func nextPage() {
-        turnPage()
+        NotificationCenter.default.post(name: MyPDFView.pdfViewNextPage, object: nil)
     }
     
     private func onTopTrailing() {
@@ -124,12 +72,6 @@ struct OpenPDFBookView: View {
 
     }
     
-    private func loadPDFData(_ data: Data) {
-        pdfViewHandler.pdfView = pdfView
-        pdfView.document = PDFDocument(data: data)
-
-    }
-
     var body: some View {
         if let data = viewModel.pdfData {
             GeometryReader { r in
@@ -137,14 +79,13 @@ struct OpenPDFBookView: View {
                 let buttonHeight = r.size.height / 2.3
                 
                 ZStack(alignment: .topLeading) {
-                    PDFKitRepresentedView(pdfView: pdfView)
+                    PDFKitRepresentedView(data: data)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                         .background(Color.red)
                         .edgesIgnoringSafeArea(.all)
                         .navigationBarHidden(true)
                         .onAppear {
                             setOrientationLandscape()
-                            loadPDFData(data)
                         }
                         .onDisappear {
                             setOrientationPortrait()
