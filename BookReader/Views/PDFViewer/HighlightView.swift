@@ -7,8 +7,12 @@
 
 import UIKit
 
+protocol ToggablePoppable {
+    func togglePopupView()
+}
 
-@objc class HighlightView : UIView {
+
+@objc class HighlightView : UIView, ToggablePoppable {
     
     private var popupView: UIView?
     

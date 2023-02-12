@@ -59,9 +59,7 @@ extension String {
     ) {
         print("WILLLL \(page)")
         if let pageOverlay = overlayView as? PageOverlay {
-            pageOverlay.makeHighlights()
-            print("DID \(page)")
-
+            pageOverlay.makeCodeHighlights()
         }
     }
     

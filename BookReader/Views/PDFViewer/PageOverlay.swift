@@ -68,8 +68,9 @@ extension CGRect {
     
     private let scaleFactor:CGFloat = 2
 
-    func makeHighlights() {
-        guard let page, let pdfView else {return }
+    func makeCodeHighlights() {
+        guard codeHighlights == nil else { return makeCodeHighlightViewsFromArray() }
+        guard let page else { return }
         let pageSize = page.bounds(for: .mediaBox).size
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         let image = page.thumbnail(of: imageSize, for: .mediaBox)
@@ -143,31 +144,51 @@ extension CGRect {
             return isProgrammingLanguage
         }
 
-        
-        filteredTuples.forEach { (text, rect, _) in
-            print("{{{{{{{{\(text)}}}}}}}}}")
-            makeHighlight(pageBounds: rect, color: UIColor.green.withAlphaComponent(0.2))
+        codeHighlights = [CGRect: String]()
+        for (text, rect, _) in filteredTuples {
+            codeHighlights![rect] = text
         }
+        makeCodeHighlightViewsFromArray()
 
     }
 
     
-    var highlightsViews = [CGRect : HighlightView]()
-    
+    var highlightsViews = [CGRect : UIView]()
+    var codeHighlights: [CGRect : String]? = nil
+
     func removeHighlights() {
-        highlightsViews.forEach { (key: CGRect, value: HighlightView) in
+        highlightsViews.forEach { (key: CGRect, value: UIView) in
             highlightsViews.removeValue(forKey: key)
             value.removeFromSuperview()
         }
     }
     
-    func makeHighlight(pageBounds:CGRect, color:UIColor, popupView: UIView? = nil) {
-        guard let page, let pdfView else { return }
-        let pageBoundsPdfView = pdfView.convert(pageBounds, from: page)
+    private func makeCodeHighlightViewsFromArray() {
+        guard let codeHighlights else { return }
+        codeHighlights.forEach { (key: CGRect, value: String) in
+            makeCodeHighlight(pageBounds: key, code: value)
+        }
+    }
+    
+    private func convertFromPage(_ rect:CGRect) -> CGRect? {
+        guard let page, let pdfView else { return nil }
+        let pageBoundsPdfView = pdfView.convert(rect, from: page)
         let pageOverlayBounds = pdfView.convert(pageBoundsPdfView, to: self)
-        
-        let v = HighlightView(frame: pageOverlayBounds, color: color, popupView: popupView)
-        highlightsViews[pageOverlayBounds] = v
+        return pageOverlayBounds
+    }
+    
+    private func makeCodeHighlight(pageBounds:CGRect, code:String) {
+        guard let rect = convertFromPage(pageBounds) else { return }
+        let v = CodeOverlayView(frame: rect, code: code)
+        highlightsViews[rect] = v
+        addSubview(v)
+    }
+
+    
+    func makeHighlight(pageBounds:CGRect, color:UIColor, popupView: UIView? = nil) {
+        guard let rect = convertFromPage(pageBounds) else { return }
+        let v = HighlightView(frame: rect, color: color, popupView: popupView)
+        highlightsViews[rect] = v
         addSubview(v)
     }
     
@@ -180,8 +201,8 @@ extension CGRect {
         makeHighlight(pageBounds: pageBounds, color: color, popupView: popupView)
     }
     
-    func highlightView(at: CGPoint) -> HighlightView? {
-        let atRect = rectForWord(at: at)
+    func highlightView(at: CGPoint) -> UIView? {
+        guard let atRect = rectForWord(at: at) else { return nil }
         let smallerRect = atRect.inset(by: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         let rectsFiltered = highlightsViews.keys.filter { r in
             r.contains(smallerRect)
@@ -194,14 +215,11 @@ extension CGRect {
         
     }
     
-    func rectForWord(at: CGPoint) -> CGRect {
-        guard let page, let pdfView else { return CGRectNull }
-        guard let selection = selection(at: at) else { return CGRectNull }
+    func rectForWord(at: CGPoint) -> CGRect? {
+        guard let page else { return nil }
+        guard let selection = selection(at: at) else { return nil }
         let pageRect = selection.bounds(for: page)
-        let pdfViewRect = pdfView.convert(pageRect, from: page)
-        let overlayRect = pdfView.convert(pdfViewRect, to: self)
-        return overlayRect
-        
+        return convertFromPage(pageRect)
     }
     
     func selection(at: CGPoint) -> PDFSelection? {
@@ -213,7 +231,7 @@ extension CGRect {
     }
     
     func doubleTouched(at: CGPoint) {
-        if let highlightView = highlightView(at: at) {
+        if let highlightView = highlightView(at: at) as? ToggablePoppable {
             highlightView.togglePopupView()
         } else {
             guard let page else {return}
@@ -226,7 +244,7 @@ extension CGRect {
     }
     
     func touched(at: CGPoint) {
-        if let highlightView = highlightView(at: at) {
+        if let highlightView = highlightView(at: at) as? ToggablePoppable {
             highlightView.togglePopupView()
         }
     }

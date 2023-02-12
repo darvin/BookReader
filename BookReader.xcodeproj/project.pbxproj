@@ -42,6 +42,7 @@
 		9AA865082998887200E418F8 /* MyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865072998887200E418F8 /* MyAppDelegate.swift */; };
 		9AA8650C299888DC00E418F8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650B299888DC00E418F8 /* HostingController.swift */; };
 		9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650D2998DED400E418F8 /* MyPDFView.swift */; };
+		9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -105,6 +106,7 @@
 		9AA865072998887200E418F8 /* MyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppDelegate.swift; sourceTree = "<group>"; };
 		9AA8650B299888DC00E418F8 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		9AA8650D2998DED400E418F8 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
+		9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeOverlayView.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				9AA864F02997A31E00E418F8 /* PDFRepresentedView.swift */,
 				9AA864F22997AD7600E418F8 /* ClearButton.swift */,
 				9AA8650D2998DED400E418F8 /* MyPDFView.swift */,
+				9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */,
 			);
 			path = PDFViewer;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,
 				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
+				9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */,
 				9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */,
 				9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */,
 				9AA864ED2997A27600E418F8 /* PageOverlay.swift in Sources */,
