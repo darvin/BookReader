@@ -13,7 +13,7 @@ import Highlightr
 @objc class PageOverlay : UIView {
     private static let highlightr = {
         let highlightr = Highlightr()
-        highlightr?.setTheme(to: "paraiso-dark")
+        highlightr?.setTheme(to: "routeros")
         return highlightr
     }()
 
@@ -27,14 +27,26 @@ import Highlightr
         
     }
 
+    private var pdfAnnotationBorder:PDFBorder {
+        let border = PDFBorder()
+        border.lineWidth = 4.0
+        border.style = .solid
+        return border
+    }
+    
+
     func makeHighlights() {
-        
-        guard let text = page?.string as? NSString else { return }
+        guard let page else {return }
+        guard let text = page.string as? NSString else { return }
         guard let highlightedText = PageOverlay.highlightr?.highlight(text as String) else { return }
         highlightedText.enumerateAttribute(NSAttributedString.Key.foregroundColor, in: NSRange(location: 0, length: highlightedText.length)) { color, range, stop in
             if range.length > 10 { return }
-            guard let color:UIColor = (color as? UIColor)?.withAlphaComponent(0.1) else {return}
-            makeHighlight(range: range, color: color)
+            guard let color:UIColor = (color as? UIColor)?.withAlphaComponent(0.9) else {return}
+            guard let selection = page.selection(for: range) else {return}
+            let annotation = PDFAnnotation(bounds: selection.bounds(for: page), forType: .underline, withProperties: nil)
+            let border = PDFBorder()
+            annotation.color = color
+            page.addAnnotation(annotation)
         }
         
     }
