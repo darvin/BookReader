@@ -50,36 +50,81 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttri
     return joinedLines
 }
 
-
-let MonospacedLinesTreshold = 0.3
 func findMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)], getRectFor: (NSRange) -> CGRect) -> [(NSAttributedString, NSRange, CGRect)] {
-  let monospacedLines: [(NSAttributedString, NSRange, CGRect)] = lines.enumerated().reduce([]) { result, line in
-    let charWidth = line.element.2.width / CGFloat(line.element.0.length)
-    let previousLine: (NSAttributedString, NSRange, CGRect)?
-    if line.offset > 0 {
-      previousLine = lines[line.offset - 1]
-    } else {
-      let previousRange = NSRange(location: line.element.1.location - 1, length: 1)
-      let previousRect = getRectFor( previousRange)
-      previousLine = (NSAttributedString(string: " "), previousRange, previousRect)
+    
+    let MonospacedLinesTreshold = 0.3
+    var result: [(NSAttributedString, NSRange, CGRect)] = []
+    
+    for line in lines {
+        let attributedString = line.0
+        
+        // Split the line into fragments
+        let fragments = splitLine(attributedString: attributedString)
+        guard fragments.count >= 2 else { continue }
+
+        // Check if the fragments have equal character widths
+        var isMonospaced = true
+        
+        
+        let firstFragmentRect = getRectFor(fragments[0].range)
+        let firstFragmentWidth = firstFragmentRect.width / CGFloat(fragments[0].attributedString.length)
+        
+        for fragment in fragments[1...] {
+            let fragmentRect = getRectFor(fragment.range)
+            let fragmentWidth = fragmentRect.width / CGFloat(fragment.attributedString.length)
+            if abs(firstFragmentWidth - fragmentWidth) > MonospacedLinesTreshold {
+                isMonospaced = false
+                break
+            }
+        }
+        
+        // Add the line to the result if it's monospaced
+        if isMonospaced {
+            result.append(line)
+        }
     }
-    let nextLine: (NSAttributedString, NSRange, CGRect)?
-    if line.offset < lines.count - 1 {
-      nextLine = lines[line.offset + 1]
-    } else {
-      let nextRange = NSRange(location: line.element.1.location + line.element.1.length, length: 1)
-      let nextRect = getRectFor(nextRange)
-      nextLine = (NSAttributedString(string: " "), nextRange, nextRect)
-    }
-    let previousCharWidth = previousLine!.2.width / CGFloat(previousLine!.0.length)
-    let nextCharWidth = nextLine!.2.width / CGFloat(nextLine!.0.length)
-    if abs(charWidth - previousCharWidth) < MonospacedLinesTreshold && abs(charWidth - nextCharWidth) < MonospacedLinesTreshold {
-      return result + [line.element]
-    }
+    
     return result
-  }
-  return monospacedLines
 }
+func splitLine(attributedString: NSAttributedString) -> [(attributedString: NSAttributedString, range: NSRange)] {
+    let string = attributedString.string as NSString
+    let words = string.components(separatedBy: .whitespacesAndNewlines)
+    
+    var fragments: [(attributedString: NSAttributedString, range: NSRange)] = []
+    let stringLength = attributedString.length
+    
+    let minFragmentLength = max(1, stringLength / 4)
+    let maxFragmentLength = min(stringLength / 2, (stringLength - minFragmentLength))
+    
+    var fragment1Length = 0
+    var fragment2Length = 0
+    
+    for (index, word) in words.enumerated() {
+        let wordLength = word.count
+        let wordRange = NSRange(location: fragment1Length, length: wordLength)
+        let wordAttributedString = attributedString.attributedSubstring(from: wordRange)
+        
+        let nextFragmentLength = fragment1Length + wordLength + 1
+        if nextFragmentLength < minFragmentLength || nextFragmentLength <= maxFragmentLength {
+            fragment1Length = nextFragmentLength
+            fragments.append((wordAttributedString, wordRange))
+        } else {
+            fragment2Length += wordLength + 1
+            if index == words.count - 1 {
+                let fragmentRange = NSRange(location: fragment1Length, length: fragment2Length)
+                if fragmentRange.location + fragmentRange.length <= stringLength {
+                    let fragmentAttributedString = attributedString.attributedSubstring(from: fragmentRange)
+                    fragments.append((fragmentAttributedString, fragmentRange))
+                } else {
+                    return []
+                }
+            }
+        }
+    }
+    
+    return fragments
+}
+
 
 
 func joinContinuousMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)]) -> [(NSAttributedString, NSRange, CGRect)] {
