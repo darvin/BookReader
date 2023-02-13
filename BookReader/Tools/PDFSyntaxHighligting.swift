@@ -15,8 +15,7 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
     
     guard let pageText = page.attributedString  else { return [] }
 
-    let attributedText = pageText
-    let textStorage = NSTextStorage(attributedString: attributedText)
+    let textStorage = NSTextStorage(attributedString: pageText)
     let layoutManager = NSLayoutManager()
     textStorage.addLayoutManager(layoutManager)
     let textContainer = NSTextContainer(size: .zero)
@@ -31,96 +30,109 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
     }
     
     
-    
-    
-    func findMonospacedFragments(attributedString: NSAttributedString) -> [(NSRange, CGRect)] {
-        let string = attributedString.string
-        let fontAttributeName = NSAttributedString.Key.font
-        let monospaceFontAttribute = attributedString.attribute(fontAttributeName, at: 0, effectiveRange: nil) as? UIFont
-
-        var fragments: [(NSRange, CGRect)] = []
-        var startIndex = 0
-
-        while startIndex < string.count {
-            var range = NSRange(location: startIndex, length: string.count - startIndex)
-            let fontAttribute = attributedString.attribute(fontAttributeName, at: startIndex, effectiveRange: &range) as? UIFont
-
-            if let monospaceFontAttribute = monospaceFontAttribute, let fontAttribute = fontAttribute, fontAttribute.fontName == monospaceFontAttribute.fontName {
-                let rect = getRectFor(range: range)
-                fragments.append((range, rect))
-            }
-
-            startIndex = range.location + range.length
-        }
-
-        return fragments
-    }
-
-    
-    var lines = [(NSAttributedString, NSRange, CGRect)] ()
+    var linebreakRanges = [(NSRange, CGRect)] ()
     while index < layoutManager.numberOfGlyphs {
         layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &range)
         let lineRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
-        let lineAttributedText = attributedText.attributedSubstring(from: range)
         let lineRect = getRectFor(range: lineRange)
-        lines.append((lineAttributedText, lineRange, lineRect))
+        linebreakRanges.append((lineRange, lineRect))
         index = NSMaxRange(range)
     }
 
-    
-    let monospacedLines = findMonospacedFragments(attributedString: attributedText)
-    print(monospacedLines)
+    func getWords(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+            let wordSeparators = CharacterSet(charactersIn: " \n\t.,;:!?")
+            var words = [(NSRange, CGRect)]()
+            var wordIndex = 0
+
+            linebreakRanges.forEach { lineRange, lineRect in
+                let lineText = (pageText.string as NSString).substring(with: lineRange)
+                let lineCharacters = Array(lineText)
+                var wordStart = 0
+                var inWord = false
+
+                for (index, character) in lineCharacters.enumerated() {
+                    if wordSeparators.contains(character.unicodeScalars.first!) {
+                        if inWord {
+                            let wordRange = NSRange(location: lineRange.location + wordStart, length: index - wordStart)
+                            let wordRect = getRectFor(range: wordRange)
+                            words.append((wordRange, wordRect))
+                            inWord = false
+                        }
+
+                        if wordIndex % 2 == 0 && lineCharacters.count >= 2 {
+                            if index < lineCharacters.count - 1 {
+                                let wordRange = NSRange(location: lineRange.location + index, length: 2)
+                                let wordRect = getRectFor(range: wordRange)
+                                words.append((wordRange, wordRect))
+                            } else if index == lineCharacters.count - 1 {
+                                let wordRange = NSRange(location: lineRange.location + wordStart, length: lineCharacters.count - wordStart)
+                                let wordRect = getRectFor(range: wordRange)
+                                words.append((wordRange, wordRect))
+                            }
+                        }
+                    } else if !inWord {
+                        wordStart = index
+                        inWord = true
+                    }
+                }
+
+                if inWord {
+                    let wordRange = NSRange(location: lineRange.location + wordStart, length: lineCharacters.count - wordStart)
+                    let wordRect = getRectFor(range: wordRange)
+                    words.append((wordRange, wordRect))
+                }
+
+                wordIndex += 1
+            }
+
+            return words
+        }
+
+
+
+    let wordRanges = getWords(in: pageText, linebreakRanges: linebreakRanges)
+    func getMonospaceLines(linebreakRanges: [(NSRange, CGRect)], wordRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        let monospaceLines = linebreakRanges.filter { lineRange, lineRect in
+            let lineWords = wordRanges.filter { wordRange, wordRect in
+                return lineRange.contains(wordRange.location)
+            }
+
+            let totalCharacterWidth = lineWords.reduce(0) { (result, wordRangeAndRect) in
+                result + wordRangeAndRect.1.width
+            }
+            let totalCharacterCount = lineWords.reduce(0) { (result, wordRangeAndRect) in
+                result + wordRangeAndRect.0.length
+            }
+            let averageCharacterWidth = totalCharacterWidth / CGFloat(totalCharacterCount)
+
+            return lineWords.allSatisfy { wordRange, wordRect in
+                return abs(wordRect.width / CGFloat(wordRange.length) - averageCharacterWidth) < 1.8
+            }
+        }
+
+        return monospaceLines
+    }
+
 //    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
 
-    return monospacedLines
+    return joinContinuousMonospacedLines(lines:getMonospaceLines(linebreakRanges: linebreakRanges, wordRanges: wordRanges))
 }
 
 
-
-extension Character {
-    func isWide() -> Bool? {
-        let narrowChars = "abcdefghijklmnopqrstuvwxyz0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~I"
-        let wideChars = "MWmw_ABCDEFGHJKLMNOPQRSTUVWXYZ"
-        let scalars = String(self).unicodeScalars
-        let scalarValue = scalars[scalars.startIndex].value
-        if narrowChars.contains(self) {
-            return false
-        } else if wideChars.contains(self) {
-            return true
+func joinContinuousMonospacedLines(lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+    var result: [(NSRange, CGRect)] = []
+    var currentLine: (NSRange, CGRect) = lines.first!
+    for i in 1..<lines.count {
+        let nextLine = lines[i]
+        let lineDistance = nextLine.0.location - currentLine.0.location - currentLine.0.length
+        let rectDistance = abs(nextLine.1.minY - currentLine.1.maxY)
+        if lineDistance < 4 && rectDistance < currentLine.1.height / 2 {
+            currentLine = (NSRange(location: currentLine.0.location, length: nextLine.0.location + nextLine.0.length - currentLine.0.location), CGRect(x: currentLine.1.minX, y: currentLine.1.minY, width: currentLine.1.width, height: nextLine.1.maxY - currentLine.1.minY))
         } else {
-            return nil
+            result.append(currentLine)
+            currentLine = nextLine
         }
     }
-}
-
-
-
-func joinContinuousMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)]) -> [(NSAttributedString, NSRange, CGRect)] {
-  var joinedLines: [(NSAttributedString, NSRange, CGRect)] = []
-  var currentLine: (NSAttributedString, NSRange, CGRect)?
-  for line in lines {
-    if let current = currentLine {
-      let charWidth = line.2.width / CGFloat(line.0.length)
-      let lineHeight = line.2.height
-      let currentCharWidth = current.2.width / CGFloat(current.0.length)
-      let currentLineHeight = current.2.height
-      if abs(charWidth - currentCharWidth) < 0.1 && abs(lineHeight - currentLineHeight) < 0.1 {
-        let combinedString = NSMutableAttributedString(attributedString: current.0)
-        combinedString.append(NSAttributedString(string: "\n"))
-        combinedString.append(line.0)
-        let combinedRange = NSRange(location: current.1.location, length: line.1.location + line.1.length - current.1.location)
-        let combinedRect = CGRect(x: min(current.2.minX, line.2.minX), y: min(current.2.minY, line.2.minY), width: max(current.2.maxX, line.2.maxX) - min(current.2.minX, line.2.minX), height: max(current.2.maxY, line.2.maxY) - min(current.2.minY, line.2.minY))
-        currentLine = (combinedString, combinedRange, combinedRect)
-      } else {
-        joinedLines.append(current)
-        currentLine = line
-      }
-    } else {
-      currentLine = line
-    }
-  }
-  if let current = currentLine {
-    joinedLines.append(current)
-  }
-  return joinedLines
+    result.append(currentLine)
+    return result
 }
