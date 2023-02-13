@@ -38,59 +38,78 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
         linebreakRanges.append((lineRange, lineRect))
         index = NSMaxRange(range)
     }
+    
+    func removeNewLineSymbols(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        var updatedLinebreakRanges = [(NSRange, CGRect)]()
 
-    func getWords(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-            let wordSeparators = CharacterSet(charactersIn: " \n\t.,;:!?")
-            var words = [(NSRange, CGRect)]()
-            var wordIndex = 0
-
-            linebreakRanges.forEach { lineRange, lineRect in
-                let lineText = (pageText.string as NSString).substring(with: lineRange)
-                let lineCharacters = Array(lineText)
-                var wordStart = 0
-                var inWord = false
-
-                for (index, character) in lineCharacters.enumerated() {
-                    if wordSeparators.contains(character.unicodeScalars.first!) {
-                        if inWord {
-                            let wordRange = NSRange(location: lineRange.location + wordStart, length: index - wordStart)
-                            let wordRect = getRectFor(range: wordRange)
-                            words.append((wordRange, wordRect))
-                            inWord = false
-                        }
-
-                        if wordIndex % 2 == 0 && lineCharacters.count >= 2 {
-                            if index < lineCharacters.count - 1 {
-                                let wordRange = NSRange(location: lineRange.location + index, length: 2)
-                                let wordRect = getRectFor(range: wordRange)
-                                words.append((wordRange, wordRect))
-                            } else if index == lineCharacters.count - 1 {
-                                let wordRange = NSRange(location: lineRange.location + wordStart, length: lineCharacters.count - wordStart)
-                                let wordRect = getRectFor(range: wordRange)
-                                words.append((wordRange, wordRect))
-                            }
-                        }
-                    } else if !inWord {
-                        wordStart = index
-                        inWord = true
-                    }
-                }
-
-                if inWord {
-                    let wordRange = NSRange(location: lineRange.location + wordStart, length: lineCharacters.count - wordStart)
-                    let wordRect = getRectFor(range: wordRange)
-                    words.append((wordRange, wordRect))
-                }
-
-                wordIndex += 1
+        linebreakRanges.forEach { lineRange, lineRect in
+            let lineText = pageText.attributedSubstring(from: lineRange).string
+            if !lineText.contains("\n") {
+                updatedLinebreakRanges.append((lineRange, lineRect))
+                return
             }
 
-            return words
+            let newLineRange = NSRange(location: lineRange.location, length: lineRange.length - 1)
+            let newLineRect = getRectFor(range: newLineRange)
+            updatedLinebreakRanges.append((newLineRange, newLineRect))
         }
 
+        return updatedLinebreakRanges
+    }
 
+    linebreakRanges = removeNewLineSymbols(in: pageText, linebreakRanges: linebreakRanges)
+    
+    func getCharacters(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        var characters = [(NSRange, CGRect)]()
 
-    let wordRanges = getWords(in: pageText, linebreakRanges: linebreakRanges)
+        linebreakRanges.forEach { lineRange, lineRect in
+            let lineText = (pageText.string as NSString).substring(with: lineRange)
+            let lineCharacters = Array(lineText)
+
+            for (index, character) in lineCharacters.enumerated() {
+                let characterRange = NSRange(location: lineRange.location + index, length: 1)
+                let characterRect = getRectFor(range: characterRange)
+                characters.append((characterRange, characterRect))
+//                print("\(character)   \(characterRect.minY)")
+            }
+        }
+
+        return characters
+    }
+
+    let characterRanges = getCharacters(in: pageText, linebreakRanges: linebreakRanges)
+    
+    
+    func getContinuousLines(characterRanges: [(NSRange, CGRect)], linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        var continuousLines = [(NSRange, CGRect)]()
+        
+        linebreakRanges.forEach { lineRange, lineRect in
+            if lineRange.length == 1 {
+                continuousLines.append((lineRange, lineRect))
+                return
+            }
+            if let firstCharacterRange = characterRanges.first(where: { NSLocationInRange($0.0.location, lineRange) }),
+                        let lastCharacterRange = characterRanges.last(where: { NSLocationInRange($0.0.location, lineRange) })
+                         {
+                let lastCharacterRect = lastCharacterRange.1
+                let firstCharacterRect = firstCharacterRange.1
+                if abs(firstCharacterRect.minY - lastCharacterRect.minY) <= lineRect.height / 2 {
+                            continuousLines.append((lineRange, lineRect))
+                        }
+                else {
+                    let firstCharacter = (pageText.string as NSString).substring(with: firstCharacterRange.0)
+                    let lastCharacter = (pageText.string as NSString).substring(with: lastCharacterRange.0)
+                    print(" '\(firstCharacter)' minY  \(firstCharacterRect.minY) '\(lastCharacter)' minY  \(lastCharacterRect.minY) '\((pageText.string as NSString).substring(with: lineRange))'")
+                }
+            }
+        }
+        
+        return continuousLines
+    }
+
+    
+    let continuousLines = getContinuousLines(characterRanges: characterRanges, linebreakRanges: linebreakRanges)
+    
     func getMonospaceLines(linebreakRanges: [(NSRange, CGRect)], wordRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
         let monospaceLines = linebreakRanges.filter { lineRange, lineRect in
             let lineWords = wordRanges.filter { wordRange, wordRect in
@@ -112,16 +131,19 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
 
         return monospaceLines
     }
+    
+    
 
-//    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
+    let joinedLines = joinContinuousMonospacedLines(lines: continuousLines)
 
-    return joinContinuousMonospacedLines(lines:getMonospaceLines(linebreakRanges: linebreakRanges, wordRanges: wordRanges))
+    return joinedLines
 }
 
 
 func joinContinuousMonospacedLines(lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
     var result: [(NSRange, CGRect)] = []
-    var currentLine: (NSRange, CGRect) = lines.first!
+    guard let firstLine = lines.first else {return []}
+    var currentLine: (NSRange, CGRect) = firstLine
     for i in 1..<lines.count {
         let nextLine = lines[i]
         let lineDistance = nextLine.0.location - currentLine.0.location - currentLine.0.length
