@@ -11,7 +11,7 @@ import PDFKit
 
 
 
-func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttributedString, NSRange, CGRect)] {
+func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange, CGRect)] {
     
     guard let pageText = page.attributedString  else { return [] }
 
@@ -32,6 +32,31 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttri
     
     
     
+    
+    func findMonospacedFragments(attributedString: NSAttributedString) -> [(NSRange, CGRect)] {
+        let string = attributedString.string
+        let fontAttributeName = NSAttributedString.Key.font
+        let monospaceFontAttribute = attributedString.attribute(fontAttributeName, at: 0, effectiveRange: nil) as? UIFont
+
+        var fragments: [(NSRange, CGRect)] = []
+        var startIndex = 0
+
+        while startIndex < string.count {
+            var range = NSRange(location: startIndex, length: string.count - startIndex)
+            let fontAttribute = attributedString.attribute(fontAttributeName, at: startIndex, effectiveRange: &range) as? UIFont
+
+            if let monospaceFontAttribute = monospaceFontAttribute, let fontAttribute = fontAttribute, fontAttribute.fontName == monospaceFontAttribute.fontName {
+                let rect = getRectFor(range: range)
+                fragments.append((range, rect))
+            }
+
+            startIndex = range.location + range.length
+        }
+
+        return fragments
+    }
+
+    
     var lines = [(NSAttributedString, NSRange, CGRect)] ()
     while index < layoutManager.numberOfGlyphs {
         layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &range)
@@ -43,82 +68,14 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttri
     }
 
     
-    let monospacedLines = findMonospacedLines(lines: lines, getRectFor: getRectFor)
+    let monospacedLines = findMonospacedFragments(attributedString: attributedText)
     print(monospacedLines)
-    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
+//    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
 
-    return joinedLines
+    return monospacedLines
 }
 
-func findMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)], getRectFor: (NSRange) -> CGRect) -> [(NSAttributedString, NSRange, CGRect)] {
-    
-    let MonospacedLinesTreshold = 0.3
-    var result: [(NSAttributedString, NSRange, CGRect)] = []
-    
-    for line in lines {
-        let attributedString = line.0
-        let range = line.1
 
-        // Split the line into fragments
-        let fragments = splitLine(attributedString: attributedString, range:range)
-        guard fragments.count >= 2 else { continue }
-
-        // Check if the fragments have equal character widths
-        var isMonospaced = true
-        
-        
-        let firstFragmentRect = getRectFor(fragments[0].range)
-        let firstFragmentWidth = firstFragmentRect.width / CGFloat(fragments[0].attributedString.length)
-        
-        for fragment in fragments[1...] {
-            let fragmentRect = getRectFor(fragment.range)
-            let fragmentWidth = fragmentRect.width / CGFloat(fragment.attributedString.length)
-            if abs(firstFragmentWidth - fragmentWidth) > MonospacedLinesTreshold {
-                isMonospaced = false
-                break
-            }
-        }
-        
-        // Add the line to the result if it's monospaced
-        if isMonospaced {
-            result.append(line)
-        }
-    }
-    
-    return result
-}
-
-func splitLine(attributedString: NSAttributedString, range: NSRange) -> [(attributedString: NSAttributedString, range: NSRange)] {
-    let string = attributedString.string
-    let characters = Array(string)
-    var fragments: [(attributedString: NSAttributedString, range: NSRange)] = []
-    var currentFragment = ""
-    var currentRangeStart = 0
-    var wideCount = 0
-    var narrowCount = 0
-    for (index, character) in characters.enumerated() {
-        if let isWide = character.isWide(){
-            if isWide {
-                wideCount += 1
-            } else {
-                narrowCount += 1
-            }
-        }
-        
-        
-        currentFragment.append(character)
-        if (wideCount > narrowCount + 1) || (index == characters.count - 1) {
-            let fragmentRange = NSRange(location: currentRangeStart, length: currentFragment.utf16.count)
-            let fragmentAttributedString = attributedString.attributedSubstring(from: fragmentRange)
-            fragments.append((fragmentAttributedString, fragmentRange))
-            currentFragment = ""
-            currentRangeStart = range.location + fragmentRange.length
-            wideCount = 0
-            narrowCount = 0
-        }
-    }
-    return fragments
-}
 
 extension Character {
     func isWide() -> Bool? {

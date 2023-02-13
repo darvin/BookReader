@@ -74,7 +74,7 @@ public extension UIImage {
         
         
         
-        for (attrString, range, rect) in highligtedFragments {
+        for (range, rect) in highligtedFragments {
             
             let color = UIColor.red.withAlphaComponent(0.2)
             guard let mask = cgImage.cropping(to: rect) else { continue }
