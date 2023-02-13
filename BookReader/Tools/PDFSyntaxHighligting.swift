@@ -57,9 +57,10 @@ func findMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)], getRect
     
     for line in lines {
         let attributedString = line.0
-        
+        let range = line.1
+
         // Split the line into fragments
-        let fragments = splitLine(attributedString: attributedString)
+        let fragments = splitLine(attributedString: attributedString, range:range)
         guard fragments.count >= 2 else { continue }
 
         // Check if the fragments have equal character widths
@@ -86,43 +87,53 @@ func findMonospacedLines(lines: [(NSAttributedString, NSRange, CGRect)], getRect
     
     return result
 }
-func splitLine(attributedString: NSAttributedString) -> [(attributedString: NSAttributedString, range: NSRange)] {
-    let string = attributedString.string as NSString
-    let words = string.components(separatedBy: .whitespacesAndNewlines)
-    
+
+func splitLine(attributedString: NSAttributedString, range: NSRange) -> [(attributedString: NSAttributedString, range: NSRange)] {
+    let string = attributedString.string
+    let characters = Array(string)
     var fragments: [(attributedString: NSAttributedString, range: NSRange)] = []
-    let stringLength = attributedString.length
-    
-    let minFragmentLength = max(1, stringLength / 4)
-    let maxFragmentLength = min(stringLength / 2, (stringLength - minFragmentLength))
-    
-    var fragment1Length = 0
-    var fragment2Length = 0
-    
-    for (index, word) in words.enumerated() {
-        let wordLength = word.count
-        let wordRange = NSRange(location: fragment1Length, length: wordLength)
-        let wordAttributedString = attributedString.attributedSubstring(from: wordRange)
-        
-        let nextFragmentLength = fragment1Length + wordLength + 1
-        if nextFragmentLength < minFragmentLength || nextFragmentLength <= maxFragmentLength {
-            fragment1Length = nextFragmentLength
-            fragments.append((wordAttributedString, wordRange))
-        } else {
-            fragment2Length += wordLength + 1
-            if index == words.count - 1 {
-                let fragmentRange = NSRange(location: fragment1Length, length: fragment2Length)
-                if fragmentRange.location + fragmentRange.length <= stringLength {
-                    let fragmentAttributedString = attributedString.attributedSubstring(from: fragmentRange)
-                    fragments.append((fragmentAttributedString, fragmentRange))
-                } else {
-                    return []
-                }
+    var currentFragment = ""
+    var currentRangeStart = 0
+    var wideCount = 0
+    var narrowCount = 0
+    for (index, character) in characters.enumerated() {
+        if let isWide = character.isWide(){
+            if isWide {
+                wideCount += 1
+            } else {
+                narrowCount += 1
             }
         }
+        
+        
+        currentFragment.append(character)
+        if (wideCount > narrowCount + 1) || (index == characters.count - 1) {
+            let fragmentRange = NSRange(location: currentRangeStart, length: currentFragment.utf16.count)
+            let fragmentAttributedString = attributedString.attributedSubstring(from: fragmentRange)
+            fragments.append((fragmentAttributedString, fragmentRange))
+            currentFragment = ""
+            currentRangeStart = range.location + fragmentRange.length
+            wideCount = 0
+            narrowCount = 0
+        }
     }
-    
     return fragments
+}
+
+extension Character {
+    func isWide() -> Bool? {
+        let narrowChars = "abcdefghijklmnopqrstuvwxyz0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~I"
+        let wideChars = "MWmw_ABCDEFGHJKLMNOPQRSTUVWXYZ"
+        let scalars = String(self).unicodeScalars
+        let scalarValue = scalars[scalars.startIndex].value
+        if narrowChars.contains(self) {
+            return false
+        } else if wideChars.contains(self) {
+            return true
+        } else {
+            return nil
+        }
+    }
 }
 
 
