@@ -47,6 +47,7 @@
 		9AA8651729991EB200E418F8 /* FontColorizationOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */; };
 		9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */; };
 		9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */; };
+		9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -115,6 +116,7 @@
 		9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColorizationOverlayView.swift; sourceTree = "<group>"; };
 		9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighligtingTools.swift; sourceTree = "<group>"; };
 		9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFThumbnailGenerator.swift; sourceTree = "<group>"; };
+		9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFSyntaxHighligting.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */,
 				9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */,
 				9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */,
+				9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA865082998887200E418F8 /* MyAppDelegate.swift in Sources */,
+				9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
 				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,
 				9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */,

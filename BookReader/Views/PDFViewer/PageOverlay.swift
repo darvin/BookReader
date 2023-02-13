@@ -58,14 +58,31 @@ public extension UIImage {
 
     func makeCodeHighlights() {
         guard let page else { return }
+        
+        let highligtedFragments = HightlightSyntaxIn(page: page, book: book)
+        
         let pageSize = page.bounds(for: .cropBox).size
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         guard let image = page.thumbnail(of: imageSize, for: .cropBox).imageByMakingWhiteBackgroundTransparent() else { return }
+        
+        
         
 
         guard let cgImage = image.cgImage else { return }
 
         guard let pageText = page.attributedString  else { return }
+        
+        
+        
+        for (attrString, range, rect) in highligtedFragments {
+            
+            let color = UIColor.red.withAlphaComponent(0.2)
+            guard let mask = cgImage.cropping(to: rect) else { continue }
+            makeHighlight(pageBounds: rect, color: color)
+//            makeColorization(range: range, color: color, mask: mask)
+            
+        }
+        /*
         
         guard let colorizedPageText = Highlighter.shared.highlight(pageText.string, inBook:book) else {return}
         
@@ -89,7 +106,9 @@ public extension UIImage {
             )
             guard let mask = cgImage.cropping(to: imageRect) else { return }
             makeColorization(range: range, color: color, mask: mask)
+         
         }
+         */
 
     }
     
