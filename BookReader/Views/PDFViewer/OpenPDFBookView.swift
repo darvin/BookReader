@@ -79,7 +79,7 @@ struct OpenPDFBookView: View {
                 let buttonHeight = r.size.height / 2.3
                 
                 ZStack(alignment: .topLeading) {
-                    PDFKitRepresentedView(data: data)
+                    PDFKitRepresentedView(data: data, book: viewModel.book)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                         .background(Color.red)
                         .edgesIgnoringSafeArea(.all)

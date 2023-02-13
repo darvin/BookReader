@@ -15,9 +15,10 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     typealias UIViewType = MyPDFView
     
     let data: Data
+    let book: any BookMetadatable
 
     func makeUIView(context _: UIViewRepresentableContext<PDFKitRepresentedView>) -> UIViewType {
-        let pdfView = MyPDFView()
+        let pdfView = MyPDFView(frame: CGRectNull, book: book)
         pdfView.document = PDFDocument(data: data)
         return pdfView
     }

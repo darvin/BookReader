@@ -13,7 +13,7 @@ class MyPDFView: PDFView {
     
     static let pdfViewPrevPage =  Notification.Name("MyPDFView_pdfViewPrevPage")
     
-    private let pdfViewHandler = PDFViewHandler()
+    private var pdfViewHandler: PDFViewHandler
 
     override func willMove(toWindow newWindow: UIWindow?) {
         NotificationCenter.default.addObserver(self, selector:#selector(nextPage(notification:)), name:Self.pdfViewNextPage, object: nil)
@@ -31,9 +31,11 @@ class MyPDFView: PDFView {
         turnPage(false)
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, book: any BookMetadatable) {
+        pdfViewHandler = PDFViewHandler()
+        pdfViewHandler.book = book
+
         super.init(frame: frame)
-        
         autoScales = true
         pageShadowsEnabled = false
         backgroundColor = UIColor.white

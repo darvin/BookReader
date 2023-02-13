@@ -18,6 +18,7 @@ extension String {
 
 
 @objc class PDFViewHandler : NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {
+    var book: (any BookMetadatable)?
 
     private var _pdfView: PDFView?
     
@@ -45,6 +46,7 @@ extension String {
         if !pageOverlays.keys.contains(page) {
             let pageOverlay = PageOverlay()
             pageOverlays[page] = pageOverlay
+            pageOverlay.book = book
 
             pageOverlay.pdfView = pdfView
             pageOverlay.page = page

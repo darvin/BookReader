@@ -35,7 +35,7 @@ public extension UIImage {
 
 @objc class PageOverlay : UIView {
     
-
+    var book: (any BookMetadatable)?
 
     weak var pdfView: PDFView?
     private var _page: PDFPage?
@@ -67,7 +67,7 @@ public extension UIImage {
 
         guard let pageText = page.attributedString  else { return }
         
-        guard let colorizedPageText = Highlighter.shared.highlight(pageText.string) else {return}
+        guard let colorizedPageText = Highlighter.shared.highlight(pageText.string, inBook:book) else {return}
         
         colorizedPageText
             .removingIgnoredColors()
