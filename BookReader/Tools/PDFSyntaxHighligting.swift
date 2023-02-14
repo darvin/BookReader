@@ -9,6 +9,13 @@ import Foundation
 
 import PDFKit
 
+extension String {
+    var removeSpaces: String {
+        let components = self.components(separatedBy: NSCharacterSet.whitespaces)
+        let filtered = components.filter({!$0.isEmpty})
+        return filtered.joined(separator: "")
+    }
+}
 
 
 func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange, CGRect)] {
@@ -61,23 +68,36 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
 
     let lines = getLines(from: characterRanges)
 
-    
     func getMonospacedLines(lineRanges: [(NSRange, CGRect)], characterRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
         let sortedRanges = characterRanges.sorted { $0.1.minY < $1.1.minY }
-        let tolerance: CGFloat = 0.05
+        let tolerance: CGFloat = 0.04
         
         let monospacedRanges = lineRanges.filter { lineRange in
             let lineCharacterRanges = sortedRanges.filter { lineRange.0.contains($0.0.location) }
             guard let firstCharacterRect = lineCharacterRanges.first?.1 else { return false }
-            let isMonospaced = lineCharacterRanges.allSatisfy {
-                let widthRatio = $0.1.width / firstCharacterRect.width
-                return (1.0 - tolerance) <= widthRatio && widthRatio <= (1.0 + tolerance)
+            
+            let line = pageText.substring(with: lineRange.0).removeSpaces
+
+            if line.count == 0 {
+                return false
+            } else if line.count == 1 {
+                if "{}[]()|\\|/".contains(line){
+                    return true
+                }
+            } else {
+                // Check if all characters in the line have approximately the same width
+                let isMonospaced = lineCharacterRanges.allSatisfy {
+                    let widthRatio = $0.1.width / firstCharacterRect.width
+                    return (1.0 - tolerance) <= widthRatio && widthRatio <= (1.0 + tolerance)
+                }
+                return isMonospaced
             }
-            return isMonospaced
+            return false
         }
         
         return monospacedRanges
     }
+
 
     
     let monospacedLines = getMonospacedLines(lineRanges: lines, characterRanges: characterRanges)
