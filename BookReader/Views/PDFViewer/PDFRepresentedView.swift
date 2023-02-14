@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 import PDFKit
 
-#if os(iOS) || os(watchOS) || os(tvOS)
 
 struct PDFKitRepresentedView: UIViewRepresentable {
     typealias UIViewType = MyPDFView
@@ -33,10 +32,4 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     
 }
 
-#elseif os(macOS)
-struct PDFKitRepresentedView: View {
-    
-}
-#else
 
-#endif
