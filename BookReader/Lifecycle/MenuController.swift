@@ -25,7 +25,7 @@ class MenuController {
         let openCommand =
             UIKeyCommand(title: NSLocalizedString("OpenTitle", comment: ""),
                          image: nil,
-                         action: #selector(HostingController.openAction),
+                         action: #selector(AppDelegate.openAction),
                          input: "o",
                          modifierFlags: .command)
         let openMenu =
@@ -39,8 +39,6 @@ class MenuController {
     
     
 
-    
-    
 }
 
 extension UIMenu.Identifier {

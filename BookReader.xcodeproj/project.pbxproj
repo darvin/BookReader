@@ -39,7 +39,7 @@
 		9AA865012998558A00E418F8 /* html.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FD2998558900E418F8 /* html.pdf */; };
 		9AA865022998558A00E418F8 /* higlightr.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9AA864FE2998558A00E418F8 /* higlightr.pdf */; };
 		9AA865052998588F00E418F8 /* Highlightr in Frameworks */ = {isa = PBXBuildFile; productRef = 9AA865042998588F00E418F8 /* Highlightr */; };
-		9AA865082998887200E418F8 /* MyAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865072998887200E418F8 /* MyAppDelegate.swift */; };
+		9AA865082998887200E418F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865072998887200E418F8 /* AppDelegate.swift */; };
 		9AA8650C299888DC00E418F8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650B299888DC00E418F8 /* HostingController.swift */; };
 		9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650D2998DED400E418F8 /* MyPDFView.swift */; };
 		9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */; };
@@ -55,6 +55,7 @@
 		9AA86574299BE07D00E418F8 /* CGTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86573299BE07D00E418F8 /* CGTools.swift */; };
 		9AA86579299BE3F700E418F8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86578299BE3F700E418F8 /* MenuController.swift */; };
 		9AA8657B299BEFD500E418F8 /* OpenPDFBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */; };
+		9AA8657D299BF44600E418F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8657C299BF44600E418F8 /* SceneDelegate.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -115,7 +116,7 @@
 		9AA864FC2998558900E418F8 /* pytorch.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pytorch.pdf; sourceTree = "<group>"; };
 		9AA864FD2998558900E418F8 /* html.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = html.pdf; sourceTree = "<group>"; };
 		9AA864FE2998558A00E418F8 /* higlightr.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = higlightr.pdf; sourceTree = "<group>"; };
-		9AA865072998887200E418F8 /* MyAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppDelegate.swift; sourceTree = "<group>"; };
+		9AA865072998887200E418F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AA8650B299888DC00E418F8 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		9AA8650D2998DED400E418F8 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeOverlayView.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		9AA86573299BE07D00E418F8 /* CGTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTools.swift; sourceTree = "<group>"; };
 		9AA86578299BE3F700E418F8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPDFBookViewController.swift; sourceTree = "<group>"; };
+		9AA8657C299BF44600E418F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -333,10 +335,11 @@
 			isa = PBXGroup;
 			children = (
 				9A586C59299393CA0001A1EA /* BookReaderApp.swift */,
-				9AA865072998887200E418F8 /* MyAppDelegate.swift */,
+				9AA865072998887200E418F8 /* AppDelegate.swift */,
 				9AA8650B299888DC00E418F8 /* HostingController.swift */,
 				9AA86578299BE3F700E418F8 /* MenuController.swift */,
 				9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */,
+				9AA8657C299BF44600E418F8 /* SceneDelegate.swift */,
 			);
 			path = Lifecycle;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				9AA864E2299692C800E418F8 /* UIShakeTools.swift in Sources */,
 				9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */,
 				9AC2F7A32993A97F0053EA37 /* GutenFetcher_Preview.swift in Sources */,
+				9AA8657D299BF44600E418F8 /* SceneDelegate.swift in Sources */,
 				9AA8657B299BEFD500E418F8 /* OpenPDFBookViewController.swift in Sources */,
 				9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */,
 				9AA864D8299513BD00E418F8 /* OpenPDFBookView.swift in Sources */,
@@ -526,7 +530,7 @@
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
 				9AA86568299BDF1600E418F8 /* UIColor+Tools.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
-				9AA865082998887200E418F8 /* MyAppDelegate.swift in Sources */,
+				9AA865082998887200E418F8 /* AppDelegate.swift in Sources */,
 				9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
 				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,
@@ -694,6 +698,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookReader/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -701,6 +706,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -736,6 +742,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BookReader/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -743,6 +750,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

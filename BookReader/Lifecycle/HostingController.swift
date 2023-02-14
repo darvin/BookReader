@@ -8,6 +8,13 @@
 import UIKit
 import SwiftUI
 
+struct Window1: View {
+    var body: some View {
+        Text("Window1")
+    }
+}
+
+
 class HostingController: UIHostingController<MainView> {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -27,45 +34,25 @@ class HostingController: UIHostingController<MainView> {
     }()
 
 
-    @objc
-    // User chose Open from the File menu.
-    public func openAction(_ sender: AnyObject) {
-        present(documentPickerViewController, animated: true)
-        
-
-    }
+   
 
 }
 
 extension HostingController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         let url = urls[0]
-        let vc = makePDFViewController(url: url)
-        present(vc, animated: true)
+        UIApplication.shared.requestSceneSessionActivation(nil,
+                                                           userActivity: NSUserActivity(activityType: "window1"),
+                                                           options: nil,
+                                                           errorHandler: nil)
+
+//        if UIApplication.shared.canOpenURL(url) {
+//            UIApplication.shared.open(url)
+//        }
+
+
 
     }
 }
 
 
-
-extension View {
-    func withHostingWindow(_ callback: @escaping (UIWindow?) -> Void) -> some View {
-        self.background(HostingWindowFinder(callback: callback))
-    }
-}
-
-struct HostingWindowFinder: UIViewRepresentable {
-    var callback: (UIWindow?) -> ()
-
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-        DispatchQueue.main.async { [weak view] in
-            self.callback(view?.window)
-        }
-        return view
-    }
-
-    func updateUIView(_ uiView: UIView, context: Context) {
-    }
-    
-}

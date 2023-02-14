@@ -18,11 +18,6 @@ struct BookReaderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Text("")  // << temporary placeholder
-                .withHostingWindow { window in
-                    window?.rootViewController =
-                         HostingController(rootView: MainView())
-                }
         }
 
     }
