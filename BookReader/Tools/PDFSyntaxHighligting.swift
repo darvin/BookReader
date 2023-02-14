@@ -13,130 +13,75 @@ import PDFKit
 
 func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange, CGRect)] {
     
-    guard let pageText = page.attributedString  else { return [] }
+    guard let pageAttributedText = page.attributedString  else { return [] }
+    guard let pageText: NSString = page.string as NSString?  else { return [] }
 
-    let textStorage = NSTextStorage(attributedString: pageText)
-    let layoutManager = NSLayoutManager()
-    textStorage.addLayoutManager(layoutManager)
-    let textContainer = NSTextContainer(size: .zero)
-    layoutManager.addTextContainer(textContainer)
-
-    var range = NSRange(location: 0, length: 0)
-    var index = 0
     
     func getRectFor(range:NSRange) -> CGRect {
         let rect = page.selection(for: range)?.bounds(for: page)
         return rect ?? CGRectNull
     }
     
-    
-    var linebreakRanges = [(NSRange, CGRect)] ()
-    while index < layoutManager.numberOfGlyphs {
-        layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &range)
-        let lineRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
-        let lineRect = getRectFor(range: lineRange)
-        linebreakRanges.append((lineRange, lineRect))
-        index = NSMaxRange(range)
-    }
-    
-    func removeNewLineSymbols(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-        var updatedLinebreakRanges = [(NSRange, CGRect)]()
-
-        linebreakRanges.forEach { lineRange, lineRect in
-            let lineText = pageText.attributedSubstring(from: lineRange).string
-            if !lineText.contains("\n") {
-                updatedLinebreakRanges.append((lineRange, lineRect))
-                return
-            }
-
-            let newLineRange = NSRange(location: lineRange.location, length: lineRange.length - 1)
-            let newLineRect = getRectFor(range: newLineRange)
-            updatedLinebreakRanges.append((newLineRange, newLineRect))
-        }
-
-        return updatedLinebreakRanges
-    }
-
-    linebreakRanges = removeNewLineSymbols(in: pageText, linebreakRanges: linebreakRanges)
-    
-    func getCharacters(in pageText: NSAttributedString, linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-        var characters = [(NSRange, CGRect)]()
-
-        linebreakRanges.forEach { lineRange, lineRect in
-            let lineText = (pageText.string as NSString).substring(with: lineRange)
-            let lineCharacters = Array(lineText)
-
-            for (index, character) in lineCharacters.enumerated() {
-                let characterRange = NSRange(location: lineRange.location + index, length: 1)
-                let characterRect = getRectFor(range: characterRange)
-                characters.append((characterRange, characterRect))
-//                print("\(character)   \(characterRect.minY)")
+    func getCharacters(text: NSString, getRectFor: (NSRange) -> CGRect) -> [(NSRange, CGRect)] {
+        var result = [(NSRange, CGRect)]()
+        let stringLength = text.length
+        var characterRange = NSRange(location: 0, length: 0)
+        for i in 0..<stringLength {
+            let character = text.character(at: i)
+            if !CharacterSet.newlines.contains(UnicodeScalar(character)!) {
+                characterRange.length = 1
+                let rect = getRectFor(characterRange)
+                result.append((characterRange, rect))
+                characterRange.location += 1
+            } else {
+                characterRange.location += 1
             }
         }
-
-        return characters
+        return result
     }
 
-    let characterRanges = getCharacters(in: pageText, linebreakRanges: linebreakRanges)
     
-    
-    func getContinuousLines(characterRanges: [(NSRange, CGRect)], linebreakRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-        var continuousLines = [(NSRange, CGRect)]()
+    let characterRanges = getCharacters(text: pageText, getRectFor: getRectFor)
+
+    func getLines(from characterRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        let sortedRanges = characterRanges.sorted { $0.1.minY < $1.1.minY }
+        var lineRanges: [(NSRange, CGRect)] = []
         
-        linebreakRanges.forEach { lineRange, lineRect in
-            if lineRange.length == 1 {
-                continuousLines.append((lineRange, lineRect))
-                return
-            }
-            if let firstCharacterRange = characterRanges.first(where: { NSLocationInRange($0.0.location, lineRange) }),
-                        let lastCharacterRange = characterRanges.last(where: { NSLocationInRange($0.0.location, lineRange) })
-                         {
-                let lastCharacterRect = lastCharacterRange.1
-                let firstCharacterRect = firstCharacterRange.1
-                if abs(firstCharacterRect.minY - lastCharacterRect.minY) <= lineRect.height / 2 {
-                            continuousLines.append((lineRange, lineRect))
-                        }
-                else {
-                    let firstCharacter = (pageText.string as NSString).substring(with: firstCharacterRange.0)
-                    let lastCharacter = (pageText.string as NSString).substring(with: lastCharacterRange.0)
-                    print(" '\(firstCharacter)' minY  \(firstCharacterRect.minY) '\(lastCharacter)' minY  \(lastCharacterRect.minY) '\((pageText.string as NSString).substring(with: lineRange))'")
-                }
+        for range in sortedRanges {
+            if let lastRange = lineRanges.last, abs(lastRange.1.minY - range.1.minY) < 0.39 {
+                lineRanges[lineRanges.count-1].0.length = range.0.location + range.0.length - lineRanges[lineRanges.count-1].0.location
+                lineRanges[lineRanges.count-1].1 = lastRange.1.union(range.1)
+            } else {
+                lineRanges.append(range)
             }
         }
         
-        return continuousLines
+        return lineRanges
     }
 
-    
-    let continuousLines = getContinuousLines(characterRanges: characterRanges, linebreakRanges: linebreakRanges)
-    
-    func getMonospaceLines(linebreakRanges: [(NSRange, CGRect)], wordRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-        let monospaceLines = linebreakRanges.filter { lineRange, lineRect in
-            let lineWords = wordRanges.filter { wordRange, wordRect in
-                return lineRange.contains(wordRange.location)
-            }
+    let lines = getLines(from: characterRanges)
 
-            let totalCharacterWidth = lineWords.reduce(0) { (result, wordRangeAndRect) in
-                result + wordRangeAndRect.1.width
+    
+    func getMonospacedLines(lineRanges: [(NSRange, CGRect)], characterRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+        let sortedRanges = characterRanges.sorted { $0.1.minY < $1.1.minY }
+        let tolerance: CGFloat = 0.05
+        
+        let monospacedRanges = lineRanges.filter { lineRange in
+            let lineCharacterRanges = sortedRanges.filter { lineRange.0.contains($0.0.location) }
+            guard let firstCharacterRect = lineCharacterRanges.first?.1 else { return false }
+            let isMonospaced = lineCharacterRanges.allSatisfy {
+                let widthRatio = $0.1.width / firstCharacterRect.width
+                return (1.0 - tolerance) <= widthRatio && widthRatio <= (1.0 + tolerance)
             }
-            let totalCharacterCount = lineWords.reduce(0) { (result, wordRangeAndRect) in
-                result + wordRangeAndRect.0.length
-            }
-            let averageCharacterWidth = totalCharacterWidth / CGFloat(totalCharacterCount)
-
-            return lineWords.allSatisfy { wordRange, wordRect in
-                return abs(wordRect.width / CGFloat(wordRange.length) - averageCharacterWidth) < 1.8
-            }
+            return isMonospaced
         }
-
-        return monospaceLines
+        
+        return monospacedRanges
     }
-    
-    
 
-    let joinedLines = joinContinuousMonospacedLines(lines: continuousLines)
-
-    return joinedLines
+    
+    let monospacedLines = getMonospacedLines(lineRanges: lines, characterRanges: characterRanges)
+    return monospacedLines
 }
 
 
