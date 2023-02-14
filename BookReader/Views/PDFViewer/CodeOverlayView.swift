@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Highlightr
+
 extension String {
 
     var numberOfLines: Int {
@@ -15,35 +15,67 @@ extension String {
 
 }
 
-@objc class CodeOverlayView : UIView {
-    private static let highlightr = {
-        let highlightr = Highlightr()
-        highlightr?.setTheme(to: "routeros")
-        return highlightr
-    }()
+@objc class CodeOverlayView : UIView, ToggablePoppable {
+    func togglePopupView() {
+        label.isHidden = !label.isHidden
+        if label.isHidden {
+            layer.mask = maskLayer
+            layer.backgroundColor = UIColor.clear.cgColor
+        } else {
+            layer.mask = nil
+            layer.backgroundColor = UIColor.lightGray.cgColor
+        }
+        
+        for layer in highlightLayers {
+            layer.isHidden = !label.isHidden
+        }
+    }
     
-    private var code: String
+
+    private var code: NSAttributedString
     private var label: UILabel
-    init(frame: CGRect, code: String) {
+    private var maskLayer: CALayer
+    private var highlightLayers: [CALayer] = []
+
+    init(frame: CGRect, code: NSAttributedString, colors: [(CGRect, UIColor)], mask: CGImage) {
         label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        label.text = code
+        label.attributedText = code
         label.backgroundColor = UIColor.white
         label.minimumScaleFactor = 0.1
-        label.numberOfLines = code.numberOfLines
+        label.numberOfLines = code.string.numberOfLines
         label.font = UIFont.monospacedSystemFont(ofSize: 30.0, weight: .regular)
         label.adjustsFontSizeToFitWidth = true
+        label.isHidden = true
+        
         self.code = code
+        
+        self.maskLayer = CALayer()
+
         super.init(frame: frame)
         addSubview(label)
-        layer.backgroundColor = UIColor.lightGray.cgColor.copy(alpha: 0.8)
 
+
+        for (rect, color) in colors {
+            let l = CALayer()
+            l.backgroundColor = color.cgColor.copy(alpha: 0.3)
+            l.frame = rect
+            layer.addSublayer(l)
+            highlightLayers.append(l)
+        }
+        
+        
+        maskLayer.contents = mask
+        maskLayer.frame = bounds
+        maskLayer.opacity = 1.0
+        layer.mask = maskLayer
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func willMove(toWindow newWindow: UIWindow?) {
-        label.attributedText = CodeOverlayView.highlightr?.highlight(code)
+        setNeedsDisplay()
+//        label.attributedText = CodeOverlayView.highlightr?.highlight(code)
     }
 
 }

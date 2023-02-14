@@ -32,6 +32,16 @@ public extension UIImage {
 
 }
 
+func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CGRect {
+
+    let x = (rect.origin.x - fromRect.origin.x)  + toRect.origin.x
+    let y = (rect.origin.y - fromRect.origin.y) + toRect.origin.y
+    let width = rect.size.width
+    let height = rect.size.height
+
+    return CGRect(x: x, y: y, width: width, height: height)
+}
+
 
 @objc class PageOverlay : UIView {
     
@@ -79,61 +89,38 @@ public extension UIImage {
         
         for (highlightedFragment, rangeOnPage, rectOnPage) in highligtedFragments {
             
-//            let color = UIColor.red.withAlphaComponent(0.08)
-//            makeHighlight(pageBounds: rectOnPage, color: color)
-            
-//            let rectOnPage2 = getRectFor(range: rangeOnPage)
-//            let color2 = UIColor.green.withAlphaComponent(0.7)
-//            makeHighlight(pageBounds: rectOnPage2, color: color2)
+
+            let rectOnPageBlock = getRectFor(range: rangeOnPage)
+            let rectOnImage = CGRect(
+                x:rectOnPage.origin.x*scaleFactor,
+                y: imageSize.height - rectOnPage.origin.y*scaleFactor
+                - rectOnPage.height * scaleFactor
+                ,
+                width:rectOnPage.width*scaleFactor,
+                height:rectOnPage.height*scaleFactor)
+            guard let mask = cgImage.cropping(to: rectOnImage) else { return }
 
 
+            var colorization = [(CGRect, UIColor)]()
             highlightedFragment.enumerateAttribute(.foregroundColor, in: NSRange(0..<highlightedFragment.length), options: .longestEffectiveRangeNotRequired) {
                 color, range, stop in
                 let attrRangeOnPage = NSMakeRange(rangeOnPage.location + range.location, range.length)
                 let textOnPage = (pageText.string as! NSString ).substring(with:attrRangeOnPage)
                 let textHighlighted = (highlightedFragment.string as! NSString ).substring(with:range)
+                let rectOnPage = getRectFor(range: attrRangeOnPage)
+                let rectInOverlay = convertFromPage(rectOnPage)!
+                let rectInOverlayBlock = convertFromPage(rectOnPageBlock)!
+                let rectInCodeHighlight = convertCoords(rect: rectInOverlay, from: rectInOverlayBlock, to: CGRect(x: 0, y: 0, width: rectInOverlayBlock.width, height: rectInOverlayBlock.height))
                 assert(textOnPage == textHighlighted)
                 guard let color = color as? UIColor else { return }
-                let rectOnPage = getRectFor(range: attrRangeOnPage)
-                let rectOnImage = CGRect(
-                    x:rectOnPage.minX*scaleFactor,
-                    y:rectOnPage.minY*scaleFactor,
-                    width:rectOnPage.width*scaleFactor,
-                    height:rectOnPage.height*scaleFactor)
-                guard let mask = cgImage.cropping(to: rectOnImage) else { return }
-                
-//                makeHighlight(range: attrRangeOnPage, color: color)
-                makeColorization(range: attrRangeOnPage, color: color, mask: mask)
+                colorization.append((rectInCodeHighlight, color))
+
             }
             
+            makeCodeHighlight(pageBounds: rectOnPageBlock, code: highlightedFragment, colors: colorization, mask: mask)
+            
         }
-        /*
         
-        guard let colorizedPageText = Highlighter.shared.highlight(pageText.string, inBook:book) else {return}
-        
-        colorizedPageText
-            .removingIgnoredColors()
-//            .removingColorsWithLowLineCoverage()
-            .removeForegroundColorFromLongLines()
-            .enumerateAttribute(.foregroundColor, in: NSRange(0..<colorizedPageText.length), options: .longestEffectiveRangeNotRequired) {
-            color, range, stop in
-            guard let color = color as? UIColor else { return }
-            guard let pageBounds = rectFor(range: range) else { return }
-            let text = colorizedPageText.attributedSubstring(from: range)
-            let textOrig = pageText.attributedSubstring(from: range)
-            assert(text.string == textOrig.string)
-            print("\(pageBounds) \(text.string)")
-            let imageRect = CGRect(
-                x:pageBounds.minX*scaleFactor,
-                y:pageBounds.minY*scaleFactor,
-                width:pageBounds.width*scaleFactor,
-                height:pageBounds.height*scaleFactor
-            )
-            guard let mask = cgImage.cropping(to: imageRect) else { return }
-            makeColorization(range: range, color: color, mask: mask)
-         
-        }
-         */
 
     }
     
@@ -154,22 +141,22 @@ public extension UIImage {
         return pageOverlayBounds
     }
     
-    private func makeCodeHighlight(pageBounds:CGRect, code:String) {
+    private func makeCodeHighlight(pageBounds:CGRect, code:NSAttributedString, colors: [(CGRect, UIColor)], mask: CGImage) {
         guard let rect = convertFromPage(pageBounds) else { return }
-        let v = CodeOverlayView(frame: rect, code: code)
+        let v = CodeOverlayView(frame: rect, code: code, colors: colors, mask: mask)
         highlightsViews[rect] = v
         addSubview(v)
     }
 
     
 
-    
-    func makeColorization(pageBounds:CGRect, color:UIColor, mask: CGImage) {
-        guard let rect = convertFromPage(pageBounds) else { return }
-        let v = FontColorizationOverlayView(frame:rect, mask: mask, color:color)
-        highlightsViews[rect] = v
-        addSubview(v)
-    }
+//
+//    func makeColorization(pageBounds:CGRect, color:UIColor, mask: CGImage) {
+//        guard let rect = convertFromPage(pageBounds) else { return }
+//        let v = FontColorizationOverlayView(frame:rect, mask: mask, color:color)
+//        highlightsViews[rect] = v
+//        addSubview(v)
+//    }
     
     
     func makeHighlight(pageBounds:CGRect, color:UIColor, popupView: UIView? = nil) {
@@ -180,12 +167,12 @@ public extension UIImage {
     }
     
 
-    func makeColorization(range:NSRange, color:UIColor, mask: CGImage) {
-        guard let page, let pdfView else { return }
-        guard let selection = page.selection(for: range) else { return }
-        let pageBounds = selection.bounds(for: page)
-        makeColorization(pageBounds: pageBounds, color: color, mask: mask)
-    }
+//    func makeColorization(range:NSRange, color:UIColor, mask: CGImage) {
+//        guard let page, let pdfView else { return }
+//        guard let selection = page.selection(for: range) else { return }
+//        let pageBounds = selection.bounds(for: page)
+//        makeColorization(pageBounds: pageBounds, color: color, mask: mask)
+//    }
     
     func makeHighlight(range:NSRange, color:UIColor, popupView: UIView? = nil) {
         guard let page, let pdfView else { return }
