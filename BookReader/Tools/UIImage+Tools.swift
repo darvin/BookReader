@@ -15,7 +15,12 @@ public extension UIImage {
         let image = UIImage(data: self.jpegData(compressionQuality: 1.0)!)!
         let rawImageRef: CGImage = image.cgImage!
 
-        let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
+        let maskingFrom: CGFloat = 88
+        let maskingTo:CGFloat = 255
+        let colorMasking: [CGFloat] = [
+            maskingFrom, maskingTo,
+            maskingFrom, maskingTo,
+            maskingFrom, maskingTo]
         UIGraphicsBeginImageContext(image.size);
 
         let maskedImageRef = rawImageRef.copy(maskingColorComponents: colorMasking)
