@@ -6,64 +6,33 @@
 //
 
 import Foundation
-extension String {
-    
-    func startsWithCommentSymbol() -> Bool {
-        let symbols = ["#", "//", "/*"]
-        for commmentSymbol in symbols {
-            if hasPrefix(commmentSymbol) {
-                return true
-            }
-        }
-        return false
-    }
 
-    func looksLikeProgrammingLanguage() -> Bool {
-        let characters = Array(self)
-        let length = characters.count
+import UIKit
+
+extension UIColor {
+    var isGray: Bool {
+        guard let components = self.cgColor.components else {return true}
+        guard components.count >= 3 else {return true}
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+        let tolerance: CGFloat = 0.05
+        return abs(r - g) < tolerance && abs(r - b) < tolerance && abs(g - b) < tolerance
+    }
+}
+
+
+
+extension NSAttributedString {
+    func removingGrayForegroundAttributes() -> NSAttributedString {
+        let mutableAttributedString = NSMutableAttributedString(attributedString: self)
         
-        // Check if the string contains any uppercase characters, which are often used in programming languages
-//        let hasUppercaseCharacters = characters.reduce(false) { (result, character) -> Bool in
-//            return result || character.isUppercase
-//        }
-        
-        // Check if the string contains digits, which are often used in programming languages
-        let hasDigits = characters.reduce(false) { (result, character) -> Bool in
-            return result || character.isNumber
-        }
-        
-        // Check if the string contains underscore, which is a commonly used symbol in programming languages
-        let hasUnderscore = self.contains("_")
-        
-        // Check if the string has a balanced number of curly braces, which are used for control structures and defining scopes in many programming languages
-        var numberOfOpenCurlyBraces = 0
-        var numberOfCloseCurlyBraces = 0
-        for character in characters {
-            if character == "{" {
-                numberOfOpenCurlyBraces += 1
-            } else if character == "}" {
-                numberOfCloseCurlyBraces += 1
+        mutableAttributedString.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) { (attributes: [NSAttributedString.Key: Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) in
+            if let color = attributes[NSAttributedString.Key.foregroundColor] as? UIColor, color.isGray {
+                mutableAttributedString.removeAttribute(NSAttributedString.Key.foregroundColor, range: range)
             }
         }
-        let hasBalancedCurlyBraces = numberOfOpenCurlyBraces > 1 || numberOfCloseCurlyBraces > 1
         
-        // Check if the string has a balanced number of square brackets, which are used for array indexing and array comprehensions in many programming languages
-        var numberOfOpenSquareBrackets = 0
-        var numberOfCloseSquareBrackets = 0
-        for character in characters {
-            if character == "[" {
-                numberOfOpenSquareBrackets += 1
-            } else if character == "]" {
-                numberOfCloseSquareBrackets += 1
-            }
-        }
-        let hasBalancedSquareBrackets = numberOfOpenSquareBrackets > 1 || numberOfCloseSquareBrackets > 1
-        
-        // Return true if any of the checks indicate that the string looks like a programming language
-        let isProgramming = //hasUppercaseCharacters ||
-         hasDigits || hasUnderscore || hasBalancedCurlyBraces || hasBalancedSquareBrackets || startsWithCommentSymbol()
-        
-        print("\(isProgramming)  '\(self)' \(hasDigits) || \(hasUnderscore) || \(hasBalancedCurlyBraces) || \(hasBalancedSquareBrackets) || \(startsWithCommentSymbol())()")
-        return isProgramming
+        return NSAttributedString(attributedString: mutableAttributedString)
     }
 }

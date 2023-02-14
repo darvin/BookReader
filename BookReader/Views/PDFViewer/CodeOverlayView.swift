@@ -53,7 +53,7 @@ extension String {
 
         super.init(frame: frame)
         addSubview(label)
-
+        
         for (rect, color) in colors {
             let l = CALayer()
             l.backgroundColor = color.cgColor.copy(alpha: 0.7)

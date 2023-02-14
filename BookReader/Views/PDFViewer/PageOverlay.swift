@@ -104,7 +104,7 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
 
 
             var colorization = [(CGRect, UIColor)]()
-            highlightedFragment.enumerateAttribute(.foregroundColor, in: NSRange(0..<highlightedFragment.length), options: .longestEffectiveRangeNotRequired) {
+            highlightedFragment.removingGrayForegroundAttributes().enumerateAttribute(.foregroundColor, in: NSRange(0..<highlightedFragment.length), options: .longestEffectiveRangeNotRequired) {
                 color, range, stop in
                 let attrRangeOnPage = NSMakeRange(rangeOnPage.location + range.location, range.length)
                 let textOnPage = (pageText.string as! NSString ).substring(with:attrRangeOnPage)

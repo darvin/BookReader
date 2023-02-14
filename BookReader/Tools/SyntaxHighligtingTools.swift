@@ -36,7 +36,7 @@ public class Highlighter {
         let languages = (guessedLanguage != nil ? [guessedLanguage] : []) + ["bash", "xml", "html"]
         
         return languages.map { lang in
-            highlightr.highlight(text, as: lang)?.removingGrayForegroundAttributes() ?? NSAttributedString(string: text)
+            highlightr.highlight(text, as: lang) ?? NSAttributedString(string: text)
         }
     }
 }
