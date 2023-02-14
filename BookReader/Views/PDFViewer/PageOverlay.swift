@@ -59,7 +59,7 @@ public extension UIImage {
     func makeCodeHighlights() {
         guard let page else { return }
         
-        let highligtedFragments = HightlightSyntaxIn(page: page, book: book)
+        let highligtedFragments: [(NSAttributedString, NSRange, CGRect)] = HightlightSyntaxIn(page: page, book: book)
         
         let pageSize = page.bounds(for: .cropBox).size
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
@@ -72,14 +72,39 @@ public extension UIImage {
 
         guard let pageText = page.attributedString  else { return }
         
+        func getRectFor(range:NSRange) -> CGRect {
+            let rect = page.selection(for: range)?.bounds(for: page)
+            return rect ?? CGRectNull
+        }
         
-        
-        for (range, rect) in highligtedFragments {
+        for (highlightedFragment, rangeOnPage, rectOnPage) in highligtedFragments {
             
-            let color = UIColor.red.withAlphaComponent(0.2)
-            guard let mask = cgImage.cropping(to: rect) else { continue }
-            makeHighlight(pageBounds: rect, color: color)
-//            makeColorization(range: range, color: color, mask: mask)
+//            let color = UIColor.red.withAlphaComponent(0.08)
+//            makeHighlight(pageBounds: rectOnPage, color: color)
+            
+//            let rectOnPage2 = getRectFor(range: rangeOnPage)
+//            let color2 = UIColor.green.withAlphaComponent(0.7)
+//            makeHighlight(pageBounds: rectOnPage2, color: color2)
+
+
+            highlightedFragment.enumerateAttribute(.foregroundColor, in: NSRange(0..<highlightedFragment.length), options: .longestEffectiveRangeNotRequired) {
+                color, range, stop in
+                let attrRangeOnPage = NSMakeRange(rangeOnPage.location + range.location, range.length)
+                let textOnPage = (pageText.string as! NSString ).substring(with:attrRangeOnPage)
+                let textHighlighted = (highlightedFragment.string as! NSString ).substring(with:range)
+                assert(textOnPage == textHighlighted)
+                guard let color = color as? UIColor else { return }
+                let rectOnPage = getRectFor(range: attrRangeOnPage)
+                let rectOnImage = CGRect(
+                    x:rectOnPage.minX*scaleFactor,
+                    y:rectOnPage.minY*scaleFactor,
+                    width:rectOnPage.width*scaleFactor,
+                    height:rectOnPage.height*scaleFactor)
+                guard let mask = cgImage.cropping(to: rectOnImage) else { return }
+                
+//                makeHighlight(range: attrRangeOnPage, color: color)
+                makeColorization(range: attrRangeOnPage, color: color, mask: mask)
+            }
             
         }
         /*
@@ -190,13 +215,13 @@ public extension UIImage {
         return convertFromPage(pageRect)
     }
     
-    func rectFor(range: NSRange) -> CGRect? {
-        guard let page else { return nil }
-        guard let selection = page.selection(for: range) else { return nil }
-        let pageRect = selection.bounds(for: page)
-        return convertFromPage(pageRect)
-    }
-    
+//    func rectFor(range: NSRange) -> CGRect? {
+//        guard let page else { return nil }
+//        guard let selection = page.selection(for: range) else { return nil }
+//        let pageRect = selection.bounds(for: page)
+//        return convertFromPage(pageRect)
+//    }
+//
 
     
     func selection(at: CGPoint) -> PDFSelection? {

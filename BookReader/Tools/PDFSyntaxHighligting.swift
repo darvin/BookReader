@@ -18,9 +18,46 @@ extension String {
 }
 
 
-func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange, CGRect)] {
+extension NSAttributedString {
+    var countForegroundColorAttributes: Int {
+        var count = 0
+        self.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) { attributes, range, _ in
+            if let foregroundColor = attributes[.foregroundColor] as? UIColor {
+                count += 1
+            }
+        }
+        return count
+    }
+}
+
+
+func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttributedString, NSRange, CGRect)] {
+    let monospacedFragments = findMonospacedFragments(page: page)
     
-    guard let pageAttributedText = page.attributedString  else { return [] }
+    guard let pageText: NSString = page.string as NSString?  else { return [] }
+
+    let highlightedFragments = monospacedFragments.map { (range, rect) in
+        []
+        
+        let str = pageText.substring(with: range)
+        
+        let highlightedStrings = Highlighter.shared.highlight(str, inBook: book).sorted { $0.countForegroundColorAttributes > $1.countForegroundColorAttributes }
+        
+        let highlightedString = highlightedStrings.first ?? NSAttributedString(string: str)
+        
+        return (highlightedString, range, rect)
+        
+    }
+    
+    return highlightedFragments
+    
+}
+
+
+
+
+func findMonospacedFragments(page:PDFPage) -> [(NSRange, CGRect)] {
+    
     guard let pageText: NSString = page.string as NSString?  else { return [] }
     
     
@@ -102,11 +139,22 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
     
     let monospacedLines = getMonospacedLines(lineRanges: lines, characterRanges: characterRanges)
     
-    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
+    
+    let joinedLines = joinContinuousMonospacedLines(in: pageText, lines: monospacedLines)
     return joinedLines
 }
 
-func joinContinuousMonospacedLines(lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
+
+extension NSRange {
+    func union(with range: NSRange) -> NSRange {
+        let start = min(self.location, range.location)
+        let end = max(self.location + self.length, range.location + range.length)
+        let length = end - start
+        return NSRange(location: start, length: length)
+    }
+}
+
+func joinContinuousMonospacedLines(in text:NSString, lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
     guard let firstLine = lines.first else {return []}
     let tolerance: CGFloat = 5.0
     
@@ -115,7 +163,7 @@ func joinContinuousMonospacedLines(lines: [(NSRange, CGRect)]) -> [(NSRange, CGR
     
     for nextLine in lines.dropFirst() {
         if abs(nextLine.1.minY - currentLine.1.maxY) <= tolerance {
-            currentLine.0.length += nextLine.0.length
+            currentLine.0 = currentLine.0.union(nextLine.0)
             currentLine.1 = currentLine.1.union(nextLine.1)
         } else {
             result.append(currentLine)

@@ -23,19 +23,24 @@ public class Highlighter {
         highlightr?.setTheme(to: "xcode")
     }
     
-    func highlight(_ text:String, inBook book:(any BookMetadatable)?) -> NSAttributedString? {
-        var language: String? = nil
+    func highlight(_ text:String, inBook book:(any BookMetadatable)?) -> [NSAttributedString] {
+        guard let highlightr = highlightr else {return []}
+        var guessedLanguage: String? = nil
         
         if let book = book {
             for lang in HighlighterLanguages {
                 if book.title.lowercased().contains(lang) {
-                    language = lang
+                    guessedLanguage = lang
                     break
                 }
             }
         }
         
-        return highlightr?.highlight(text, as: language)
+        let languages = (guessedLanguage != nil ? [guessedLanguage] : []) + ["bash", "xml", "html"]
+        
+        return languages.map { lang in
+            highlightr.highlight(text, as: lang) ?? NSAttributedString(string: text)
+        }
     }
 }
 
