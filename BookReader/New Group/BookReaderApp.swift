@@ -28,6 +28,19 @@ struct BookReaderApp: App {
                     showingDocumentPicker = true
                 }.keyboardShortcut("o")
             }
+            CommandMenu("Navigation") {
+                Button("Prev Page") {
+                    NotificationCenter.default.post(name: MyPDFView.pdfViewPrevPage, object: nil)
+
+                }.keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
+                Button("Next Page") {
+                    NotificationCenter.default.post(name: MyPDFView.pdfViewNextPage, object: nil)
+
+                }
+                .keyboardShortcut(KeyEquivalent.space, modifiers: [])
+                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: []) //fixme only first seems to work
+
+            }
         }
     }
     

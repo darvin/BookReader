@@ -123,9 +123,11 @@ struct OpenPDFBookView: View {
                         .ignoresSafeArea()
                     
                 }
-            }            .edgesIgnoringSafeArea(.all)
-                .statusBarHidden()
-                .persistentSystemOverlays(.hidden)
+            }
+            .edgesIgnoringSafeArea(.all)
+            .statusBarHidden()
+            .persistentSystemOverlays(.hidden)
+            
 
         } else {
             ProgressView().task {
