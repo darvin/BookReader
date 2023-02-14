@@ -54,10 +54,14 @@ extension String {
         super.init(frame: frame)
         addSubview(label)
 
+        let backgroundView = UIView(frame: bounds)
+        backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        insertSubview(backgroundView, belowSubview: label)
+        backgroundView.layer.zPosition = layer.zPosition - 1
 
         for (rect, color) in colors {
             let l = CALayer()
-            l.backgroundColor = color.cgColor.copy(alpha: 0.3)
+            l.backgroundColor = color.cgColor.copy(alpha: 0.9)
             l.frame = rect
             layer.addSublayer(l)
             highlightLayers.append(l)
@@ -75,6 +79,7 @@ extension String {
     
     override func willMove(toWindow newWindow: UIWindow?) {
         setNeedsDisplay()
+        setNeedsLayout()
     }
 
 }
