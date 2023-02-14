@@ -36,7 +36,7 @@ import Highlightr
         return border
     }
     
-    private let scaleFactor:CGFloat = 3
+    private let scaleFactor:CGFloat = 6
 
     func makeCodeHighlights() {
         guard let page else { return }

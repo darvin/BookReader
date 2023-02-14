@@ -265,7 +265,6 @@
 		9AA864CB2993BCD200E418F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9AA86575299BE2F200E418F8 /* Mac */,
 				9A586C5B299393CA0001A1EA /* MainView.swift */,
 				9AA864E72997A22400E418F8 /* PDFViewer */,
 				9AA864CC2993BCF900E418F8 /* BookView.swift */,
@@ -342,13 +341,6 @@
 				9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */,
 			);
 			path = Lifecycle;
-			sourceTree = "<group>";
-		};
-		9AA86575299BE2F200E418F8 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
