@@ -44,7 +44,6 @@
 		9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650D2998DED400E418F8 /* MyPDFView.swift */; };
 		9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */; };
 		9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */; };
-		9AA8651729991EB200E418F8 /* FontColorizationOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */; };
 		9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */; };
 		9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */; };
 		9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */; };
@@ -113,7 +112,6 @@
 		9AA8650D2998DED400E418F8 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeOverlayView.swift; sourceTree = "<group>"; };
 		9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_ProgrammingLanguage.swift; sourceTree = "<group>"; };
-		9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontColorizationOverlayView.swift; sourceTree = "<group>"; };
 		9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighligtingTools.swift; sourceTree = "<group>"; };
 		9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFThumbnailGenerator.swift; sourceTree = "<group>"; };
 		9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFSyntaxHighligting.swift; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 				9AA864F22997AD7600E418F8 /* ClearButton.swift */,
 				9AA8650D2998DED400E418F8 /* MyPDFView.swift */,
 				9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */,
-				9AA865152999188800E418F8 /* FontColorizationOverlayView.swift */,
 			);
 			path = PDFViewer;
 			sourceTree = "<group>";
@@ -474,7 +471,6 @@
 				9AA864D6299512AE00E418F8 /* OpenBookViewModel.swift in Sources */,
 				9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */,
 				9A586C5C299393CA0001A1EA /* MainView.swift in Sources */,
-				9AA8651729991EB200E418F8 /* FontColorizationOverlayView.swift in Sources */,
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
 				9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */,
 				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,

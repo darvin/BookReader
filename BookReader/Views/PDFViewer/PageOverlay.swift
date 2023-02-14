@@ -150,14 +150,6 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
 
     
 
-//
-//    func makeColorization(pageBounds:CGRect, color:UIColor, mask: CGImage) {
-//        guard let rect = convertFromPage(pageBounds) else { return }
-//        let v = FontColorizationOverlayView(frame:rect, mask: mask, color:color)
-//        highlightsViews[rect] = v
-//        addSubview(v)
-//    }
-    
     
     func makeHighlight(pageBounds:CGRect, color:UIColor, popupView: UIView? = nil) {
         guard let rect = convertFromPage(pageBounds) else { return }
@@ -167,13 +159,6 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
     }
     
 
-//    func makeColorization(range:NSRange, color:UIColor, mask: CGImage) {
-//        guard let page, let pdfView else { return }
-//        guard let selection = page.selection(for: range) else { return }
-//        let pageBounds = selection.bounds(for: page)
-//        makeColorization(pageBounds: pageBounds, color: color, mask: mask)
-//    }
-    
     func makeHighlight(range:NSRange, color:UIColor, popupView: UIView? = nil) {
         guard let page, let pdfView else { return }
         guard let selection = page.selection(for: range) else { return }
@@ -202,14 +187,6 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
         return convertFromPage(pageRect)
     }
     
-//    func rectFor(range: NSRange) -> CGRect? {
-//        guard let page else { return nil }
-//        guard let selection = page.selection(for: range) else { return nil }
-//        let pageRect = selection.bounds(for: page)
-//        return convertFromPage(pageRect)
-//    }
-//
-
     
     func selection(at: CGPoint) -> PDFSelection? {
         guard let page, let pdfView else { return nil }

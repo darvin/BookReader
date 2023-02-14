@@ -75,7 +75,6 @@ extension String {
     
     override func willMove(toWindow newWindow: UIWindow?) {
         setNeedsDisplay()
-//        label.attributedText = CodeOverlayView.highlightr?.highlight(code)
     }
 
 }
