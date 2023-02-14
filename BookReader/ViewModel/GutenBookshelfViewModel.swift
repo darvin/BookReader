@@ -9,12 +9,14 @@ import Foundation
 import SwiftUI
 
 class GutenBookshelfViewModel: Bookshelfable {
+    typealias Book = GutenBook
+
     public init() {}
 
     let api = GutenFetcher()
 
     @Published
-    var books = [GutenBook]()
+    var books = [Book]()
 
     func getFirstHundred() async {
         await fetchBooks()

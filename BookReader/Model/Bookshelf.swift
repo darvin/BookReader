@@ -14,5 +14,6 @@ struct Bookshelf: Hashable, Identifiable {
     static let local = Bookshelf(id: 0, name: "Local")
     static let gutenberg1 = Bookshelf(id: 1, name: "Gutenberg 1")
     static let gutenberg2 = Bookshelf(id: 2, name: "Gutenberg 2")
+    static let telegram = Bookshelf(id: 3, name: "Telegram")
 
 }

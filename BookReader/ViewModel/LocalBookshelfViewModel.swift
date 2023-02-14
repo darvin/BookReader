@@ -12,7 +12,7 @@ class LocalBookshelfViewModel: Bookshelfable {
     typealias Book = LocalBook
 
     @Published
-    var books: [LocalBook] = []
+    var books: [Book] = []
 
     let fetcher = LocalBookFetcher()
     let thumbnailGenerator = PDFThumbnailGenerator()

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9A3B7B1C299C2B47001E2CDD /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */; };
+		9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */; };
+		9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B20299C492E001E2CDD /* TelegramBook.swift */; };
+		9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */; };
 		9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C59299393CA0001A1EA /* BookReaderApp.swift */; };
 		9A586C5C299393CA0001A1EA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C5B299393CA0001A1EA /* MainView.swift */; };
 		9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A586C5D299393CB0001A1EA /* Assets.xcassets */; };
@@ -82,6 +85,9 @@
 
 /* Begin PBXFileReference section */
 		9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfViewModel.swift; sourceTree = "<group>"; };
+		9A3B7B20299C492E001E2CDD /* TelegramBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBook.swift; sourceTree = "<group>"; };
+		9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfView.swift; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C59299393CA0001A1EA /* BookReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookReaderApp.swift; path = "../New Group/BookReaderApp.swift"; sourceTree = "<group>"; };
 		9A586C5B299393CA0001A1EA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -167,6 +173,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A3B7B1F299C4921001E2CDD /* Telegram */ = {
+			isa = PBXGroup;
+			children = (
+				9A3B7B20299C492E001E2CDD /* TelegramBook.swift */,
+			);
+			path = Telegram;
+			sourceTree = "<group>";
+		};
 		9A586C4D299393CA0001A1EA = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +260,7 @@
 		9A586C902993956A0001A1EA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B1F299C4921001E2CDD /* Telegram */,
 				9AA864F42997C4B500E418F8 /* Local */,
 				9AC2F79F2993A1680053EA37 /* HTTPService.swift */,
 				9A586C91299395760001A1EA /* Gutenberg */,
@@ -270,6 +285,7 @@
 				9AA864CC2993BCF900E418F8 /* BookView.swift */,
 				9AA864CE2993BD0500E418F8 /* BookshelfView.swift */,
 				9AA864D9299521B600E418F8 /* BookshelfRow.swift */,
+				9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +298,7 @@
 				9AA864D32993C9A300E418F8 /* Bookshelfable.swift */,
 				9AA864D5299512AE00E418F8 /* OpenBookViewModel.swift */,
 				9AA864DD299524E100E418F8 /* ManyBookshelvesViewModel.swift */,
+				9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -494,6 +511,7 @@
 				9AA8657B299BEFD500E418F8 /* OpenPDFBookViewController.swift in Sources */,
 				9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */,
 				9AA864D8299513BD00E418F8 /* OpenPDFBookView.swift in Sources */,
+				9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */,
 				9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */,
 				9A3B7B1C299C2B47001E2CDD /* DocumentPicker.swift in Sources */,
 				9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */,
@@ -514,6 +532,7 @@
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
 				9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */,
 				9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */,
+				9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */,
 				9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */,
 				9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */,
 				9AA864ED2997A27600E418F8 /* PageOverlay.swift in Sources */,
@@ -523,6 +542,7 @@
 				9AA86568299BDF1600E418F8 /* UIColor+Tools.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA865082998887200E418F8 /* AppDelegate.swift in Sources */,
+				9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */,
 				9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
 				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,

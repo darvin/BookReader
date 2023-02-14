@@ -13,7 +13,8 @@ class ManyBookshelvesViewModel : ObservableObject {
     var bookshelfs: [Bookshelf] = [
         .local,
         .gutenberg1,
-        .gutenberg2
+        .gutenberg2,
+        .telegram
     ]
 
     
@@ -30,7 +31,9 @@ class ManyBookshelvesViewModel : ObservableObject {
                 
             case .gutenberg2:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
-                
+            case .telegram:
+                viewModels[bookshelf] = TelegramBookshelfViewModel()
+
 
                 
             default:
@@ -60,6 +63,12 @@ class ManyBookshelvesViewModel : ObservableObject {
         case .local:
             let vm = viewModel(bookshelf: bookshelf) as! LocalBookshelfViewModel
             return AnyView(BookshelfView<LocalBookshelfViewModel>(viewModel:vm))
+                .task {
+                    await vm.fetch()
+                }
+        case .telegram:
+            let vm = viewModel(bookshelf: bookshelf) as! TelegramBookshelfViewModel
+            return AnyView(TelegramBookshelfView(viewModel:vm))
                 .task {
                     await vm.fetch()
                 }
