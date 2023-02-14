@@ -14,7 +14,7 @@ import SwiftUI
 
 @main
 struct BookReaderApp: App {
-    @UIApplicationDelegateAdaptor(MyAppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {

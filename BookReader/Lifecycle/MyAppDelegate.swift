@@ -8,13 +8,31 @@
 import Foundation
 import UIKit
 
-class MyAppDelegate: NSObject, UIApplicationDelegate {
+//@UIApplicationMain
+@objc class AppDelegate: UIResponder, UIApplicationDelegate {
         
     static var orientationLock = UIInterfaceOrientationMask.all
 
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return MyAppDelegate.orientationLock
+        return AppDelegate.orientationLock
     }
     
-
+    
+    
+    
+    var menuController: MenuController!
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return true
+    }
+    
+    override func buildMenu(with builder: UIMenuBuilder) {
+        /** First check if the builder object is using the main system menu, which is the main menu bar.
+            To check if the builder is for a contextual menu, check for: UIMenuSystem.context.
+         */
+        if builder.system == .main {
+            menuController = MenuController(with: builder)
+            
+        }
+    }
 }

@@ -12,7 +12,42 @@ class HostingController: UIHostingController<MainView> {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
+    
+    
+    func makePDFViewController(url:URL) -> UIViewController {
+        return OpenPDFBookViewController(url:url)
+    }
+    
+#if targetEnvironment(macCatalyst)
+
+    lazy var documentPickerViewController:UIDocumentPickerViewController = {
+        let vc = UIDocumentPickerViewController(documentTypes: ["com.adobe.pdf"], in: .open)
+        vc.allowsMultipleSelection = false
+        vc.delegate = self
+        return vc
+    }()
+
+    
+    @objc
+    // User chose Open from the File menu.
+    public func openAction(_ sender: AnyObject) {
+        present(documentPickerViewController, animated: true)
+        
+
+    }
+#endif
+
 }
+
+extension HostingController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let url = urls[0]
+        let vc = makePDFViewController(url: url)
+        present(vc, animated: true)
+
+    }
+}
+
 
 
 extension View {
@@ -34,4 +69,5 @@ struct HostingWindowFinder: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIView, context: Context) {
     }
+    
 }
