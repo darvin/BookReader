@@ -7,13 +7,7 @@
 
 import UIKit
 
-extension String {
 
-    var numberOfLines: Int {
-        return self.components(separatedBy: "\n").count
-    }
-
-}
 
 @objc class CodeOverlayView : UIView, ToggablePoppable {
     func togglePopupView() {

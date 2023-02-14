@@ -10,28 +10,8 @@ import Foundation
 import PDFKit
 
 
-extension String {
-    var removeSpaces: String {
-        let components = self.components(separatedBy: NSCharacterSet.whitespaces)
-        let filtered = components.filter({!$0.isEmpty})
-        return filtered.joined(separator: "")
-    }
-}
 
 
-
-
-extension NSAttributedString {
-    var countForegroundColorAttributes: Int {
-        var count = 0
-        self.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) { attributes, range, _ in
-            if let foregroundColor = attributes[.foregroundColor] as? UIColor {
-                count += 1
-            }
-        }
-        return count
-    }
-}
 
 
 func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSAttributedString, NSRange, CGRect)] {
@@ -147,15 +127,6 @@ func findMonospacedFragments(page:PDFPage) -> [(NSRange, CGRect)] {
     return joinedLines
 }
 
-
-extension NSRange {
-    func union(with range: NSRange) -> NSRange {
-        let start = min(self.location, range.location)
-        let end = max(self.location + self.length, range.location + range.length)
-        let length = end - start
-        return NSRange(location: start, length: length)
-    }
-}
 
 func joinContinuousMonospacedLines(in text:NSString, lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
     guard let firstLine = lines.first else {return []}

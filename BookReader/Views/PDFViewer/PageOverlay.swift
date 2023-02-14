@@ -12,37 +12,7 @@ import Highlightr
 
 
 
-public extension UIImage {
-    func
-    imageByMakingWhiteBackgroundTransparent() -> UIImage? {
 
-        let image = UIImage(data: self.jpegData(compressionQuality: 1.0)!)!
-        let rawImageRef: CGImage = image.cgImage!
-
-        let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
-        UIGraphicsBeginImageContext(image.size);
-
-        let maskedImageRef = rawImageRef.copy(maskingColorComponents: colorMasking)
-        UIGraphicsGetCurrentContext()?.translateBy(x: 0.0,y: image.size.height)
-        UIGraphicsGetCurrentContext()?.scaleBy(x: 1.0, y: -1.0)
-        UIGraphicsGetCurrentContext()?.draw(maskedImageRef!, in: CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        let result = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return result
-
-    }
-
-}
-
-func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CGRect {
-
-    let x = (rect.origin.x - fromRect.origin.x)  + toRect.origin.x
-    let y = (rect.origin.y - fromRect.origin.y) + toRect.origin.y
-    let width = rect.size.width
-    let height = rect.size.height
-
-    return CGRect(x: x, y: y, width: width, height: height)
-}
 
 
 @objc class PageOverlay : UIView {
@@ -77,9 +47,6 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
         let imageSize = CGSize(width: pageSize.width * scaleFactor, height: pageSize.height * scaleFactor)
         guard let image = page.thumbnail(of: imageSize, for: .cropBox).imageByMakingWhiteBackgroundTransparent() else { return }
         
-        
-        
-
         guard let cgImage = image.cgImage else { return }
 
         guard let pageText = page.attributedString  else { return }
@@ -112,7 +79,7 @@ func convertCoords(rect: CGRect, from fromRect: CGRect, to toRect: CGRect) -> CG
                 let rectOnPage = getRectFor(range: attrRangeOnPage)
                 let rectInOverlay = convertFromPage(rectOnPage)!
                 let rectInOverlayBlock = convertFromPage(rectOnPageBlock)!
-                let rectInCodeHighlight = convertCoords(rect: rectInOverlay, from: rectInOverlayBlock, to: CGRect(x: 0, y: 0, width: rectInOverlayBlock.width, height: rectInOverlayBlock.height))
+                let rectInCodeHighlight = rectInOverlay.convert(from: rectInOverlayBlock, to: CGRect(x: 0, y: 0, width: rectInOverlayBlock.width, height: rectInOverlayBlock.height))
                 assert(textOnPage == textHighlighted)
                 guard let color = color as? UIColor else { return }
                 colorization.append((rectInCodeHighlight, color))

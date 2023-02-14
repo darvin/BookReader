@@ -10,11 +10,6 @@ import PDFKit
 import SwiftUI
 
 
-extension String {
-    func translate() -> String {
-        return String(self.reversed())
-    }
-}
 
 
 @objc class PDFViewHandler : NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {

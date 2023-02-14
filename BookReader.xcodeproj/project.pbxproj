@@ -23,7 +23,7 @@
 		9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864D9299521B600E418F8 /* BookshelfRow.swift */; };
 		9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864DB2995230400E418F8 /* Bookshelf.swift */; };
 		9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864DD299524E100E418F8 /* ManyBookshelvesViewModel.swift */; };
-		9AA864E2299692C800E418F8 /* ShakeTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864E1299692C800E418F8 /* ShakeTools.swift */; };
+		9AA864E2299692C800E418F8 /* UIShakeTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864E1299692C800E418F8 /* UIShakeTools.swift */; };
 		9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864E32997A1B600E418F8 /* HashableSynthesizable.swift */; };
 		9AA864E92997A23700E418F8 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864E82997A23700E418F8 /* PopupView.swift */; };
 		9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA864EA2997A25500E418F8 /* HighlightView.swift */; };
@@ -43,10 +43,16 @@
 		9AA8650C299888DC00E418F8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650B299888DC00E418F8 /* HostingController.swift */; };
 		9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650D2998DED400E418F8 /* MyPDFView.swift */; };
 		9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */; };
-		9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */; };
-		9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */; };
+		9AA86519299932E700E418F8 /* Highlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86518299932E700E418F8 /* Highlighter.swift */; };
 		9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */; };
 		9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */; };
+		9AA86566299BDF0900E418F8 /* NSAttributedString+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86565299BDF0900E418F8 /* NSAttributedString+Tools.swift */; };
+		9AA86568299BDF1600E418F8 /* UIColor+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86567299BDF1600E418F8 /* UIColor+Tools.swift */; };
+		9AA8656A299BDF6100E418F8 /* String+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86569299BDF6100E418F8 /* String+Tools.swift */; };
+		9AA8656C299BDF9000E418F8 /* NSRange+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8656B299BDF9000E418F8 /* NSRange+Tools.swift */; };
+		9AA8656E299BDFC400E418F8 /* UIApplication+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */; };
+		9AA86572299BE02600E418F8 /* UIImage+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86571299BE02600E418F8 /* UIImage+Tools.swift */; };
+		9AA86574299BE07D00E418F8 /* CGTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86573299BE07D00E418F8 /* CGTools.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
 		9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */; };
 		9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */; };
@@ -92,7 +98,7 @@
 		9AA864D9299521B600E418F8 /* BookshelfRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookshelfRow.swift; sourceTree = "<group>"; };
 		9AA864DB2995230400E418F8 /* Bookshelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookshelf.swift; sourceTree = "<group>"; };
 		9AA864DD299524E100E418F8 /* ManyBookshelvesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManyBookshelvesViewModel.swift; sourceTree = "<group>"; };
-		9AA864E1299692C800E418F8 /* ShakeTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeTools.swift; sourceTree = "<group>"; };
+		9AA864E1299692C800E418F8 /* UIShakeTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIShakeTools.swift; sourceTree = "<group>"; };
 		9AA864E32997A1B600E418F8 /* HashableSynthesizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableSynthesizable.swift; sourceTree = "<group>"; };
 		9AA864E82997A23700E418F8 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		9AA864EA2997A25500E418F8 /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
@@ -111,10 +117,16 @@
 		9AA8650B299888DC00E418F8 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		9AA8650D2998DED400E418F8 /* MyPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPDFView.swift; sourceTree = "<group>"; };
 		9AA8650F2998EE9600E418F8 /* CodeOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeOverlayView.swift; sourceTree = "<group>"; };
-		9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_ProgrammingLanguage.swift; sourceTree = "<group>"; };
-		9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighligtingTools.swift; sourceTree = "<group>"; };
+		9AA86518299932E700E418F8 /* Highlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlighter.swift; sourceTree = "<group>"; };
 		9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFThumbnailGenerator.swift; sourceTree = "<group>"; };
 		9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFSyntaxHighligting.swift; sourceTree = "<group>"; };
+		9AA86565299BDF0900E418F8 /* NSAttributedString+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Tools.swift"; sourceTree = "<group>"; };
+		9AA86567299BDF1600E418F8 /* UIColor+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Tools.swift"; sourceTree = "<group>"; };
+		9AA86569299BDF6100E418F8 /* String+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Tools.swift"; sourceTree = "<group>"; };
+		9AA8656B299BDF9000E418F8 /* NSRange+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRange+Tools.swift"; sourceTree = "<group>"; };
+		9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Tools.swift"; sourceTree = "<group>"; };
+		9AA86571299BE02600E418F8 /* UIImage+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Tools.swift"; sourceTree = "<group>"; };
+		9AA86573299BE07D00E418F8 /* CGTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTools.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
 		9AC2F79A2993A1580053EA37 /* GutenFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenFetcher.swift; sourceTree = "<group>"; };
 		9AC2F79D2993A1620053EA37 /* BookMetadatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookMetadatable.swift; sourceTree = "<group>"; };
@@ -271,12 +283,18 @@
 		9AA864E0299692B800E418F8 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9AA864E1299692C800E418F8 /* ShakeTools.swift */,
+				9AA864E1299692C800E418F8 /* UIShakeTools.swift */,
 				9AA864E32997A1B600E418F8 /* HashableSynthesizable.swift */,
-				9AA865112998FFB500E418F8 /* String_ProgrammingLanguage.swift */,
-				9AA86518299932E700E418F8 /* SyntaxHighligtingTools.swift */,
+				9AA86518299932E700E418F8 /* Highlighter.swift */,
 				9AA8651D29993ADE00E418F8 /* PDFThumbnailGenerator.swift */,
 				9AA86525299A622200E418F8 /* PDFSyntaxHighligting.swift */,
+				9AA86565299BDF0900E418F8 /* NSAttributedString+Tools.swift */,
+				9AA86567299BDF1600E418F8 /* UIColor+Tools.swift */,
+				9AA86569299BDF6100E418F8 /* String+Tools.swift */,
+				9AA8656B299BDF9000E418F8 /* NSRange+Tools.swift */,
+				9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */,
+				9AA86571299BE02600E418F8 /* UIImage+Tools.swift */,
+				9AA86573299BE07D00E418F8 /* CGTools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -460,7 +478,7 @@
 				9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */,
 				9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */,
 				9AA864E92997A23700E418F8 /* PopupView.swift in Sources */,
-				9AA864E2299692C800E418F8 /* ShakeTools.swift in Sources */,
+				9AA864E2299692C800E418F8 /* UIShakeTools.swift in Sources */,
 				9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */,
 				9AC2F7A32993A97F0053EA37 /* GutenFetcher_Preview.swift in Sources */,
 				9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */,
@@ -468,14 +486,19 @@
 				9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */,
 				9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */,
 				9AC2F7A02993A1680053EA37 /* HTTPService.swift in Sources */,
+				9AA8656E299BDFC400E418F8 /* UIApplication+Tools.swift in Sources */,
 				9AA864D6299512AE00E418F8 /* OpenBookViewModel.swift in Sources */,
+				9AA86566299BDF0900E418F8 /* NSAttributedString+Tools.swift in Sources */,
 				9AA864CF2993BD0500E418F8 /* BookshelfView.swift in Sources */,
 				9A586C5C299393CA0001A1EA /* MainView.swift in Sources */,
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
-				9AA865122998FFB500E418F8 /* String_ProgrammingLanguage.swift in Sources */,
 				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,
-				9AA86519299932E700E418F8 /* SyntaxHighligtingTools.swift in Sources */,
+				9AA86572299BE02600E418F8 /* UIImage+Tools.swift in Sources */,
+				9AA8656C299BDF9000E418F8 /* NSRange+Tools.swift in Sources */,
+				9AA86519299932E700E418F8 /* Highlighter.swift in Sources */,
+				9AA86574299BE07D00E418F8 /* CGTools.swift in Sources */,
 				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
+				9AA8656A299BDF6100E418F8 /* String+Tools.swift in Sources */,
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
 				9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */,
 				9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */,
@@ -485,6 +508,7 @@
 				9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */,
 				9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */,
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
+				9AA86568299BDF1600E418F8 /* UIColor+Tools.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA865082998887200E418F8 /* MyAppDelegate.swift in Sources */,
 				9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */,
