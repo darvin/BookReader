@@ -7,12 +7,14 @@
 
 import Foundation
 
-import SwiftUI
 import UIKit
+import SwiftUI
 
 class OpenPDFBookViewController: UIHostingController<OpenPDFBookView> {
     let book:any BookPDFable
-    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
     init(url:URL) {
         book = LocalBook(url: url)
         let view = OpenPDFBookView(book: book)

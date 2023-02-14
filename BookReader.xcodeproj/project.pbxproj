@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A3B7B1C299C2B47001E2CDD /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */; };
 		9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C59299393CA0001A1EA /* BookReaderApp.swift */; };
 		9A586C5C299393CA0001A1EA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C5B299393CA0001A1EA /* MainView.swift */; };
 		9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A586C5D299393CB0001A1EA /* Assets.xcassets */; };
@@ -53,7 +54,6 @@
 		9AA8656E299BDFC400E418F8 /* UIApplication+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */; };
 		9AA86572299BE02600E418F8 /* UIImage+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86571299BE02600E418F8 /* UIImage+Tools.swift */; };
 		9AA86574299BE07D00E418F8 /* CGTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86573299BE07D00E418F8 /* CGTools.swift */; };
-		9AA86579299BE3F700E418F8 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA86578299BE3F700E418F8 /* MenuController.swift */; };
 		9AA8657B299BEFD500E418F8 /* OpenPDFBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */; };
 		9AA8657D299BF44600E418F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA8657C299BF44600E418F8 /* SceneDelegate.swift */; };
 		9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC2F7992993A1580053EA37 /* GutenBook.swift */; };
@@ -81,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C59299393CA0001A1EA /* BookReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookReaderApp.swift; path = "../New Group/BookReaderApp.swift"; sourceTree = "<group>"; };
 		9A586C5B299393CA0001A1EA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Tools.swift"; sourceTree = "<group>"; };
 		9AA86571299BE02600E418F8 /* UIImage+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Tools.swift"; sourceTree = "<group>"; };
 		9AA86573299BE07D00E418F8 /* CGTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTools.swift; sourceTree = "<group>"; };
-		9AA86578299BE3F700E418F8 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPDFBookViewController.swift; sourceTree = "<group>"; };
 		9AA8657C299BF44600E418F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9AC2F7992993A1580053EA37 /* GutenBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GutenBook.swift; sourceTree = "<group>"; };
@@ -337,9 +337,9 @@
 				9A586C59299393CA0001A1EA /* BookReaderApp.swift */,
 				9AA865072998887200E418F8 /* AppDelegate.swift */,
 				9AA8650B299888DC00E418F8 /* HostingController.swift */,
-				9AA86578299BE3F700E418F8 /* MenuController.swift */,
 				9AA8657A299BEFD500E418F8 /* OpenPDFBookViewController.swift */,
 				9AA8657C299BF44600E418F8 /* SceneDelegate.swift */,
+				9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */,
 			);
 			path = Lifecycle;
 			sourceTree = "<group>";
@@ -503,9 +503,9 @@
 				9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */,
 				9AA864D8299513BD00E418F8 /* OpenPDFBookView.swift in Sources */,
 				9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */,
+				9A3B7B1C299C2B47001E2CDD /* DocumentPicker.swift in Sources */,
 				9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */,
 				9AC2F7A02993A1680053EA37 /* HTTPService.swift in Sources */,
-				9AA86579299BE3F700E418F8 /* MenuController.swift in Sources */,
 				9AA8656E299BDFC400E418F8 /* UIApplication+Tools.swift in Sources */,
 				9AA864D6299512AE00E418F8 /* OpenBookViewModel.swift in Sources */,
 				9AA86566299BDF0900E418F8 /* NSAttributedString+Tools.swift in Sources */,
