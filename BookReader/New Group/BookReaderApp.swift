@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 @main
 struct BookReaderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -20,7 +19,7 @@ struct BookReaderApp: App {
                 .sheet(isPresented: $showingDocumentPicker) {
                     DocumentPicker(filePath: $filePathURL)
                 }
-            
+
         }
         .commands {
             CommandGroup(replacing: .importExport) {
@@ -38,10 +37,10 @@ struct BookReaderApp: App {
 
                 }
                 .keyboardShortcut(KeyEquivalent.space, modifiers: [])
-                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: []) //fixme only first seems to work
+                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])  //fixme only first seems to work
 
             }
         }
     }
-    
+
 }

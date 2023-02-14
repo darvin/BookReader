@@ -6,10 +6,15 @@
 //
 
 import Foundation
+
 extension URL {
-    var typeIdentifier: String? { (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier }
-    var isPDF: Bool {typeIdentifier == "com.adobe.pdf"}
-    var localizedName: String? { (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName }
+    var typeIdentifier: String? {
+        (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    }
+    var isPDF: Bool { typeIdentifier == "com.adobe.pdf" }
+    var localizedName: String? {
+        (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
+    }
     var hasHiddenExtension: Bool {
         get { (try? resourceValues(forKeys: [.hasHiddenExtensionKey]))?.hasHiddenExtension == true }
         set {
@@ -20,10 +25,8 @@ extension URL {
     }
 }
 
-
 class LocalBookFetcher {
 
-    
     func fetch() -> AsyncThrowingStream<LocalBook, Error> {
         return AsyncThrowingStream { continuation in
             Task {
@@ -41,11 +44,14 @@ class LocalBookFetcher {
                         at: documentDirectory,
                         includingPropertiesForKeys: nil
                     )
-                    print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+                    print(
+                        "directoryContents:",
+                        directoryContents.map { $0.localizedName ?? $0.lastPathComponent }
+                    )
                     for url in directoryContents {
                         print(url.localizedName ?? url.lastPathComponent)
                     }
-                    
+
                     // if you would like to hide the file extension
                     for var url in directoryContents {
                         url.hasHiddenExtension = true
@@ -53,17 +59,16 @@ class LocalBookFetcher {
                     for url in directoryContents {
                         print(url.localizedName ?? url.lastPathComponent)
                     }
-                    
-                    
-                    
+
                     directoryContents.filter(\.isPDF).forEach { url in
                         continuation.yield(LocalBook(url: url))
                     }
                     continuation.finish(throwing: nil)
-                    
-                } catch {
+
+                }
+                catch {
                     continuation.finish(throwing: error)
-                    
+
                 }
             }
         }

@@ -7,21 +7,21 @@
 
 import Foundation
 
-public protocol HashableSynthesizable: Hashable { }
+public protocol HashableSynthesizable: Hashable {}
 
-public extension HashableSynthesizable {
-  static func == (hashable0: Self, hashable1: Self) -> Bool {
-    zip(hashable0.hashables, hashable1.hashables).allSatisfy(==)
-  }
+extension HashableSynthesizable {
+    public static func == (hashable0: Self, hashable1: Self) -> Bool {
+        zip(hashable0.hashables, hashable1.hashables).allSatisfy(==)
+    }
 
-  func hash(into hasher: inout Hasher) {
-    hashables.forEach { hasher.combine($0) }
-  }
+    public func hash(into hasher: inout Hasher) {
+        hashables.forEach { hasher.combine($0) }
+    }
 }
 
-private extension HashableSynthesizable {
-  var hashables: [AnyHashable] {
-    Mirror(reflecting: self).children
-      .compactMap { $0.value as? AnyHashable }
-  }
+extension HashableSynthesizable {
+    fileprivate var hashables: [AnyHashable] {
+        Mirror(reflecting: self).children
+            .compactMap { $0.value as? AnyHashable }
+    }
 }

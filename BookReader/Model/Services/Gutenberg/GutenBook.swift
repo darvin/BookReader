@@ -7,20 +7,19 @@
 
 import Foundation
 
-
 struct GutenResponse: Codable {
     let count: Int
     let next: String?
     let previous: String?
     let results: [GutenBook]
-    
+
 }
 
 struct GutenAuthor: Codable {
     let name: String
     let birth_year: Int?
     let death_year: Int?
-    
+
 }
 
 enum GutenMediaType: String, Codable {
@@ -31,7 +30,6 @@ enum GutenMediaType: String, Codable {
     case collection = "Collection"
     case image = "Image"
 }
-
 
 enum GutenFormat: String, Codable {
     case rdf = "application/rdf+xml"
@@ -62,12 +60,10 @@ extension GutenBook: BookPDFable {
     var pdfURL: URL? {
         guard let pdfURLString = formats[GutenFormat.pdf.rawValue] else { return nil }
         return URL(string: pdfURLString)
-        
-    }
-    
-    
-}
 
+    }
+
+}
 
 extension GutenBook: BookMetadatable {
 
@@ -78,19 +74,17 @@ extension GutenBook: BookMetadatable {
         hasher.combine(id)
     }
 
-    
     var author: String {
         return authors.map { author in
             author.name
         }.joined(separator: ", ")
     }
-    
+
     var thumbnailURL: URL {
         guard let urlString = formats[GutenFormat.jpeg.rawValue] else {
             return URL(string: "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg")!
         }
         return URL(string: urlString)!
     }
-    
-    
+
 }

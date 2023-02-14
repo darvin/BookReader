@@ -6,17 +6,19 @@
 //
 
 import Foundation
-import UIKit
 import PDFKit
+import UIKit
 
 class PDFThumbnailGenerator {
-    
-    init() {}
-    
-    func generateAndSaveThumbnail(for url: URL, forceRegenerate: Bool = false) throws -> URL {
-        let thumbnailURL = LocalBook.thumbnailURL(for:url)
 
-        guard forceRegenerate || !FileManager.default.fileExists(atPath: thumbnailURL.path) else { return thumbnailURL }
+    init() {}
+
+    func generateAndSaveThumbnail(for url: URL, forceRegenerate: Bool = false) throws -> URL {
+        let thumbnailURL = LocalBook.thumbnailURL(for: url)
+
+        guard forceRegenerate || !FileManager.default.fileExists(atPath: thumbnailURL.path) else {
+            return thumbnailURL
+        }
         let pdfDocument = PDFDocument(url: url)
         let firstPage = pdfDocument?.page(at: 0)
         let thumbnailSize = firstPage?.bounds(for: .mediaBox).size
@@ -34,7 +36,8 @@ class PDFThumbnailGenerator {
         do {
             try imageData?.write(to: thumbnailURL)
             return thumbnailURL
-        } catch {
+        }
+        catch {
             throw NSError(domain: "Error saving thumbnail", code: 0, userInfo: nil)
         }
     }

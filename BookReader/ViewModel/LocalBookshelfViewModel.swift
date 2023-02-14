@@ -8,17 +8,15 @@
 import Foundation
 import SwiftUI
 
-
 class LocalBookshelfViewModel: Bookshelfable {
     typealias Book = LocalBook
 
-    
     @Published
     var books: [LocalBook] = []
-    
+
     let fetcher = LocalBookFetcher()
     let thumbnailGenerator = PDFThumbnailGenerator()
-    
+
     public init() {}
 
     func fetch() async {
@@ -27,17 +25,18 @@ class LocalBookshelfViewModel: Bookshelfable {
         }
         let booksAsyncSequence = fetcher.fetch()
         do {
-            for try await book in booksAsyncSequence  {
+            for try await book in booksAsyncSequence {
                 try await thumbnailGenerator.generateAndSaveThumbnail(for: book.url)
                 await MainActor.run {
                     books.append(book)
                     print("BOOKS: \(books.count)")
                 }
             }
-        } catch {
+        }
+        catch {
             print("error: ", error)
         }
 
     }
-    
+
 }

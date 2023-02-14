@@ -5,20 +5,17 @@
 //  Created by standard on 2/11/23.
 //
 
-import UIKit
 import PDFKit
 import SwiftUI
+import UIKit
 
-
-
-
-@objc class PDFViewHandler : NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {
+@objc class PDFViewHandler: NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {
     var book: (any BookMetadatable)?
 
     private var _pdfView: PDFView?
-    
+
     private var pageOverlays = [PDFPage: PageOverlay]()
-    
+
     var pdfView: PDFView {
         set {
             _pdfView = newValue
@@ -32,11 +29,11 @@ import SwiftUI
             _pdfView!
         }
     }
-    
+
     private func pageOverlays(page: PDFPage) -> PageOverlay {
         return pageOverlays[page]!
     }
-    
+
     func pdfView(_ view: PDFView, overlayViewFor page: PDFPage) -> UIView? {
         if !pageOverlays.keys.contains(page) {
             let pageOverlay = PageOverlay()
@@ -48,7 +45,7 @@ import SwiftUI
         }
         return pageOverlays(page: page)
     }
-    
+
     func pdfView(
         _ pdfView: PDFView,
         willDisplayOverlayView overlayView: UIView,
@@ -56,48 +53,55 @@ import SwiftUI
     ) {
         if let pageOverlay = overlayView as? PageOverlay {
             pageOverlay.makeCodeHighlights()
-              
+
         }
     }
-    
-    func pdfView(_ pdfView: PDFView, willEndDisplayingOverlayView overlayView: UIView, for page: PDFPage) {
+
+    func pdfView(
+        _ pdfView: PDFView,
+        willEndDisplayingOverlayView overlayView: UIView,
+        for page: PDFPage
+    ) {
         if let pageOverlay = overlayView as? PageOverlay {
             pageOverlay.removeHighlights()
         }
     }
-    
-    
+
     lazy var doubleTapGestureRecognizer: UITapGestureRecognizer = {
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGesture(_:)))
+        let doubleTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(doubleTapGesture(_:))
+        )
         doubleTapGesture.numberOfTapsRequired = 2
         return doubleTapGesture
     }()
-    
+
     lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         tapGesture.numberOfTapsRequired = 1
         tapGesture.require(toFail: doubleTapGestureRecognizer)
         return tapGesture
     }()
-    
+
     @objc func doubleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
+        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true)
+        else { return }
         let pageOverlay = pageOverlays(page: page)
         let pdfViewPoint = gestureRecognizer.location(in: pdfView)
-        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to:pageOverlay)
-        pageOverlay.doubleTouched(at:pageOverlayPoint)
+        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to: pageOverlay)
+        pageOverlay.doubleTouched(at: pageOverlayPoint)
     }
-    
+
     @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         print("tap")
 
-        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true) else { return }
+        guard let page = pdfView.page(for: gestureRecognizer.location(in: pdfView), nearest: true)
+        else { return }
         let pageOverlay = pageOverlays(page: page)
         let pdfViewPoint = gestureRecognizer.location(in: pdfView)
-        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to:pageOverlay)
+        let pageOverlayPoint = pdfView.convert(pdfViewPoint, to: pageOverlay)
 
-        pageOverlay.touched(at:pageOverlayPoint)
+        pageOverlay.touched(at: pageOverlayPoint)
     }
 
 }
-

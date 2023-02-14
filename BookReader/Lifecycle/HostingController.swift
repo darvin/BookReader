@@ -5,15 +5,11 @@
 //  Created by standard on 2/12/23.
 //
 
-import UIKit
 import SwiftUI
-
-
+import UIKit
 
 class HostingController: UIHostingController<MainView> {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
 }
-
-

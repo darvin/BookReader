@@ -5,9 +5,9 @@
 //  Created by standard on 2/8/23.
 //
 
-import XCTest
-import BookReader
 import Algorithms
+import BookReader
+import XCTest
 
 final class BookReaderTests: XCTestCase {
 
@@ -27,15 +27,14 @@ final class BookReaderTests: XCTestCase {
         var indexIterator = (1...100).makeIterator()
 
         print("📚 Fetching bunch of books ")
-        
+
         for try await book in books {
             let emoji = emojisIterator.next()!
             guard let i = indexIterator.next() else {
-               break
+                break
             }
             print("          \(book), // \(emoji) Book #\(i)")
         }
     }
-
 
 }

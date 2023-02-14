@@ -7,24 +7,22 @@
 
 import UIKit
 
-
-
-@objc class CodeOverlayView : UIView, ToggablePoppable {
+@objc class CodeOverlayView: UIView, ToggablePoppable {
     func togglePopupView() {
         label.isHidden = !label.isHidden
         if label.isHidden {
             layer.mask = maskLayer
             layer.backgroundColor = UIColor.clear.cgColor
-        } else {
+        }
+        else {
             layer.mask = nil
             layer.backgroundColor = UIColor.lightGray.cgColor
         }
-        
+
         for layer in highlightLayers {
             layer.isHidden = !label.isHidden
         }
     }
-    
 
     private var code: NSAttributedString
     private var label: UILabel
@@ -40,14 +38,14 @@ import UIKit
         label.font = UIFont.monospacedSystemFont(ofSize: 30.0, weight: .regular)
         label.adjustsFontSizeToFitWidth = true
         label.isHidden = true
-        
+
         self.code = code
-        
+
         self.maskLayer = CALayer()
 
         super.init(frame: frame)
         addSubview(label)
-        
+
         for (rect, color) in colors {
             let l = CALayer()
             l.backgroundColor = color.cgColor.copy(alpha: 0.7)
@@ -55,8 +53,7 @@ import UIKit
             layer.addSublayer(l)
             highlightLayers.append(l)
         }
-        
-        
+
         maskLayer.contents = mask
         maskLayer.frame = bounds
         maskLayer.opacity = 1.0
@@ -65,7 +62,7 @@ import UIKit
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func willMove(toWindow newWindow: UIWindow?) {
         setNeedsDisplay()
         setNeedsLayout()

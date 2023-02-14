@@ -6,31 +6,42 @@
 //
 
 import Foundation
-
-
 import UIKit
 
 extension NSAttributedString {
     func removingGrayForegroundAttributes() -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString(attributedString: self)
-        
-        mutableAttributedString.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) { (attributes: [NSAttributedString.Key: Any], range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) in
-            if let color = attributes[NSAttributedString.Key.foregroundColor] as? UIColor, color.isGray {
-                mutableAttributedString.removeAttribute(NSAttributedString.Key.foregroundColor, range: range)
+
+        mutableAttributedString.enumerateAttributes(
+            in: NSRange(location: 0, length: self.length),
+            options: []
+        ) {
+            (
+                attributes: [NSAttributedString.Key: Any],
+                range: NSRange,
+                stop: UnsafeMutablePointer<ObjCBool>
+            ) in
+            if let color = attributes[NSAttributedString.Key.foregroundColor] as? UIColor,
+                color.isGray
+            {
+                mutableAttributedString.removeAttribute(
+                    NSAttributedString.Key.foregroundColor,
+                    range: range
+                )
             }
         }
-        
+
         return NSAttributedString(attributedString: mutableAttributedString)
     }
 }
 
-
-
-
 extension NSAttributedString {
     var countForegroundColorAttributes: Int {
         var count = 0
-        self.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) { attributes, range, _ in
+        self.enumerateAttributes(in: NSRange(location: 0, length: self.length), options: []) {
+            attributes,
+            range,
+            _ in
             if let foregroundColor = attributes[.foregroundColor] as? UIColor {
                 count += 1
             }
@@ -38,4 +49,3 @@ extension NSAttributedString {
         return count
     }
 }
-

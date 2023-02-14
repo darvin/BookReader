@@ -6,21 +6,23 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 // The notification we'll send when a shake gesture happens.
 extension UIDevice {
-    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+    static let deviceDidShakeNotification = Notification.Name(
+        rawValue: "deviceDidShakeNotification"
+    )
 }
 
 //  Override the default behavior of shake gestures to send our notification instead.
 extension UIWindow {
-     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
         }
-     }
+    }
 }
 
 // A view modifier that detects shaking and calls a function of our choosing.
@@ -30,7 +32,10 @@ struct DeviceShakeViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear()
-            .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
+            .onReceive(
+                NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)
+            ) {
+                _ in
                 action()
             }
     }

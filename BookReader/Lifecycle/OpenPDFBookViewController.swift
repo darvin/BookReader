@@ -6,21 +6,20 @@
 //
 
 import Foundation
-
-import UIKit
 import SwiftUI
+import UIKit
 
 class OpenPDFBookViewController: UIHostingController<OpenPDFBookView> {
-    let book:any BookPDFable
+    let book: any BookPDFable
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-    init(url:URL) {
+    init(url: URL) {
         book = LocalBook(url: url)
         let view = OpenPDFBookView(book: book)
         super.init(rootView: view)
     }
-    
+
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

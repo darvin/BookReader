@@ -11,12 +11,15 @@ protocol ToggablePoppable {
     func togglePopupView()
 }
 
+@objc class HighlightView: UIView, ToggablePoppable {
 
-@objc class HighlightView : UIView, ToggablePoppable {
-    
     private var popupView: UIView?
-    
-    init(frame: CGRect, color:UIColor = UIColor(cgColor: CGColor(red: 0, green: 0.3, blue: 0.1, alpha: 0.4)),  popupView: UIView? = nil) {
+
+    init(
+        frame: CGRect,
+        color: UIColor = UIColor(cgColor: CGColor(red: 0, green: 0.3, blue: 0.1, alpha: 0.4)),
+        popupView: UIView? = nil
+    ) {
         if let popupView {
             self.popupView = popupView
         }
@@ -31,11 +34,10 @@ protocol ToggablePoppable {
         fatalError("init(coder:) has not been implemented")
     }
     func togglePopupView() {
-        guard let popupView else {return}
+        guard let popupView else { return }
         popupView.isUserInteractionEnabled = !popupView.isUserInteractionEnabled
         popupView.isHidden = !popupView.isHidden
 
     }
 
 }
-

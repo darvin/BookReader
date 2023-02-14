@@ -5,14 +5,13 @@
 //  Created by standard on 2/11/23.
 //
 
+import PDFKit
 import SwiftUI
 import UIKit
-import PDFKit
-
 
 struct PDFKitRepresentedView: UIViewRepresentable {
     typealias UIViewType = MyPDFView
-    
+
     let data: Data
     let book: any BookMetadatable
 
@@ -22,14 +21,12 @@ struct PDFKitRepresentedView: UIViewRepresentable {
         return pdfView
     }
 
-    func updateUIView(_ pdfView: UIViewType, context _: UIViewRepresentableContext<PDFKitRepresentedView>) {
+    func updateUIView(
+        _ pdfView: UIViewType,
+        context _: UIViewRepresentableContext<PDFKitRepresentedView>
+    ) {
         pdfView.document = PDFDocument(data: data)
 
     }
-    
-    
-    
-    
+
 }
-
-

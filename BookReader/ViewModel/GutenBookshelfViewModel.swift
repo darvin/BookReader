@@ -8,24 +8,25 @@
 import Foundation
 import SwiftUI
 
-class GutenBookshelfViewModel : Bookshelfable {
+class GutenBookshelfViewModel: Bookshelfable {
     public init() {}
 
     let api = GutenFetcher()
-    
+
     @Published
     var books = [GutenBook]()
-    
+
     func getFirstHundred() async {
         await fetchBooks()
     }
-    
+
     func getAnotherHundred() async {
         await fetchBooks(query: [
-                                 "page": "30"])
+            "page": "30"
+        ])
 
     }
-    
+
     func fetchBooks(query: [String: String] = [String: String](), limitBooks: Int = 100) async {
         await MainActor.run {
             books = []
@@ -40,12 +41,13 @@ class GutenBookshelfViewModel : Bookshelfable {
                     print("BOOKS: \(books.count)")
                 }
             }
-        } catch {
+        }
+        catch {
             print("error: ", error)
         }
     }
-    
+
     func search(searchTerm: String) {
-        
+
     }
 }
