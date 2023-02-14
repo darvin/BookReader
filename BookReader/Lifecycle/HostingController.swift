@@ -18,7 +18,6 @@ class HostingController: UIHostingController<MainView> {
         return OpenPDFBookViewController(url:url)
     }
     
-#if targetEnvironment(macCatalyst)
 
     lazy var documentPickerViewController:UIDocumentPickerViewController = {
         let vc = UIDocumentPickerViewController(documentTypes: ["com.adobe.pdf"], in: .open)
@@ -27,7 +26,7 @@ class HostingController: UIHostingController<MainView> {
         return vc
     }()
 
-    
+
     @objc
     // User chose Open from the File menu.
     public func openAction(_ sender: AnyObject) {
@@ -35,7 +34,6 @@ class HostingController: UIHostingController<MainView> {
         
 
     }
-#endif
 
 }
 
