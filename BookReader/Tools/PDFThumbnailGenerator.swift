@@ -12,6 +12,15 @@ import UIKit
 class PDFThumbnailGenerator {
 
     init() {}
+    
+    func generateAndSaveThumbnailAsync(for url: URL, forceRegenerate: Bool = false) async throws -> URL {
+        let task = Task { () -> URL in
+            try generateAndSaveThumbnail(for: url, forceRegenerate: forceRegenerate)
+        }
+        return try await task.value
+
+
+    }
 
     func generateAndSaveThumbnail(for url: URL, forceRegenerate: Bool = false) throws -> URL {
         let thumbnailURL = LocalBook.thumbnailURL(for: url)

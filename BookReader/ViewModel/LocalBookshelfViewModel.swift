@@ -26,7 +26,7 @@ class LocalBookshelfViewModel: Bookshelfable {
         let booksAsyncSequence = fetcher.fetch()
         do {
             for try await book in booksAsyncSequence {
-                try await thumbnailGenerator.generateAndSaveThumbnail(for: book.url)
+                let _ = try await thumbnailGenerator.generateAndSaveThumbnailAsync(for: book.url)
                 await MainActor.run {
                     books.append(book)
                     print("BOOKS: \(books.count)")

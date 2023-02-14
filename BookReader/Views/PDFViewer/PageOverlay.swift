@@ -84,10 +84,8 @@ import UIKit
                     rangeOnPage.location + range.location,
                     range.length
                 )
-                let textOnPage = (pageText.string as! NSString).substring(with: attrRangeOnPage)
-                let textHighlighted = (highlightedFragment.string as! NSString).substring(
-                    with: range
-                )
+                let textOnPage = (pageText.string as NSString).substring(with: attrRangeOnPage)
+                let textHighlighted = (highlightedFragment.string as NSString).substring(with: range)
                 let rectOnPage = getRectFor(range: attrRangeOnPage)
                 let rectInOverlay = convertFromPage(rectOnPage)!
                 let rectInOverlayBlock = convertFromPage(rectOnPageBlock)!
@@ -153,7 +151,7 @@ import UIKit
     }
 
     func makeHighlight(range: NSRange, color: UIColor, popupView: UIView? = nil) {
-        guard let page, let pdfView else { return }
+        guard let page else { return }
         guard let selection = page.selection(for: range) else { return }
         let pageBounds = selection.bounds(for: page)
         makeHighlight(pageBounds: pageBounds, color: color, popupView: popupView)
