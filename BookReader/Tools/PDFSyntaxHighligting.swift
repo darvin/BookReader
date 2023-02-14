@@ -22,7 +22,7 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
     
     guard let pageAttributedText = page.attributedString  else { return [] }
     guard let pageText: NSString = page.string as NSString?  else { return [] }
-
+    
     
     func getRectFor(range:NSRange) -> CGRect {
         let rect = page.selection(for: range)?.bounds(for: page)
@@ -46,10 +46,10 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
         }
         return result
     }
-
+    
     
     let characterRanges = getCharacters(text: pageText, getRectFor: getRectFor)
-
+    
     func getLines(from characterRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
         let sortedRanges = characterRanges.sorted { $0.1.minY < $1.1.minY }
         var lineRanges: [(NSRange, CGRect)] = []
@@ -65,9 +65,9 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
         
         return lineRanges
     }
-
+    
     let lines = getLines(from: characterRanges)
-
+    
     func getMonospacedLines(lineRanges: [(NSRange, CGRect)], characterRanges: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
         let sortedRanges = characterRanges.sorted { $0.1.minY < $1.1.minY }
         let tolerance: CGFloat = 0.04
@@ -77,7 +77,7 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
             guard let firstCharacterRect = lineCharacterRanges.first?.1 else { return false }
             
             let line = pageText.substring(with: lineRange.0).removeSpaces
-
+            
             if line.count == 0 {
                 return false
             } else if line.count == 1 {
@@ -97,29 +97,33 @@ func HightlightSyntaxIn(page:PDFPage, book: (any BookMetadatable)?) -> [(NSRange
         
         return monospacedRanges
     }
-
-
+    
+    
     
     let monospacedLines = getMonospacedLines(lineRanges: lines, characterRanges: characterRanges)
-    return monospacedLines
+    
+    let joinedLines = joinContinuousMonospacedLines(lines: monospacedLines)
+    return joinedLines
 }
 
-
 func joinContinuousMonospacedLines(lines: [(NSRange, CGRect)]) -> [(NSRange, CGRect)] {
-    var result: [(NSRange, CGRect)] = []
     guard let firstLine = lines.first else {return []}
-    var currentLine: (NSRange, CGRect) = firstLine
-    for i in 1..<lines.count {
-        let nextLine = lines[i]
-        let lineDistance = nextLine.0.location - currentLine.0.location - currentLine.0.length
-        let rectDistance = abs(nextLine.1.minY - currentLine.1.maxY)
-        if lineDistance < 4 && rectDistance < currentLine.1.height / 2 {
-            currentLine = (NSRange(location: currentLine.0.location, length: nextLine.0.location + nextLine.0.length - currentLine.0.location), CGRect(x: currentLine.1.minX, y: currentLine.1.minY, width: currentLine.1.width, height: nextLine.1.maxY - currentLine.1.minY))
+    let tolerance: CGFloat = 5.0
+    
+    var result = [(NSRange, CGRect)]()
+    var currentLine = firstLine
+    
+    for nextLine in lines.dropFirst() {
+        if abs(nextLine.1.minY - currentLine.1.maxY) <= tolerance {
+            currentLine.0.length += nextLine.0.length
+            currentLine.1 = currentLine.1.union(nextLine.1)
         } else {
             result.append(currentLine)
             currentLine = nextLine
         }
     }
+    
     result.append(currentLine)
+    
     return result
 }
