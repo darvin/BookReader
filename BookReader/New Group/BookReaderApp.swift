@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TDLibKit
 
 @main
 struct BookReaderApp: App {
@@ -13,6 +14,11 @@ struct BookReaderApp: App {
     @State private var showingDocumentPicker = false
     @State private var filePathURL: URL?
 
+    
+    init() {
+        TdApi.shared.startTdLibUpdateHandler()
+
+    }
     var body: some Scene {
         WindowGroup(Scenes.MainScene.rawValue) {
             MainView()

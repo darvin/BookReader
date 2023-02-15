@@ -11,7 +11,7 @@
 		9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */; };
 		9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B20299C492E001E2CDD /* TelegramBook.swift */; };
 		9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */; };
-		9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */; };
+		9A3B7B28299C4B64001E2CDD /* __TelegramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B27299C4B64001E2CDD /* __TelegramClient.swift */; };
 		9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A3B7B29299C5058001E2CDD /* .KEYS.plist */; };
 		9A3B7B35299CC45B001E2CDD /* LoginView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B2E299CC45B001E2CDD /* LoginView+Registration.swift */; };
 		9A3B7B36299CC45B001E2CDD /* LoginView+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B2F299CC45B001E2CDD /* LoginView+QRCode.swift */; };
@@ -131,7 +131,7 @@
 		9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfViewModel.swift; sourceTree = "<group>"; };
 		9A3B7B20299C492E001E2CDD /* TelegramBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBook.swift; sourceTree = "<group>"; };
 		9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfView.swift; sourceTree = "<group>"; };
-		9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramClient.swift; sourceTree = "<group>"; };
+		9A3B7B27299C4B64001E2CDD /* __TelegramClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = __TelegramClient.swift; sourceTree = "<group>"; };
 		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
 		9A3B7B2E299CC45B001E2CDD /* LoginView+Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+Registration.swift"; sourceTree = "<group>"; };
 		9A3B7B2F299CC45B001E2CDD /* LoginView+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+QRCode.swift"; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 				9A3B7B42299CC46D001E2CDD /* TdLoginService.swift */,
 				9A3B7B3E299CC46D001E2CDD /* TdMainService.swift */,
 				9A3B7B20299C492E001E2CDD /* TelegramBook.swift */,
-				9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */,
+				9A3B7B27299C4B64001E2CDD /* __TelegramClient.swift */,
 				9A3B7B5D299CCB60001E2CDD /* Secret.swift */,
 			);
 			path = Telegram;
@@ -690,7 +690,7 @@
 				9A3B7B4E299CC46D001E2CDD /* ChatService.swift in Sources */,
 				9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */,
 				9A3B7B62299CCD50001E2CDD /* UIImage+QRCode.swift in Sources */,
-				9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */,
+				9A3B7B28299C4B64001E2CDD /* __TelegramClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

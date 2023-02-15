@@ -11,9 +11,17 @@ struct TelegramBookshelfView: View {
     @ObservedObject
     var viewModel: TelegramBookshelfViewModel
     var body: some View {
-        VStack {
-            BookshelfView(viewModel: viewModel)
+        if !viewModel.showingLoginScreen {
+            VStack {
+                BookshelfView(viewModel: viewModel)
+            }
+
+        } else {
+            LoginView(onClose: { viewModel.showingLoginScreen = false })
+
         }
+        
+        
     }
 }
 

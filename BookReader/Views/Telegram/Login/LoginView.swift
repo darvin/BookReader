@@ -105,6 +105,7 @@ struct LoginView: View {
         .frame(maxWidth: 400)
         .onAppear {
             Task {
+                
                 var countries = try await service.getCountries()
                 let countryCode = try await service.getCountryCode()
                 

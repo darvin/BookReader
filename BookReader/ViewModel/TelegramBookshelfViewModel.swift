@@ -14,6 +14,8 @@ class TelegramBookshelfViewModel: Bookshelfable {
     @Published
     var books: [Book] = []
 
+    @Published
+    var showingLoginScreen: Bool = true
     
     public init() {}
 
