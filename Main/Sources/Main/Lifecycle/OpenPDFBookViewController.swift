@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 import UIKit
-import Books
+import Models
+import LocalReader
+import Views
 
 class OpenPDFBookViewController: UIHostingController<OpenPDFBookView> {
     let book: any BookPDFable

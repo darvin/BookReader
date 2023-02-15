@@ -15,10 +15,13 @@ let package = Package(
             targets: ["Main"]),
     ],
     dependencies: [
-        .package(path: "../Books"),
+        .package(path: "../Views"),
+        .package(path: "../ViewModels"),
+        .package(path: "../Models"),
         .package(path: "../GutenReader"),
         .package(path: "../PDFViewer"),
-        .package(path: "../TelegramReader")
+        .package(path: "../TelegramReader"),
+        .package(path: "../LocalReader"),
     ],
     targets: [
         .target(
@@ -26,8 +29,11 @@ let package = Package(
             dependencies: [
                 .product(name: "TelegramReader", package: "TelegramReader", condition: .when(platforms: [.iOS])),
                 "GutenReader",
-                "Books",
                 "PDFViewer",
+                "LocalReader",
+                "ViewModels",
+                "Models",
+                "Views",
 
             ]),
         .testTarget(

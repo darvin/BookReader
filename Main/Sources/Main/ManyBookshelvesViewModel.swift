@@ -10,8 +10,11 @@ import SwiftUI
 #if !targetEnvironment(macCatalyst)
 import TelegramReader
 #endif
-import Books
+import Models
+import ViewModels
+import Views
 import GutenReader
+import LocalReader
 
 #if !targetEnvironment(macCatalyst)
 let platformSpecficBookshelfes =       [

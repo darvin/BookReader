@@ -3,27 +3,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "GutenReader",
+    name: "LocalReader",
     platforms: [
         .macOS(.v12),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "GutenReader",
-            targets: ["GutenReader"]),
+            name: "LocalReader",
+            targets: ["LocalReader"]),
     ],
     dependencies: [
         .package(path: "../Models"),
+        .package(path: "../UITools"),
     ],
     targets: [
         .target(
-            name: "GutenReader",
+            name: "LocalReader",
             dependencies: [
                 "Models",
+                "UITools",
             ]),
         .testTarget(
-            name: "GutenReaderTests",
-            dependencies: ["GutenReader"]),
+            name: "LocalReaderTests",
+            dependencies: ["LocalReader"]),
     ]
 )

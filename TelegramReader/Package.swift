@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
          .package(path: "../tdlibkit"),
-         .package(path: "../Books"),
+         .package(path: "../Models"),
          .package(path: "../Tools"),
 
     ],
@@ -23,7 +23,7 @@ let package = Package(
             name: "TelegramReader",
             dependencies: [
                 .product(name: "TDLibKit", package: "tdlibkit", condition: .when(platforms: [.iOS])),
-                "Books",
+                "Models",
                 "Tools",
             ]),
         .testTarget(

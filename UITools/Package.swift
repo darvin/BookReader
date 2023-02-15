@@ -1,29 +1,28 @@
 // swift-tools-version: 5.7
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "GutenReader",
+    name: "UITools",
     platforms: [
         .macOS(.v12),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "GutenReader",
-            targets: ["GutenReader"]),
+            name: "UITools",
+            targets: ["UITools"]),
     ],
     dependencies: [
-        .package(path: "../Models"),
     ],
     targets: [
         .target(
-            name: "GutenReader",
+            name: "UITools",
             dependencies: [
-                "Models",
             ]),
         .testTarget(
-            name: "GutenReaderTests",
-            dependencies: ["GutenReader"]),
+            name: "UIToolsTests",
+            dependencies: ["UITools"]),
     ]
 )

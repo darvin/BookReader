@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-import Books
+import Models
+import Views
 
 struct MainView: View {
 

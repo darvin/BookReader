@@ -7,7 +7,7 @@
 
 import SwiftUI
 //import TDLibKit
-import Books
+import Models
 import PDFViewer
 #if !targetEnvironment(macCatalyst)
 import TelegramReader

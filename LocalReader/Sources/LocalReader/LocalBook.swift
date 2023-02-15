@@ -1,21 +1,25 @@
 //
-//  TelegramBook.swift
+//  LocalBook.swift
 //  BookReader
 //
-//  Created by standard on 2/15/23.
+//  Created by standard on 2/11/23.
 //
 
 import Foundation
-import Models
 import Tools
+import Models
 
-
-public struct TelegramBook: Codable, Identifiable {
+public struct LocalBook: Codable, Identifiable {
     public var id: UUID = UUID()
-    var url: URL
+    public var url: URL
+    
+    public init(url: URL) {
+        self.id = UUID()
+        self.url = url
+    }
 }
 
-extension TelegramBook: BookPDFable {
+extension LocalBook: BookPDFable {
     public var pdfURL: URL? {
         return url
     }
@@ -26,9 +30,9 @@ extension TelegramBook: BookPDFable {
         return URL(fileURLWithPath: url.deletingLastPathComponent().path + "/." + fileName)
     }
 }
-extension TelegramBook: HashableSynthesizable {}
+extension LocalBook: HashableSynthesizable {}
 
-extension TelegramBook: BookMetadatable {
+extension LocalBook: BookMetadatable {
     public var title: String {
         let t = (url.lastPathComponent as NSString).deletingPathExtension
         return t

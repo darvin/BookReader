@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import Books
+import Models
+import Views
 
 public struct TelegramBookshelfView: View {
     @ObservedObject
