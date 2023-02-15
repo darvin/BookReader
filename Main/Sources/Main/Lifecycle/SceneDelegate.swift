@@ -36,7 +36,7 @@ let ScenesUserInfoKeyURL = "OpenPDFBookSceneURL"
                 let urlString = (activity.userInfo?[ScenesUserInfoKeyURL]) as? String
             {
                 let url = URL(string: urlString)
-                window.rootViewController = OpenPDFBookViewController(url: url!)
+                window.rootViewController = PDFBookViewController(url: url!)
 
             }
             else {

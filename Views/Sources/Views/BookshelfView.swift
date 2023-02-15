@@ -24,8 +24,8 @@ struct BookItemView<Book: BookMetadatable & BookPDFable>: View {
 
     var body: some View {
         NavigationLink {
-            NavigationLazyView<OpenPDFBookView>(
-                OpenPDFBookView(book: book)
+            NavigationLazyView<PDFBookView>(
+                PDFBookView(book: book)
 
             )
         } label: {

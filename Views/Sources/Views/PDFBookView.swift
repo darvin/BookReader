@@ -15,7 +15,7 @@ import ViewModels
 import UITools
 
 
-public struct OpenPDFBookView: View {
+public struct PDFBookView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject
