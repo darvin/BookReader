@@ -1,0 +1,3 @@
+[submodule "tdlibkit"]
+	path = tdlibkit
+	url = https://github.com/mock-foundation/tdlibkit.git
