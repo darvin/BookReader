@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import TDLibKit
 import Models
 import PDFViewer
 #if !targetEnvironment(macCatalyst)
