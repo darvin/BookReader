@@ -13,7 +13,7 @@ class OpenBookViewModel: ObservableObject {
     @Published var progress: Float = 0
     @Published var pdfData: Data?
 
-    let logger = Logger(subsystem: "📖 OpenBookViewModel", category: "main")
+    let logger = Logger(category: "main", label: "📖 OpenBookViewModel")
 
     // Custom URL cache with 1 GB disk storage
     lazy var cache: URLCache = {

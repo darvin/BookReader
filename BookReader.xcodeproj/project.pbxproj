@@ -11,9 +11,35 @@
 		9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */; };
 		9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B20299C492E001E2CDD /* TelegramBook.swift */; };
 		9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */; };
-		9A3B7B26299C4B51001E2CDD /* TDLibKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9A3B7B25299C4B51001E2CDD /* TDLibKit */; };
 		9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */; };
 		9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A3B7B29299C5058001E2CDD /* .KEYS.plist */; };
+		9A3B7B35299CC45B001E2CDD /* LoginView+Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B2E299CC45B001E2CDD /* LoginView+Registration.swift */; };
+		9A3B7B36299CC45B001E2CDD /* LoginView+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B2F299CC45B001E2CDD /* LoginView+QRCode.swift */; };
+		9A3B7B37299CC45B001E2CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B30299CC45B001E2CDD /* LoginView.swift */; };
+		9A3B7B38299CC45B001E2CDD /* LoginView+2FACode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B31299CC45B001E2CDD /* LoginView+2FACode.swift */; };
+		9A3B7B39299CC45B001E2CDD /* LoginView+Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B32299CC45B001E2CDD /* LoginView+Code.swift */; };
+		9A3B7B3A299CC45B001E2CDD /* LoginView+Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B33299CC45B001E2CDD /* LoginView+Welcome.swift */; };
+		9A3B7B3B299CC45B001E2CDD /* LoginView+PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B34299CC45B001E2CDD /* LoginView+PhoneNumber.swift */; };
+		9A3B7B46299CC46D001E2CDD /* TdChatInspectorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B3C299CC46D001E2CDD /* TdChatInspectorService.swift */; };
+		9A3B7B47299CC46D001E2CDD /* TdHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B3D299CC46D001E2CDD /* TdHandler.swift */; };
+		9A3B7B48299CC46D001E2CDD /* TdMainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B3E299CC46D001E2CDD /* TdMainService.swift */; };
+		9A3B7B49299CC46D001E2CDD /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B3F299CC46D001E2CDD /* Service.swift */; };
+		9A3B7B4A299CC46D001E2CDD /* TdChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B40299CC46D001E2CDD /* TdChatService.swift */; };
+		9A3B7B4B299CC46D001E2CDD /* ChatInspectorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B41299CC46D001E2CDD /* ChatInspectorService.swift */; };
+		9A3B7B4C299CC46D001E2CDD /* TdLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B42299CC46D001E2CDD /* TdLoginService.swift */; };
+		9A3B7B4D299CC46D001E2CDD /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B43299CC46D001E2CDD /* LoginService.swift */; };
+		9A3B7B4E299CC46D001E2CDD /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B44299CC46D001E2CDD /* ChatService.swift */; };
+		9A3B7B4F299CC46D001E2CDD /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B45299CC46D001E2CDD /* MainService.swift */; };
+		9A3B7B52299CC4AE001E2CDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B50299CC4AE001E2CDD /* Logger.swift */; };
+		9A3B7B53299CC4AE001E2CDD /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B51299CC4AE001E2CDD /* LogLevel.swift */; };
+		9A3B7B55299CC6BE001E2CDD /* PhoneNumberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B54299CC6BE001E2CDD /* PhoneNumberInfo.swift */; };
+		9A3B7B57299CC70F001E2CDD /* Array+Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B56299CC70F001E2CDD /* Array+Tools.swift */; };
+		9A3B7B5A299CC9D6001E2CDD /* TDLibKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9A3B7B59299CC9D6001E2CDD /* TDLibKit */; };
+		9A3B7B5C299CCA8C001E2CDD /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B5B299CCA8C001E2CDD /* ServiceError.swift */; };
+		9A3B7B5E299CCB60001E2CDD /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B5D299CCB60001E2CDD /* Secret.swift */; };
+		9A3B7B60299CCC56001E2CDD /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B5F299CCC56001E2CDD /* SystemUtils.swift */; };
+		9A3B7B62299CCD50001E2CDD /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B61299CCD50001E2CDD /* UIImage+QRCode.swift */; };
+		9A3B7B63299CCE89001E2CDD /* TDLibKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9A3B7B59299CC9D6001E2CDD /* TDLibKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C59299393CA0001A1EA /* BookReaderApp.swift */; };
 		9A586C5C299393CA0001A1EA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C5B299393CA0001A1EA /* MainView.swift */; };
 		9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A586C5D299393CB0001A1EA /* Assets.xcassets */; };
@@ -86,6 +112,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9A3B7B64299CCE89001E2CDD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9A3B7B63299CCE89001E2CDD /* TDLibKit in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9A3B7B1B299C2B47001E2CDD /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfViewModel.swift; sourceTree = "<group>"; };
@@ -93,6 +133,31 @@
 		9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfView.swift; sourceTree = "<group>"; };
 		9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramClient.swift; sourceTree = "<group>"; };
 		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
+		9A3B7B2E299CC45B001E2CDD /* LoginView+Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+Registration.swift"; sourceTree = "<group>"; };
+		9A3B7B2F299CC45B001E2CDD /* LoginView+QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+QRCode.swift"; sourceTree = "<group>"; };
+		9A3B7B30299CC45B001E2CDD /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9A3B7B31299CC45B001E2CDD /* LoginView+2FACode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+2FACode.swift"; sourceTree = "<group>"; };
+		9A3B7B32299CC45B001E2CDD /* LoginView+Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+Code.swift"; sourceTree = "<group>"; };
+		9A3B7B33299CC45B001E2CDD /* LoginView+Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+Welcome.swift"; sourceTree = "<group>"; };
+		9A3B7B34299CC45B001E2CDD /* LoginView+PhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginView+PhoneNumber.swift"; sourceTree = "<group>"; };
+		9A3B7B3C299CC46D001E2CDD /* TdChatInspectorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdChatInspectorService.swift; sourceTree = "<group>"; };
+		9A3B7B3D299CC46D001E2CDD /* TdHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdHandler.swift; sourceTree = "<group>"; };
+		9A3B7B3E299CC46D001E2CDD /* TdMainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdMainService.swift; sourceTree = "<group>"; };
+		9A3B7B3F299CC46D001E2CDD /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		9A3B7B40299CC46D001E2CDD /* TdChatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdChatService.swift; sourceTree = "<group>"; };
+		9A3B7B41299CC46D001E2CDD /* ChatInspectorService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInspectorService.swift; sourceTree = "<group>"; };
+		9A3B7B42299CC46D001E2CDD /* TdLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdLoginService.swift; sourceTree = "<group>"; };
+		9A3B7B43299CC46D001E2CDD /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		9A3B7B44299CC46D001E2CDD /* ChatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		9A3B7B45299CC46D001E2CDD /* MainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
+		9A3B7B50299CC4AE001E2CDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9A3B7B51299CC4AE001E2CDD /* LogLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevel.swift; sourceTree = "<group>"; };
+		9A3B7B54299CC6BE001E2CDD /* PhoneNumberInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberInfo.swift; sourceTree = "<group>"; };
+		9A3B7B56299CC70F001E2CDD /* Array+Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Tools.swift"; sourceTree = "<group>"; };
+		9A3B7B5B299CCA8C001E2CDD /* ServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceError.swift; path = BookReader/Model/Telegram/ServiceError.swift; sourceTree = SOURCE_ROOT; };
+		9A3B7B5D299CCB60001E2CDD /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		9A3B7B5F299CCC56001E2CDD /* SystemUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
+		9A3B7B61299CCD50001E2CDD /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C59299393CA0001A1EA /* BookReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookReaderApp.swift; path = "../New Group/BookReaderApp.swift"; sourceTree = "<group>"; };
 		9A586C5B299393CA0001A1EA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -158,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AA865052998588F00E418F8 /* Highlightr in Frameworks */,
-				9A3B7B26299C4B51001E2CDD /* TDLibKit in Frameworks */,
+				9A3B7B5A299CC9D6001E2CDD /* TDLibKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,10 +247,45 @@
 		9A3B7B1F299C4921001E2CDD /* Telegram */ = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B5B299CCA8C001E2CDD /* ServiceError.swift */,
+				9A3B7B54299CC6BE001E2CDD /* PhoneNumberInfo.swift */,
+				9A3B7B41299CC46D001E2CDD /* ChatInspectorService.swift */,
+				9A3B7B44299CC46D001E2CDD /* ChatService.swift */,
+				9A3B7B43299CC46D001E2CDD /* LoginService.swift */,
+				9A3B7B45299CC46D001E2CDD /* MainService.swift */,
+				9A3B7B3F299CC46D001E2CDD /* Service.swift */,
+				9A3B7B3C299CC46D001E2CDD /* TdChatInspectorService.swift */,
+				9A3B7B40299CC46D001E2CDD /* TdChatService.swift */,
+				9A3B7B3D299CC46D001E2CDD /* TdHandler.swift */,
+				9A3B7B42299CC46D001E2CDD /* TdLoginService.swift */,
+				9A3B7B3E299CC46D001E2CDD /* TdMainService.swift */,
 				9A3B7B20299C492E001E2CDD /* TelegramBook.swift */,
 				9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */,
+				9A3B7B5D299CCB60001E2CDD /* Secret.swift */,
 			);
 			path = Telegram;
+			sourceTree = "<group>";
+		};
+		9A3B7B2C299CC45B001E2CDD /* Telegram */ = {
+			isa = PBXGroup;
+			children = (
+				9A3B7B2D299CC45B001E2CDD /* Login */,
+			);
+			path = Telegram;
+			sourceTree = "<group>";
+		};
+		9A3B7B2D299CC45B001E2CDD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9A3B7B2E299CC45B001E2CDD /* LoginView+Registration.swift */,
+				9A3B7B2F299CC45B001E2CDD /* LoginView+QRCode.swift */,
+				9A3B7B30299CC45B001E2CDD /* LoginView.swift */,
+				9A3B7B31299CC45B001E2CDD /* LoginView+2FACode.swift */,
+				9A3B7B32299CC45B001E2CDD /* LoginView+Code.swift */,
+				9A3B7B33299CC45B001E2CDD /* LoginView+Welcome.swift */,
+				9A3B7B34299CC45B001E2CDD /* LoginView+PhoneNumber.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		9A586C4D299393CA0001A1EA = {
@@ -288,6 +388,7 @@
 		9AA864CB2993BCD200E418F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B2C299CC45B001E2CDD /* Telegram */,
 				9A586C5B299393CA0001A1EA /* MainView.swift */,
 				9AA864E72997A22400E418F8 /* PDFViewer */,
 				9AA864CC2993BCF900E418F8 /* BookView.swift */,
@@ -314,6 +415,8 @@
 		9AA864E0299692B800E418F8 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B50299CC4AE001E2CDD /* Logger.swift */,
+				9A3B7B51299CC4AE001E2CDD /* LogLevel.swift */,
 				9AA864E1299692C800E418F8 /* UIShakeTools.swift */,
 				9AA864E32997A1B600E418F8 /* HashableSynthesizable.swift */,
 				9AA86518299932E700E418F8 /* Highlighter.swift */,
@@ -326,6 +429,9 @@
 				9AA8656D299BDFC400E418F8 /* UIApplication+Tools.swift */,
 				9AA86571299BE02600E418F8 /* UIImage+Tools.swift */,
 				9AA86573299BE07D00E418F8 /* CGTools.swift */,
+				9A3B7B56299CC70F001E2CDD /* Array+Tools.swift */,
+				9A3B7B5F299CCC56001E2CDD /* SystemUtils.swift */,
+				9A3B7B61299CCD50001E2CDD /* UIImage+QRCode.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -378,6 +484,7 @@
 				9A586C52299393CA0001A1EA /* Sources */,
 				9A586C53299393CA0001A1EA /* Frameworks */,
 				9A586C54299393CA0001A1EA /* Resources */,
+				9A3B7B64299CCE89001E2CDD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -386,7 +493,7 @@
 			name = BookReader;
 			packageProductDependencies = (
 				9AA865042998588F00E418F8 /* Highlightr */,
-				9A3B7B25299C4B51001E2CDD /* TDLibKit */,
+				9A3B7B59299CC9D6001E2CDD /* TDLibKit */,
 			);
 			productName = BookReader;
 			productReference = 9A586C56299393CA0001A1EA /* BookReader.app */;
@@ -462,7 +569,7 @@
 			mainGroup = 9A586C4D299393CA0001A1EA;
 			packageReferences = (
 				9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */,
-				9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */,
+				9A3B7B58299CC9D6001E2CDD /* XCRemoteSwiftPackageReference "tdlibkit" */,
 			);
 			productRefGroup = 9A586C57299393CA0001A1EA /* Products */;
 			projectDirPath = "";
@@ -512,21 +619,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AA8650C299888DC00E418F8 /* HostingController.swift in Sources */,
+				9A3B7B52299CC4AE001E2CDD /* Logger.swift in Sources */,
+				9A3B7B60299CCC56001E2CDD /* SystemUtils.swift in Sources */,
+				9A3B7B57299CC70F001E2CDD /* Array+Tools.swift in Sources */,
 				9AC2F79B2993A1580053EA37 /* GutenBook.swift in Sources */,
 				9AC2F79C2993A1580053EA37 /* GutenFetcher.swift in Sources */,
 				9AA864E92997A23700E418F8 /* PopupView.swift in Sources */,
 				9AA864E2299692C800E418F8 /* UIShakeTools.swift in Sources */,
+				9A3B7B39299CC45B001E2CDD /* LoginView+Code.swift in Sources */,
+				9A3B7B55299CC6BE001E2CDD /* PhoneNumberInfo.swift in Sources */,
 				9AA8650E2998DED400E418F8 /* MyPDFView.swift in Sources */,
+				9A3B7B36299CC45B001E2CDD /* LoginView+QRCode.swift in Sources */,
 				9AC2F7A32993A97F0053EA37 /* GutenFetcher_Preview.swift in Sources */,
 				9AA8657D299BF44600E418F8 /* SceneDelegate.swift in Sources */,
 				9AA8657B299BEFD500E418F8 /* OpenPDFBookViewController.swift in Sources */,
 				9AA864DC2995230400E418F8 /* Bookshelf.swift in Sources */,
 				9AA864D8299513BD00E418F8 /* OpenPDFBookView.swift in Sources */,
+				9A3B7B4D299CC46D001E2CDD /* LoginService.swift in Sources */,
 				9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */,
 				9AA864F32997AD7600E418F8 /* ClearButton.swift in Sources */,
 				9A3B7B1C299C2B47001E2CDD /* DocumentPicker.swift in Sources */,
 				9AC2F79E2993A1620053EA37 /* BookMetadatable.swift in Sources */,
 				9AC2F7A02993A1680053EA37 /* HTTPService.swift in Sources */,
+				9A3B7B53299CC4AE001E2CDD /* LogLevel.swift in Sources */,
 				9AA8656E299BDFC400E418F8 /* UIApplication+Tools.swift in Sources */,
 				9AA864D6299512AE00E418F8 /* OpenBookViewModel.swift in Sources */,
 				9AA86566299BDF0900E418F8 /* NSAttributedString+Tools.swift in Sources */,
@@ -535,29 +650,46 @@
 				9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */,
 				9AA864F82997C6EC00E418F8 /* LocalBookshelfViewModel.swift in Sources */,
 				9AA86572299BE02600E418F8 /* UIImage+Tools.swift in Sources */,
+				9A3B7B49299CC46D001E2CDD /* Service.swift in Sources */,
 				9AA8656C299BDF9000E418F8 /* NSRange+Tools.swift in Sources */,
 				9AA86519299932E700E418F8 /* Highlighter.swift in Sources */,
+				9A3B7B37299CC45B001E2CDD /* LoginView.swift in Sources */,
+				9A3B7B47299CC46D001E2CDD /* TdHandler.swift in Sources */,
+				9A3B7B4C299CC46D001E2CDD /* TdLoginService.swift in Sources */,
+				9A3B7B3B299CC45B001E2CDD /* LoginView+PhoneNumber.swift in Sources */,
 				9AA86574299BE07D00E418F8 /* CGTools.swift in Sources */,
 				9AA864D22993C66A00E418F8 /* GutenBookshelfViewModel.swift in Sources */,
+				9A3B7B5C299CCA8C001E2CDD /* ServiceError.swift in Sources */,
+				9A3B7B5E299CCB60001E2CDD /* Secret.swift in Sources */,
 				9AA8656A299BDF6100E418F8 /* String+Tools.swift in Sources */,
 				9AA864D42993C9A300E418F8 /* Bookshelfable.swift in Sources */,
 				9AA865102998EE9600E418F8 /* CodeOverlayView.swift in Sources */,
+				9A3B7B35299CC45B001E2CDD /* LoginView+Registration.swift in Sources */,
+				9A3B7B3A299CC45B001E2CDD /* LoginView+Welcome.swift in Sources */,
 				9AA8651E29993ADE00E418F8 /* PDFThumbnailGenerator.swift in Sources */,
 				9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */,
+				9A3B7B46299CC46D001E2CDD /* TdChatInspectorService.swift in Sources */,
+				9A3B7B4B299CC46D001E2CDD /* ChatInspectorService.swift in Sources */,
 				9AA864DA299521B600E418F8 /* BookshelfRow.swift in Sources */,
+				9A3B7B4A299CC46D001E2CDD /* TdChatService.swift in Sources */,
 				9AA864EF2997A2A600E418F8 /* PDFViewHandler.swift in Sources */,
 				9AA864ED2997A27600E418F8 /* PageOverlay.swift in Sources */,
 				9AA864CD2993BCF900E418F8 /* BookView.swift in Sources */,
 				9AA864F62997C4C400E418F8 /* LocalBook.swift in Sources */,
+				9A3B7B4F299CC46D001E2CDD /* MainService.swift in Sources */,
 				9AA864EB2997A25500E418F8 /* HighlightView.swift in Sources */,
 				9AA86568299BDF1600E418F8 /* UIColor+Tools.swift in Sources */,
 				9AA864DE299524E100E418F8 /* ManyBookshelvesViewModel.swift in Sources */,
 				9AA865082998887200E418F8 /* AppDelegate.swift in Sources */,
+				9A3B7B38299CC45B001E2CDD /* LoginView+2FACode.swift in Sources */,
 				9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */,
+				9A3B7B48299CC46D001E2CDD /* TdMainService.swift in Sources */,
 				9AA86527299A62E800E418F8 /* PDFSyntaxHighligting.swift in Sources */,
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
 				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,
+				9A3B7B4E299CC46D001E2CDD /* ChatService.swift in Sources */,
 				9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */,
+				9A3B7B62299CCD50001E2CDD /* UIImage+QRCode.swift in Sources */,
 				9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -926,12 +1058,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */ = {
+		9A3B7B58299CC9D6001E2CDD /* XCRemoteSwiftPackageReference "tdlibkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swiftgram/TDLibKit";
+			repositoryURL = "https://github.com/mock-foundation/tdlibkit.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = "3.1.0-1.8.4-07b7faf6";
 			};
 		};
 		9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */ = {
@@ -945,9 +1077,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9A3B7B25299C4B51001E2CDD /* TDLibKit */ = {
+		9A3B7B59299CC9D6001E2CDD /* TDLibKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */;
+			package = 9A3B7B58299CC9D6001E2CDD /* XCRemoteSwiftPackageReference "tdlibkit" */;
 			productName = TDLibKit;
 		};
 		9AA865042998588F00E418F8 /* Highlightr */ = {

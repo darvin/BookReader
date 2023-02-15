@@ -21,9 +21,9 @@ class TelegramBookshelfViewModel: Bookshelfable {
         await MainActor.run {
             books = []
         }
-        TelegramClient.shared.activate()
-        let chats = await TelegramClient.shared.chats()
-        
+//        TelegramClient.shared.activate()
+//        let chats = await TelegramClient.shared.chats()
+//        
         
 
     }
