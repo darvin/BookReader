@@ -14,12 +14,17 @@ class TelegramBookshelfViewModel: Bookshelfable {
     @Published
     var books: [Book] = []
 
+    
     public init() {}
 
     func fetch() async {
         await MainActor.run {
             books = []
         }
+        TelegramClient.shared.activate()
+        let chats = await TelegramClient.shared.chats()
+        
+        
 
     }
 

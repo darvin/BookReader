@@ -42,7 +42,7 @@ extension NSAttributedString {
             attributes,
             range,
             _ in
-            if let foregroundColor = attributes[.foregroundColor] as? UIColor {
+            if let _ = attributes[.foregroundColor] as? UIColor {
                 count += 1
             }
         }

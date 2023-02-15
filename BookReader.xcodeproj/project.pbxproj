@@ -11,6 +11,9 @@
 		9A3B7B1E299C490A001E2CDD /* TelegramBookshelfViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */; };
 		9A3B7B21299C492E001E2CDD /* TelegramBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B20299C492E001E2CDD /* TelegramBook.swift */; };
 		9A3B7B23299C4A3C001E2CDD /* TelegramBookshelfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */; };
+		9A3B7B26299C4B51001E2CDD /* TDLibKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9A3B7B25299C4B51001E2CDD /* TDLibKit */; };
+		9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */; };
+		9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A3B7B29299C5058001E2CDD /* .KEYS.plist */; };
 		9A586C5A299393CA0001A1EA /* BookReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C59299393CA0001A1EA /* BookReaderApp.swift */; };
 		9A586C5C299393CA0001A1EA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C5B299393CA0001A1EA /* MainView.swift */; };
 		9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A586C5D299393CB0001A1EA /* Assets.xcassets */; };
@@ -88,6 +91,8 @@
 		9A3B7B1D299C490A001E2CDD /* TelegramBookshelfViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfViewModel.swift; sourceTree = "<group>"; };
 		9A3B7B20299C492E001E2CDD /* TelegramBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBook.swift; sourceTree = "<group>"; };
 		9A3B7B22299C4A3C001E2CDD /* TelegramBookshelfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBookshelfView.swift; sourceTree = "<group>"; };
+		9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramClient.swift; sourceTree = "<group>"; };
+		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C59299393CA0001A1EA /* BookReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookReaderApp.swift; path = "../New Group/BookReaderApp.swift"; sourceTree = "<group>"; };
 		9A586C5B299393CA0001A1EA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -153,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AA865052998588F00E418F8 /* Highlightr in Frameworks */,
+				9A3B7B26299C4B51001E2CDD /* TDLibKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				9A3B7B20299C492E001E2CDD /* TelegramBook.swift */,
+				9A3B7B27299C4B64001E2CDD /* TelegramClient.swift */,
 			);
 			path = Telegram;
 			sourceTree = "<group>";
@@ -184,6 +191,7 @@
 		9A586C4D299393CA0001A1EA = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B29299C5058001E2CDD /* .KEYS.plist */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
 				9A586C74299393CB0001A1EA /* BookReaderUITests */,
@@ -378,6 +386,7 @@
 			name = BookReader;
 			packageProductDependencies = (
 				9AA865042998588F00E418F8 /* Highlightr */,
+				9A3B7B25299C4B51001E2CDD /* TDLibKit */,
 			);
 			productName = BookReader;
 			productReference = 9A586C56299393CA0001A1EA /* BookReader.app */;
@@ -453,6 +462,7 @@
 			mainGroup = 9A586C4D299393CA0001A1EA;
 			packageReferences = (
 				9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */,
+				9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */,
 			);
 			productRefGroup = 9A586C57299393CA0001A1EA /* Products */;
 			projectDirPath = "";
@@ -472,6 +482,7 @@
 			files = (
 				9AA865002998558A00E418F8 /* pytorch.pdf in Resources */,
 				9A586C62299393CB0001A1EA /* Preview Assets.xcassets in Resources */,
+				9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */,
 				9AA864FF2998558A00E418F8 /* highlightjs.pdf in Resources */,
 				9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */,
 				9AA865012998558A00E418F8 /* html.pdf in Resources */,
@@ -547,6 +558,7 @@
 				9AA864E42997A1B600E418F8 /* HashableSynthesizable.swift in Sources */,
 				9AA864FA2997CBB300E418F8 /* LocalBookFetcher.swift in Sources */,
 				9AA864F12997A31E00E418F8 /* PDFRepresentedView.swift in Sources */,
+				9A3B7B28299C4B64001E2CDD /* TelegramClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +926,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swiftgram/TDLibKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/raspu/Highlightr.git";
@@ -925,6 +945,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9A3B7B25299C4B51001E2CDD /* TDLibKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A3B7B24299C4B51001E2CDD /* XCRemoteSwiftPackageReference "TDLibKit" */;
+			productName = TDLibKit;
+		};
 		9AA865042998588F00E418F8 /* Highlightr */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9AA865032998588F00E418F8 /* XCRemoteSwiftPackageReference "Highlightr" */;
