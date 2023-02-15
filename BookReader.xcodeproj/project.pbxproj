@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A08DC03299CE76F00492F48 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 9A08DC02299CE76F00492F48 /* Shared */; };
 		9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A3B7B29299C5058001E2CDD /* .KEYS.plist */; };
 		9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A586C5D299393CB0001A1EA /* Assets.xcassets */; };
 		9A586C6C299393CB0001A1EA /* BookReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C6B299393CB0001A1EA /* BookReaderTests.swift */; };
 		9A586C76299393CB0001A1EA /* BookReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C75299393CB0001A1EA /* BookReaderUITests.swift */; };
 		9A586C78299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */; };
+		9A6F6130299D1D910036B037 /* Main in Frameworks */ = {isa = PBXBuildFile; productRef = 9A6F612F299D1D910036B037 /* Main */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A08DC00299CE37B00492F48 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C5D299393CB0001A1EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9ADAB087299D1BF100541BE4 /* Main */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Main; sourceTree = "<group>"; };
 		9AE0D850299D0951007A872A /* tdlibkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = tdlibkit; path = "/Users/standard/Library/Developer/Xcode/DerivedData/BookReader-eaxzfmnkrzzyigarzqdxznkfldtw/SourcePackages/checkouts/tdlibkit"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A08DC03299CE76F00492F48 /* Shared in Frameworks */,
+				9A6F6130299D1D910036B037 /* Main in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 		9A586C4D299393CA0001A1EA = {
 			isa = PBXGroup;
 			children = (
-				9A08DC00299CE37B00492F48 /* Shared */,
+				9ADAB087299D1BF100541BE4 /* Main */,
 				9A3B7B29299C5058001E2CDD /* .KEYS.plist */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
@@ -162,7 +162,7 @@
 			);
 			name = BookReader;
 			packageProductDependencies = (
-				9A08DC02299CE76F00492F48 /* Shared */,
+				9A6F612F299D1D910036B037 /* Main */,
 			);
 			productName = BookReader;
 			productReference = 9A586C56299393CA0001A1EA /* BookReader.app */;
@@ -647,9 +647,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9A08DC02299CE76F00492F48 /* Shared */ = {
+		9A6F612F299D1D910036B037 /* Main */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Shared;
+			productName = Main;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
