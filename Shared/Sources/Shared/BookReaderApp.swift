@@ -9,7 +9,9 @@ import SwiftUI
 //import TDLibKit
 import Books
 import PDFViewer
+#if !targetEnvironment(macCatalyst)
 import TelegramReader
+#endif
 
 @main
 public struct BookReaderApp: App {
@@ -19,8 +21,9 @@ public struct BookReaderApp: App {
 
     
     public init() {
+#if !targetEnvironment(macCatalyst)
         TelegramReaderInitialize()
-
+#endif
     }
     public var body: some Scene {
         WindowGroup(Scenes.MainScene.rawValue) {

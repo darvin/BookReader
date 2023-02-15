@@ -7,9 +7,20 @@
 
 import Foundation
 import SwiftUI
+#if !targetEnvironment(macCatalyst)
 import TelegramReader
+#endif
 import Books
 import GutenReader
+
+#if !targetEnvironment(macCatalyst)
+let platformSpecficBookshelfes =       [
+    Bookshelf.telegram
+    ]
+#else
+let platformSpecficBookshelfes: [Bookshelf] =   []
+
+#endif
 
 class ManyBookshelvesViewModel : ObservableObject {
   
@@ -18,8 +29,8 @@ class ManyBookshelvesViewModel : ObservableObject {
         .local,
         .gutenberg1,
         .gutenberg2,
-        .telegram
-    ]
+        ] + platformSpecficBookshelfes
+
 
     
     private var viewModels: [Bookshelf: any Bookshelfable] = [Bookshelf: any Bookshelfable]()
@@ -35,9 +46,11 @@ class ManyBookshelvesViewModel : ObservableObject {
                 
             case .gutenberg2:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
+#if !targetEnvironment(macCatalyst)
+
             case .telegram:
                 viewModels[bookshelf] = TelegramReader.TelegramBookshelfViewModel()
-
+#endif
 
                 
             default:
@@ -70,6 +83,9 @@ class ManyBookshelvesViewModel : ObservableObject {
                 .task {
                     await vm.fetch()
                 }
+            
+#if !targetEnvironment(macCatalyst)
+
         case .telegram:
             let vm = viewModel(bookshelf: bookshelf) as! TelegramReader.TelegramBookshelfViewModel
             return AnyView(TelegramReader.TelegramBookshelfView(viewModel:vm))
@@ -77,7 +93,7 @@ class ManyBookshelvesViewModel : ObservableObject {
                     await vm.fetch()
                 }
 
-
+#endif
         default:
             fatalError()
         }

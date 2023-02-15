@@ -8,15 +8,6 @@
         "revision" : "93199b9e434f04bda956a613af8f571933f9f037",
         "version" : "2.1.2"
       }
-    },
-    {
-      "identity" : "tdlibframework",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Swiftgram/TDLibFramework",
-      "state" : {
-        "revision" : "4f6750cd10919d181f7f57628f710b855c73b4d5",
-        "version" : "1.8.4-07b7faf6"
-      }
     }
   ],
   "version" : 2

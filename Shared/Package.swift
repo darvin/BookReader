@@ -2,6 +2,9 @@
 
 import PackageDescription
 
+
+
+
 let package = Package(
     name: "Shared",
     platforms: [
@@ -14,17 +17,16 @@ let package = Package(
             targets: ["Shared"]),
     ],
     dependencies: [
-
         .package(path: "../Books"),
-        .package(path: "../TelegramReader"),
         .package(path: "../GutenReader"),
         .package(path: "../PDFViewer"),
+        .package(path: "../TelegramReader")
     ],
     targets: [
         .target(
             name: "Shared",
             dependencies: [
-                "TelegramReader",
+                .product(name: "TelegramReader", package: "TelegramReader", condition: .when(platforms: [.iOS])),
                 "GutenReader",
                 "Books",
                 "PDFViewer",

@@ -1,3 +1,6 @@
 [submodule "guesslang"]
 	path = guesslang
 	url = https://github.com/yoeo/guesslang.git
+[submodule "tdlibkit"]
+	path = tdlibkit
+	url = https://github.com/darvin/tdlibkit.git

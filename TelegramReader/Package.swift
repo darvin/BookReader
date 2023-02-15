@@ -15,7 +15,7 @@ let package = Package(
             targets: ["TelegramReader"]),
     ],
     dependencies: [
-         .package(url: "https://github.com/mock-foundation/tdlibkit.git", from: "3.1.0-1.8.4-07b7faf6"),
+         .package(path: "../tdlibkit"),
          .package(path: "../Books"),
          .package(path: "../Tools"),
 
@@ -26,7 +26,8 @@ let package = Package(
         .target(
             name: "TelegramReader",
             dependencies: [
-                .product(name: "TDLibKit", package: "tdlibkit"),
+//                .product(name: "TDLibKit", package: "tdlibkit"),
+                .product(name: "TDLibKit", package: "tdlibkit", condition: .when(platforms: [.iOS])),
                 "Books",
                 "Tools",
             ]),
