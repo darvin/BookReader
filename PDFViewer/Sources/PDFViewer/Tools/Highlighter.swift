@@ -17,13 +17,13 @@ public class Highlighter {
         highlightr?.setTheme(to: "googlecode")
     }
 
-    func highlight(_ text: String, inBook book: (any BookMetadatable)?) -> [NSAttributedString] {
+    func highlight(_ text: String, inBook bookTitle: String?) -> [NSAttributedString] {
         guard let highlightr = highlightr else { return [] }
         var guessedLanguage: String? = nil
 
-        if let book = book {
+        if let bookTitle = bookTitle {
             for lang in HighlighterLanguages {
-                if book.title.lowercased().contains(lang) {
+                if bookTitle.lowercased().contains(lang) {
                     guessedLanguage = lang
                     break
                 }

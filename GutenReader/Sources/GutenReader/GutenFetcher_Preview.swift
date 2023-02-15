@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Books
 
 class GutenPreviewViewModel: Bookshelfable {
     @State

@@ -41,9 +41,9 @@ public class MyPDFView: PDFView {
         turnPage(false)
     }
 
-    init(frame: CGRect, book: any BookMetadatable) {
+    init(frame: CGRect, bookTitle: String) {
         pdfViewHandler = PDFViewHandler()
-        pdfViewHandler.book = book
+        pdfViewHandler.bookTitle = bookTitle
 
         super.init(frame: frame)
         autoScales = true

@@ -7,8 +7,10 @@
 
 import Foundation
 import SwiftUI
+import Books
 
 public class GutenBookshelfViewModel: Bookshelfable {
+    
     public typealias Book = GutenBook
 
     public init() {}

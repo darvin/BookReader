@@ -20,7 +20,7 @@ struct MainView: View {
                 NavigationLink {
                     try? viewModel.view(bookshelf: bookshelf)
                 } label: {
-                    Books.BookshelfRow(bookshelf: bookshelf)
+                    BookshelfRow(bookshelf: bookshelf)
                 }
             }
             .navigationTitle("Bookshelfs")

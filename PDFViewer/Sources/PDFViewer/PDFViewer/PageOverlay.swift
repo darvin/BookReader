@@ -8,10 +8,15 @@
 import Highlightr
 import PDFKit
 import UIKit
+import Tools
+
+extension CGPoint: HashableSynthesizable {}
+extension CGRect: HashableSynthesizable {}
+
 
 @objc class PageOverlay: UIView {
 
-    var book: (any BookMetadatable)?
+    var bookTitle: String?
 
     weak var pdfView: PDFView?
     private var _page: PDFPage?
@@ -37,7 +42,7 @@ import UIKit
 
         let highligtedFragments: [(NSAttributedString, NSRange, CGRect)] = HightlightSyntaxIn(
             page: page,
-            book: book
+            book: bookTitle ?? ""
         )
 
         let pageSize = page.bounds(for: .cropBox).size

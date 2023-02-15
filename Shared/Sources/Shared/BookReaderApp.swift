@@ -8,6 +8,7 @@
 import SwiftUI
 //import TDLibKit
 import Books
+import PDFViewer
 
 @main
 public struct BookReaderApp: App {
@@ -40,7 +41,7 @@ public struct BookReaderApp: App {
 
                 }.keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
                 Button("Next Page") {
-                    NotificationCenter.default.post(name: Books.MyPDFView.pdfViewNextPage, object: nil)
+                    NotificationCenter.default.post(name: MyPDFView.pdfViewNextPage, object: nil)
 
                 }
                 .keyboardShortcut(KeyEquivalent.space, modifiers: [])

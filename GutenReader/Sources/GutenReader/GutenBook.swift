@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Books
 
 struct GutenResponse: Codable {
     let count: Int

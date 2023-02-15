@@ -17,13 +17,17 @@ let package = Package(
 
         .package(path: "../Books"),
         .package(path: "../TelegramReader"),
+        .package(path: "../GutenReader"),
+        .package(path: "../PDFViewer"),
     ],
     targets: [
         .target(
             name: "Shared",
             dependencies: [
                 "TelegramReader",
+                "GutenReader",
                 "Books",
+                "PDFViewer",
 
             ])
     ]

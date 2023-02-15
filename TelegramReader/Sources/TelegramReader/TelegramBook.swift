@@ -7,6 +7,7 @@
 
 import Foundation
 import Books
+import Tools
 
 
 public struct TelegramBook: Codable, Identifiable {
@@ -14,7 +15,7 @@ public struct TelegramBook: Codable, Identifiable {
     var url: URL
 }
 
-extension TelegramBook: Books.BookPDFable {
+extension TelegramBook: BookPDFable {
     public var pdfURL: URL? {
         return url
     }
@@ -25,9 +26,9 @@ extension TelegramBook: Books.BookPDFable {
         return URL(fileURLWithPath: url.deletingLastPathComponent().path + "/." + fileName)
     }
 }
-extension TelegramBook: Books.HashableSynthesizable {}
+extension TelegramBook: HashableSynthesizable {}
 
-extension TelegramBook: Books.BookMetadatable {
+extension TelegramBook: BookMetadatable {
     public var title: String {
         let t = (url.lastPathComponent as NSString).deletingPathExtension
         return t

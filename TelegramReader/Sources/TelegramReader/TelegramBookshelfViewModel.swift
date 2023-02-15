@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Books
 
-public class TelegramBookshelfViewModel: Books.Bookshelfable {
+public class TelegramBookshelfViewModel: Bookshelfable {
     public typealias Book = TelegramBook
 
     @Published

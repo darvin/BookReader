@@ -8,9 +8,10 @@
 import AVFoundation
 import PDFKit
 import SwiftUI
+import PDFViewer
+import Tools
 
-extension CGPoint: HashableSynthesizable {}
-extension CGRect: HashableSynthesizable {}
+
 
 public struct OpenPDFBookView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -59,7 +60,7 @@ public struct OpenPDFBookView: View {
                 let buttonHeight = r.size.height / 2.3
 
                 ZStack(alignment: .topLeading) {
-                    PDFKitRepresentedView(data: data, book: viewModel.book)
+                    PDFViewer.PDFKitRepresentedView(data: data, bookTitle: viewModel.book.title)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                         .background(Color.red)
                         .edgesIgnoringSafeArea(.all)

@@ -8,7 +8,7 @@
 import Foundation
 import PDFKit
 
-func HightlightSyntaxIn(page: PDFPage, book: (any BookMetadatable)?) -> [(
+func HightlightSyntaxIn(page: PDFPage, book: String) -> [(
     NSAttributedString, NSRange, CGRect
 )] {
     let monospacedFragments = findMonospacedFragments(page: page)

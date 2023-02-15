@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Tools
 
 public struct LocalBook: Codable, Identifiable {
     public var id: UUID = UUID()

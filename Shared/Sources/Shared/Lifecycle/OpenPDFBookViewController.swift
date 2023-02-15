@@ -10,14 +10,14 @@ import SwiftUI
 import UIKit
 import Books
 
-class OpenPDFBookViewController: UIHostingController<Books.OpenPDFBookView> {
-    let book: any Books.BookPDFable
+class OpenPDFBookViewController: UIHostingController<OpenPDFBookView> {
+    let book: any BookPDFable
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     init(url: URL) {
-        book = Books.LocalBook(url: url)
-        let view = Books.OpenPDFBookView(book: book)
+        book = LocalBook(url: url)
+        let view = OpenPDFBookView(book: book)
         super.init(rootView: view)
     }
 

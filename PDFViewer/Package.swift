@@ -4,34 +4,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "TelegramReader",
+    name: "PDFViewer",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "TelegramReader",
-            targets: ["TelegramReader"]),
+            name: "PDFViewer",
+            targets: ["PDFViewer"]),
     ],
     dependencies: [
-         .package(url: "https://github.com/mock-foundation/tdlibkit.git", from: "3.1.0-1.8.4-07b7faf6"),
-         .package(path: "../Books"),
-         .package(path: "../Tools"),
+        .package(url:"https://github.com/raspu/Highlightr.git", from: "2.1.2"),
+        .package(path: "../Tools"),
 
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "TelegramReader",
+            name: "PDFViewer",
             dependencies: [
-                .product(name: "TDLibKit", package: "tdlibkit"),
-                "Books",
+                "Highlightr",
                 "Tools",
+
             ]),
         .testTarget(
-            name: "TelegramReaderTests",
-            dependencies: ["TelegramReader"]),
+            name: "PDFViewerTests",
+            dependencies: ["PDFViewer"]),
     ]
 )

@@ -16,7 +16,9 @@ let package = Package(
             targets: ["Books"]),
     ],
     dependencies: [
-        .package(url:"https://github.com/raspu/Highlightr.git", from: "2.1.2"),
+        .package(path: "../PDFViewer"),
+        .package(path: "../Tools"),
+
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -24,8 +26,8 @@ let package = Package(
         .target(
             name: "Books",
             dependencies: [
-                "Highlightr",
-
+                "PDFViewer",
+                "Tools"
             ]),
         .testTarget(
             name: "BooksTests",

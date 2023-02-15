@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 @objc class PDFViewHandler: NSObject, PDFPageOverlayViewProvider, PDFViewDelegate {
-    var book: (any BookMetadatable)?
+    var bookTitle: String?
 
     private var _pdfView: PDFView?
 
@@ -38,7 +38,7 @@ import UIKit
         if !pageOverlays.keys.contains(page) {
             let pageOverlay = PageOverlay()
             pageOverlays[page] = pageOverlay
-            pageOverlay.book = book
+            pageOverlay.bookTitle = bookTitle
 
             pageOverlay.pdfView = pdfView
             pageOverlay.page = page
