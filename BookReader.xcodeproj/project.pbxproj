@@ -46,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9A21F725299D300900B1B16F /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C5D299393CB0001A1EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,9 +56,17 @@
 		9A586C71299393CB0001A1EA /* BookReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9AB5943A299D303F0051C74E /* Views */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Views; sourceTree = "<group>"; };
+		9AB5943C299D30690051C74E /* PDFViewer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PDFViewer; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9ADAB087299D1BF100541BE4 /* Main */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Main; sourceTree = "<group>"; };
 		9AE0D850299D0951007A872A /* tdlibkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = tdlibkit; path = "/Users/standard/Library/Developer/Xcode/DerivedData/BookReader-eaxzfmnkrzzyigarzqdxznkfldtw/SourcePackages/checkouts/tdlibkit"; sourceTree = "<absolute>"; };
+		9AFAA0EE299D2ED2001EB466 /* UITools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UITools; sourceTree = "<group>"; };
+		9AFAA0EF299D2EE0001EB466 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
+		9AFAA0F0299D2EEF001EB466 /* LocalReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalReader; sourceTree = "<group>"; };
+		9AFAA0F2299D2F14001EB466 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Tools; sourceTree = "<group>"; };
+		9AFAA0F3299D2F20001EB466 /* GutenReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GutenReader; sourceTree = "<group>"; };
+		9AFAA0F5299D2F34001EB466 /* TelegramReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TelegramReader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +107,15 @@
 			isa = PBXGroup;
 			children = (
 				9ADAB087299D1BF100541BE4 /* Main */,
-				9A3B7B29299C5058001E2CDD /* .KEYS.plist */,
+				9A21F725299D300900B1B16F /* Models */,
+				9AFAA0EF299D2EE0001EB466 /* ViewModels */,
+				9AB5943A299D303F0051C74E /* Views */,
+				9AFAA0F2299D2F14001EB466 /* Tools */,
+				9AFAA0EE299D2ED2001EB466 /* UITools */,
+				9AB5943C299D30690051C74E /* PDFViewer */,
+				9AFAA0F0299D2EEF001EB466 /* LocalReader */,
+				9AFAA0F3299D2F20001EB466 /* GutenReader */,
+				9AFAA0F5299D2F34001EB466 /* TelegramReader */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
 				9A586C74299393CB0001A1EA /* BookReaderUITests */,
@@ -120,6 +137,7 @@
 		9A586C58299393CA0001A1EA /* BookReader */ = {
 			isa = PBXGroup;
 			children = (
+				9A3B7B29299C5058001E2CDD /* .KEYS.plist */,
 				9AC2F7A12993A3F70053EA37 /* Info.plist */,
 				9A586C5D299393CB0001A1EA /* Assets.xcassets */,
 				9A586C5F299393CB0001A1EA /* BookReader.entitlements */,
