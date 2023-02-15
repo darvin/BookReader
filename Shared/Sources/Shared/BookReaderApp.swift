@@ -9,6 +9,7 @@ import SwiftUI
 //import TDLibKit
 import Books
 import PDFViewer
+import TelegramReader
 
 @main
 public struct BookReaderApp: App {
@@ -18,7 +19,7 @@ public struct BookReaderApp: App {
 
     
     public init() {
-//        TdApi.shared.startTdLibUpdateHandler()
+        TelegramReaderInitialize()
 
     }
     public var body: some Scene {

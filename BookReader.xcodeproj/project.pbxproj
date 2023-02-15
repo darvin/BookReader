@@ -57,6 +57,7 @@
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9AE0D850299D0951007A872A /* tdlibkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = tdlibkit; path = "/Users/standard/Library/Developer/Xcode/DerivedData/BookReader-eaxzfmnkrzzyigarzqdxznkfldtw/SourcePackages/checkouts/tdlibkit"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +89,7 @@
 		9A08DC01299CE76A00492F48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AE0D850299D0951007A872A /* tdlibkit */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
