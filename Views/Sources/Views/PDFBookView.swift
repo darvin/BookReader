@@ -68,13 +68,10 @@ public struct PDFBookView: View {
                         .edgesIgnoringSafeArea(.all)
                         .navigationBarHidden(true)
                         .onAppear {
-                            //fixme send notification
-
-//                            setOrientationLandscape()
+                            NotificationCenter.default.post(name: ScreenOrienationNotifications.requestOrientationLandscape, object: nil)
                         }
                         .onDisappear {
-                            //fixme send notification
-//                            setOrientationPortrait()
+                            NotificationCenter.default.post(name: ScreenOrienationNotifications.requestOrientationPortrait, object: nil)
 
                         }
                         .onShake {

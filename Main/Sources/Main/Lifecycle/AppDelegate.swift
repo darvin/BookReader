@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import UITools
+
 
 @objc class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +19,13 @@ import UIKit
         supportedInterfaceOrientationsFor window: UIWindow?
     ) -> UIInterfaceOrientationMask {
         return AppDelegate.orientationLock
+    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        NotificationCenter.default.addObserver(self, selector: #selector(requestOrientationPortrait(notification:)), name: ScreenOrienationNotifications.requestOrientationPortrait, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(requestOrientationLandscape(notification:)), name: ScreenOrienationNotifications.requestOrientationLandscape, object: nil)
+
+        return true
     }
 
     func application(
@@ -32,7 +41,7 @@ import UIKit
         return sceneConfig
     }
     
-    private func setOrientationPortrait() {
+    @objc func requestOrientationPortrait(notification: Notification) {
         AppDelegate.orientationLock = .portrait
         //                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -42,7 +51,7 @@ import UIKit
 
     }
 
-    private func setOrientationLandscape() {
+    @objc func requestOrientationLandscape(notification: Notification) {
         UIDevice.current.setValue(
             UIInterfaceOrientation.landscapeLeft.rawValue,
             forKey: "orientation"
