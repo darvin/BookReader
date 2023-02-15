@@ -17,15 +17,6 @@
         "revision" : "4f6750cd10919d181f7f57628f710b855c73b4d5",
         "version" : "1.8.4-07b7faf6"
       }
-    },
-    {
-      "identity" : "tdlibkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mock-foundation/tdlibkit.git",
-      "state" : {
-        "revision" : "4188caf0a914257f7884ce0b9e4ccc077f7db941",
-        "version" : "3.1.0-1.8.4-07b7faf6"
-      }
     }
   ],
   "version" : 2
