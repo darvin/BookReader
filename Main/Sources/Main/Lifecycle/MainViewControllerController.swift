@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-class HostingController: UIHostingController<MainView> {
+class MainViewControllerController: UIHostingController<MainView> {
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }

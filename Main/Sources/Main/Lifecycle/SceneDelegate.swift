@@ -19,7 +19,7 @@ let ScenesUserInfoKeyURL = "OpenPDFBookSceneURL"
 @objc class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func makeDefaultViewController() -> UIViewController {
-        return HostingController(rootView: MainView())
+        return MainViewControllerController(rootView: MainView())
     }
 
     var window: UIWindow?

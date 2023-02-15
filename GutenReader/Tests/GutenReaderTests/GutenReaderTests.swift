@@ -2,10 +2,24 @@ import XCTest
 @testable import GutenReader
 
 final class GutenReaderTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(GutenReader().text, "Hello, World!")
+
+    
+    func testBookFetching() async throws {
+        let g = GutenFetcher()
+
+        let books = await g.startFetchingBooks()
+        var emojisIterator = ["📓", "📔", "📗", "📘", "📙", "📕", "📒"].cycled().makeIterator()
+        var indexIterator = (1...100).makeIterator()
+
+        print("📚 Fetching bunch of books ")
+
+        for try await book in books {
+            let emoji = emojisIterator.next()!
+            guard let i = indexIterator.next() else {
+                break
+            }
+            print("          \(book), // \(emoji) Book #\(i)")
+        }
     }
+
 }
