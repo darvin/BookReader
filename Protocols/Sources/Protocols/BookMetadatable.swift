@@ -14,7 +14,6 @@ public protocol BookMetadatable: Hashable, Equatable, Identifiable {
     var narrator: String? { get }
     var language: String? { get }
     var translator: String? { get }
-    var thumbnailURL: URL { get }
 }
 
 public protocol BookPDFable: BookMetadatable {

@@ -8,7 +8,7 @@
 import Foundation
 import Protocols
 
-public protocol BookOpenPDFable: BookOpenable where Body == PDFBookView {
+public protocol BookOpenPDFable: BookOpenable where BookOpenableView == PDFBookView {
     var pdfURL: URL? { get }
 }
 

@@ -15,11 +15,13 @@ let package = Package(
             targets: ["UITools"]),
     ],
     dependencies: [
+        .package(path: "../Protocols"),
     ],
     targets: [
         .target(
             name: "UITools",
             dependencies: [
+                "Protocols",
             ]),
         .testTarget(
             name: "UIToolsTests",

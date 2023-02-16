@@ -8,23 +8,13 @@
 import SwiftUI
 import Protocols
 
-let ImageWidth: CGFloat = 150
 
-struct BookView<Book: BookMetadatable>: View {
+struct BookView<Book: BookMetadatable & BookCover>: View {
     var book: Book
 
     var body: some View {
         HStack {
-            AsyncImage(url: book.thumbnailURL) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: ImageWidth)
-            } placeholder: {
-                ProgressView()
-                    .frame(width: ImageWidth)
-            }
+            book.viewBookCover
 
             VStack(alignment: .leading) {
                 Text("\(book.title)")

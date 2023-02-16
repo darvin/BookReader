@@ -18,7 +18,7 @@ struct NavigationLazyView<Content: View>: View {
     }
 }
 
-struct BookItemView<Book: BookMetadatable & BookOpenable>: View {
+struct BookItemView<Book: BookMetadatable & BookOpenable & BookCover>: View {
 
     let book: Book
 

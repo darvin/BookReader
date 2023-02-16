@@ -9,13 +9,14 @@ import Foundation
 import Protocols
 
 
-protocol QuranOpenable: BookOpenable where Body == QuranView {
+protocol QuranOpenable: BookOpenable where BookOpenableView == QuranView {
     
 }
 
 
 
 extension QuranBook: QuranOpenable {
+    
     public var view: QuranView {
         QuranView(book: self as QuranBook)
     }

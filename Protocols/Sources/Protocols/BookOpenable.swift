@@ -10,7 +10,7 @@ import SwiftUI
 
 
 public protocol BookOpenable {
-    associatedtype Body : View
+    associatedtype BookOpenableView : View
 
-    var view: Body { get }
+    var view: BookOpenableView { get }
 }

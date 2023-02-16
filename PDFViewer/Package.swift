@@ -15,6 +15,7 @@ let package = Package(
     dependencies: [
         .package(url:"https://github.com/raspu/Highlightr.git", from: "2.1.2"),
         .package(path: "../Tools"),
+        .package(path: "../UITools"),
     ],
     targets: [
         .target(
@@ -22,6 +23,7 @@ let package = Package(
             dependencies: [
                 "Highlightr",
                 "Tools",
+                "UITools",
 
             ]),
         .testTarget(
