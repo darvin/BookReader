@@ -11,24 +11,58 @@ import Protocols
 
 public struct QuranBook: Codable, Identifiable {
     public var id: UUID = UUID()
-    public var url: URL
     
-    public init(url: URL) {
-        self.id = UUID()
-        self.url = url
-    }
+    
+    
+    var recitation: QuranRecitation
+    var translation: QuranEdition?
+    var translationTransliteration: QuranEdition?
+    var arabicTrasliteration: QuranEdition?
+    
 }
 
 extension QuranBook: HashableSynthesizable {}
 
 extension QuranBook: BookMetadatable {
-    public var title: String {
-        let t = (url.lastPathComponent as NSString).deletingPathExtension
-        return t
+    public var author: String? {
+        nil
+    }
+    
+    public var narrator: String? {
+        recitation.name
+    }
+    
+    public var language: String? {
+        translation?.language
+    }
+    
+    public var translator: String? {
+        translation?.author
+    }
+    
+    var arabicTransliterationSuffix: String {
+        if let t = arabicTrasliteration {
+            return " AR "
+        } else {
+            return ""
+        }
+    }
+    
+    var translationTransliterationSuffix: String {
+        if let t = translationTransliteration {
+            return " TR "
+        } else {
+            return ""
+        }
     }
 
-    public var author: String {
-        return "Unknown"
+    
+    var titleSuffix: String {
+        "\(arabicTransliterationSuffix)\(translationTransliterationSuffix)"
+    }
+    
+    public var title: String {
+        "Quran\(titleSuffix)"
     }
 
     public var thumbnailURL: URL {

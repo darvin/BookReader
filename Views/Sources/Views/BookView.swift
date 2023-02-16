@@ -30,9 +30,34 @@ struct BookView<Book: BookMetadatable>: View {
                 Text("\(book.title)")
                     .lineLimit(2)
 
-                Text("\(book.author)")
-                    .font(Font.system(size: 10).italic())
-                    .multilineTextAlignment(.leading)
+                if let author = book.author {
+                    
+                    Text("\(author)")
+                        .font(Font.system(size: 10).italic())
+                        .multilineTextAlignment(.leading)
+                }
+
+                if let narrator = book.narrator {
+                    Text("Narrated: \(narrator)")
+                        .font(Font.system(size: 10).italic())
+
+                }
+                
+                if let translator = book.translator {
+                    Text("Translated: \(translator)")
+                        .font(Font.system(size: 10).italic())
+
+                }
+
+                
+                
+                if let language = book.language {
+                    Text("Language: \(language)")
+                        .font(Font.system(size: 10).italic())
+
+                }
+
+
             }
         }
     }

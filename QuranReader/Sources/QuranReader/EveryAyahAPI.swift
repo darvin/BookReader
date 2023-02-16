@@ -7,7 +7,7 @@
 import Tools
 import Foundation
 
-struct RecitationFolder: Codable {
+struct QuranRecitation: Codable {
     let subfolder: String
     let name: String
     let bitrate: String
@@ -16,7 +16,7 @@ struct RecitationFolder: Codable {
 
 struct RecitationsResponce: Decodable {
     let ayahCount: [Int]
-    let recitationFolders: [RecitationFolder]
+    let recitationFolders: [QuranRecitation]
     
   private enum KnownCodingKeys: CodingKey, CaseIterable {
     case ayahCount
@@ -43,11 +43,11 @@ struct RecitationsResponce: Decodable {
     let container = try decoder.container(keyedBy: KnownCodingKeys.self)
       self.ayahCount = try container.decode([Int].self, forKey: .ayahCount)
 
-    var recitationFolders:[RecitationFolder] = []
+    var recitationFolders:[QuranRecitation] = []
     let extraContainer = try decoder.container(keyedBy: DynamicCodingKeys.self)
 
     for key in extraContainer.allKeys where KnownCodingKeys.doesNotContain(key) {
-    let decoded = try extraContainer.decode(RecitationFolder.self, forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
+    let decoded = try extraContainer.decode(QuranRecitation.self, forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
     recitationFolders.append(decoded)
     }
     self.recitationFolders = recitationFolders
@@ -62,7 +62,7 @@ class EveryAyahAPI {
         return URL(string: "\(apiRoot)\(path)")!
     }
     
-    func fetchReciters() async throws -> [RecitationFolder] {
+    func fetchReciters() async throws -> [QuranRecitation] {
         let url = url(path: "data/recitations.js")
         let resp: RecitationsResponce = try await fetchJSONDecodableAPI(url: url)
         

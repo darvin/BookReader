@@ -29,13 +29,25 @@ extension TelegramBook: BookPDFable {
 extension TelegramBook: HashableSynthesizable {}
 
 extension TelegramBook: BookMetadatable {
+    public var author: String? {
+        nil
+    }
+    
+    public var narrator: String? {
+        nil
+    }
+    
+    public var language: String? {
+        nil
+    }
+    
+    public var translator: String? {
+        nil
+    }
+    
     public var title: String {
         let t = (url.lastPathComponent as NSString).deletingPathExtension
         return t
-    }
-
-    public var author: String {
-        return "Unknown"
     }
 
     public var thumbnailURL: URL {

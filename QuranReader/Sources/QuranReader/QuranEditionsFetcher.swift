@@ -14,12 +14,12 @@ class QuranEditionsFetcher {
 
     
     public func fetchBooks() -> AsyncThrowingStream<QuranBook, Error> {
-        return AsyncThrowingStream { continuation in
+        return AsyncThrowingStream { c in
             Task {
                 do {
                     
-                    let editions: [EditionResponse] = try await quranApi.fetchEditions()
-                    let allReciters: [RecitationFolder] = try await everyAyahApi.fetchReciters()
+                    let editions: [QuranEdition] = try await quranApi.fetchEditions()
+                    let allReciters: [QuranRecitation] = try await everyAyahApi.fetchReciters()
 
                     let reciters = allReciters.filter { r in
                         QuranBook.narrarorIDs.contains(r.subfolder)
@@ -34,17 +34,35 @@ class QuranEditionsFetcher {
                         e.name.hasSuffix("-la")
                     }
                     
-                    let arabicTransliteration = editions.filter { e in
+                    let arabicTransliterations = editions.filter { e in
                         e.language == "Arabic" &&
                         e.author == "Quran Transliteration"
                     }
+                    let arabicTransliteration = arabicTransliterations.first!
 
                     
-                    print("Fetched Qurans: reciters: \(reciters.count) nonArabic: \(nonArabic.count) nonArabicTranslit: \(nonArabicTranslit.count)   arabicTranslit: \(arabicTransliteration.count) ")
-                    //                    continuation.yield(book)
-                    //                    continuation.finish(throwing: nil)
+                    print("Fetched Qurans: reciters: \(reciters.count) nonArabic: \(nonArabic.count) nonArabicTranslit: \(nonArabicTranslit.count)   arabicTranslit: \(arabicTransliterations.count) ")
+                    
+                    for reciter in reciters {
+                        c.yield(QuranBook(recitation: reciter))
+                        c.yield(QuranBook(recitation: reciter, arabicTrasliteration: arabicTransliteration))
+                        for translation in nonArabic {
+                            c.yield(QuranBook(recitation: reciter,
+                                              translation:translation, arabicTrasliteration: arabicTransliteration))
+
+                            let translationTransliteration = nonArabicTranslit.filter { t in
+                                t.language == translation.language &&
+                                t.author == translation.author
+                            }.first
+                            c.yield(QuranBook(recitation: reciter,
+                                              translation:translation, translationTransliteration:translationTransliteration, arabicTrasliteration: arabicTransliteration))
+
+                            
+                        }
+                    }
+                    c.finish(throwing: nil)
                 } catch {
-                    continuation.finish(throwing: error)
+                    c.finish(throwing: error)
                 }
 
             }

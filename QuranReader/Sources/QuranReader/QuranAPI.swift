@@ -8,7 +8,7 @@
 import Foundation
 import Tools
 
-struct EditionResponse: Codable {
+struct QuranEdition: Codable {
     let name: String
     let author: String
     let language: String
@@ -23,7 +23,7 @@ struct EditionResponse: Codable {
 class QuranAPI {
     let apiRoot = "https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/"
 
-    let isMin = false
+    let isMin = true
     var minSuffix: String {
         get {
             isMin ? ".min" : ""
@@ -34,9 +34,9 @@ class QuranAPI {
         return URL(string: "\(apiRoot)\(path)\(minSuffix).json")!
     }
     
-    func fetchEditions() async throws -> [EditionResponse] {
+    func fetchEditions() async throws -> [QuranEdition] {
         let url = url(path: "editions")
-        let resp: [String:EditionResponse] = try await fetchJSONDecodableAPI(url: url)
+        let resp: [String:QuranEdition] = try await fetchJSONDecodableAPI(url: url)
         return resp.map { $0.value }
     }
 }

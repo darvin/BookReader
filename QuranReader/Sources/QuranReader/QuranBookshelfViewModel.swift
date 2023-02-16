@@ -34,7 +34,7 @@ public class QuranBookshelfViewModel: Bookshelfable {
             for try await book in booksAsyncSequence {
                 await MainActor.run {
                     books.append(book)
-                    print("BOOKS: \(books.count)")
+                    print("QURAN BOOKS: \(books.count)")
                 }
             }
         }

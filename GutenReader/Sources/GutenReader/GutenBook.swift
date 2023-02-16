@@ -32,6 +32,28 @@ extension GutenBook: BookPDFable {
 }
 
 extension GutenBook: BookMetadatable {
+    public var author: String? {
+        authors.count > 0 ?  authors.map { author in
+            author.name
+        }.joined(separator: ", ") : nil
+    }
+    
+    public var narrator: String? {
+        nil
+    }
+    
+    public var language: String? {
+        languages.count > 0 ? languages.map { language in
+            language
+        }.joined(separator: ", ") : nil
+    }
+    
+    public var translator: String? {
+        translators.count > 0 ?  translators.map { translator in
+            translator.name
+        }.joined(separator: ", ") : nil
+    }
+    
 
     public static func == (lhs: GutenBook, rhs: GutenBook) -> Bool {
         return lhs.id == rhs.id
@@ -40,11 +62,6 @@ extension GutenBook: BookMetadatable {
         hasher.combine(id)
     }
 
-    public var author: String {
-        return authors.map { author in
-            author.name
-        }.joined(separator: ", ")
-    }
 
     public var thumbnailURL: URL {
         guard let urlString = formats[GutenFormat.jpeg.rawValue] else {
