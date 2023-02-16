@@ -8,7 +8,7 @@
 import Highlightr
 import PDFKit
 import UIKit
-import Tools
+import Protocols
 
 extension CGPoint: HashableSynthesizable {}
 extension CGRect: HashableSynthesizable {}

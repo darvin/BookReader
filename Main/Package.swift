@@ -21,6 +21,7 @@ let package = Package(
         .package(path: "../GutenReader"),
         .package(path: "../PDFViewer"),
         .package(path: "../TelegramReader"),
+        .package(path: "../QuranReader"),
         .package(path: "../LocalReader"),
     ],
     targets: [
@@ -29,6 +30,7 @@ let package = Package(
             dependencies: [
                 .product(name: "TelegramReader", package: "TelegramReader", condition: .when(platforms: [.iOS])),
                 "GutenReader",
+                "QuranReader",
                 "PDFViewer",
                 "LocalReader",
                 "ViewModels",

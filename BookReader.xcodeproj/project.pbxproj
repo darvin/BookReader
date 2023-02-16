@@ -59,6 +59,7 @@
 		9AB5943C299D30690051C74E /* PDFViewer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PDFViewer; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9ADAB087299D1BF100541BE4 /* Main */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Main; sourceTree = "<group>"; };
+		9ADAF62A299EACC90048F5F7 /* QuranReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QuranReader; sourceTree = "<group>"; };
 		9AE33D0C299EABB200792D69 /* Protocols */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Protocols; sourceTree = "<group>"; };
 		9AFAA0EE299D2ED2001EB466 /* UITools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UITools; sourceTree = "<group>"; };
 		9AFAA0EF299D2EE0001EB466 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				9AFAA0F0299D2EEF001EB466 /* LocalReader */,
 				9AFAA0F3299D2F20001EB466 /* GutenReader */,
 				9AFAA0F5299D2F34001EB466 /* TelegramReader */,
+				9ADAF62A299EACC90048F5F7 /* QuranReader */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
 				9A586C74299393CB0001A1EA /* BookReaderUITests */,

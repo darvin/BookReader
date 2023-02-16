@@ -12,7 +12,7 @@ enum ApiError: Error {
     case fetchError
 }
 
-func fetchJSONDecodableAPI<D: Decodable>(url: URL) async throws -> D {
+public func fetchJSONDecodableAPI<D: Decodable>(url: URL) async throws -> D {
     let task = Task { () -> D in
         let urlRequest = URLRequest(url: url)
         print("//🌐 curl \(url)")

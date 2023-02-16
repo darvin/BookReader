@@ -1,17 +1,18 @@
 // swift-tools-version: 5.7
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "GutenReader",
+    name: "QuranReader",
     platforms: [
         .macOS(.v12),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "GutenReader",
-            targets: ["GutenReader"]),
+            name: "QuranReader",
+            targets: ["QuranReader"]),
     ],
     dependencies: [
         .package(path: "../Protocols"),
@@ -19,13 +20,13 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "GutenReader",
+            name: "QuranReader",
             dependencies: [
                 "Protocols",
                 "Tools",
             ]),
         .testTarget(
-            name: "GutenReaderTests",
-            dependencies: ["GutenReader"]),
+            name: "QuranReaderTests",
+            dependencies: ["QuranReader"]),
     ]
 )
