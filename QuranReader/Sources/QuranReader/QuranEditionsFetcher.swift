@@ -9,7 +9,8 @@ import Foundation
 
 
 class QuranEditionsFetcher {
-    let api = QuranAPI()
+    let quranApi = QuranAPI()
+    let everyAyahApi = EveryAyahAPI()
 
     
     public func fetchBooks() -> AsyncThrowingStream<QuranBook, Error> {
@@ -17,9 +18,29 @@ class QuranEditionsFetcher {
             Task {
                 do {
                     
-                    let editions: EditionsResponse = try await api.fetchEditions()
+                    let editions: [EditionResponse] = try await quranApi.fetchEditions()
+                    let allReciters: [RecitationFolder] = try await everyAyahApi.fetchReciters()
+
+                    let reciters = allReciters.filter { r in
+                        QuranBook.narrarorIDs.contains(r.subfolder)
+                    }
                     
-                    print(editions)
+                    let nonArabic = editions.filter { e in
+                        e.language != "Arabic" &&
+                        !e.name.hasSuffix("-la")
+                    }
+                    let nonArabicTranslit = editions.filter { e in
+                        e.language != "Arabic" &&
+                        e.name.hasSuffix("-la")
+                    }
+                    
+                    let arabicTransliteration = editions.filter { e in
+                        e.language == "Arabic" &&
+                        e.author == "Quran Transliteration"
+                    }
+
+                    
+                    print("Fetched Qurans: reciters: \(reciters.count) nonArabic: \(nonArabic.count) nonArabicTranslit: \(nonArabicTranslit.count)   arabicTranslit: \(arabicTransliteration.count) ")
                     //                    continuation.yield(book)
                     //                    continuation.finish(throwing: nil)
                 } catch {
