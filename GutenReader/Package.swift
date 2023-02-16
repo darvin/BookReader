@@ -15,6 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Protocols"),
+        .package(path: "../PDFViewer"),
         .package(path: "../Tools"),
     ],
     targets: [
@@ -23,6 +24,7 @@ let package = Package(
             dependencies: [
                 "Protocols",
                 "Tools",
+                "PDFViewer",
             ]),
         .testTarget(
             name: "GutenReaderTests",

@@ -9,6 +9,8 @@ import Foundation
 import Tools
 import Protocols
 
+
+
 public struct LocalBook: Codable, Identifiable {
     public var id: UUID = UUID()
     public var url: URL
@@ -18,6 +20,7 @@ public struct LocalBook: Codable, Identifiable {
         self.url = url
     }
 }
+
 
 extension LocalBook: BookPDFable {
     public var pdfURL: URL? {
@@ -47,3 +50,4 @@ extension LocalBook: BookMetadatable {
     }
 
 }
+

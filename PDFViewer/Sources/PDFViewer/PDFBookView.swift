@@ -8,7 +8,6 @@
 import AVFoundation
 import PDFKit
 import SwiftUI
-import PDFViewer
 import Tools
 import Protocols
 import ViewModels
@@ -19,10 +18,10 @@ public struct PDFBookView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @StateObject
-    var viewModel: OpenBookViewModel
+    var viewModel: PDFBookViewModel
 
     public init(book: any BookPDFable) {
-        _viewModel = StateObject(wrappedValue: OpenBookViewModel(book: book))
+        _viewModel = StateObject(wrappedValue: PDFBookViewModel(book: book))
     }
 
     private func onDissmiss() {

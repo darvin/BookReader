@@ -15,6 +15,7 @@ import ViewModels
 import Views
 import GutenReader
 import LocalReader
+import QuranReader
 
 #if !targetEnvironment(macCatalyst)
 let platformSpecficBookshelfes =       [
@@ -25,6 +26,17 @@ let platformSpecficBookshelfes: [Bookshelf] =   []
 
 #endif
 
+
+extension Bookshelf {
+    static let local = Bookshelf(id: 0, name: "Local")
+    static let gutenberg1 = Bookshelf(id: 1, name: "Gutenberg 1")
+    static let gutenberg2 = Bookshelf(id: 2, name: "Gutenberg 2")
+    static let telegram = Bookshelf(id: 3, name: "Telegram")
+    static let quran = Bookshelf(id: 4, name: "Quran")
+
+    
+}
+
 class ManyBookshelvesViewModel : ObservableObject {
   
     @Published
@@ -32,6 +44,7 @@ class ManyBookshelvesViewModel : ObservableObject {
         .local,
         .gutenberg1,
         .gutenberg2,
+        .quran,
         ] + platformSpecficBookshelfes
 
 
@@ -49,6 +62,8 @@ class ManyBookshelvesViewModel : ObservableObject {
                 
             case .gutenberg2:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
+            case .quran:
+                viewModels[bookshelf] = QuranBookshelfViewModel()
 #if !targetEnvironment(macCatalyst)
 
             case .telegram:
@@ -86,7 +101,13 @@ class ManyBookshelvesViewModel : ObservableObject {
                 .task {
                     await vm.fetch()
                 }
-            
+        case .quran:
+            let vm = viewModel(bookshelf: bookshelf) as! QuranBookshelfViewModel
+            return AnyView(BookshelfView<QuranBookshelfViewModel>(viewModel:vm))
+                .task {
+                    await vm.fetch()
+                }
+
 #if !targetEnvironment(macCatalyst)
 
         case .telegram:

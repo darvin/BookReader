@@ -11,6 +11,7 @@ import UIKit
 import Protocols
 import LocalReader
 import Views
+import PDFViewer
 
 class PDFBookViewController: UIHostingController<PDFBookView> {
     let book: any BookPDFable

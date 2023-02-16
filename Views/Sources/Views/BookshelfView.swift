@@ -18,15 +18,16 @@ struct NavigationLazyView<Content: View>: View {
     }
 }
 
-struct BookItemView<Book: BookMetadatable & BookPDFable>: View {
+struct BookItemView<Book: BookMetadatable & BookOpenable>: View {
 
     let book: Book
 
     var body: some View {
         NavigationLink {
-            NavigationLazyView<PDFBookView>(
-                PDFBookView(book: book)
-
+            NavigationLazyView<VStack>(
+                VStack {
+                    book.view
+                }
             )
         } label: {
             BookView(book: book)

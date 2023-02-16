@@ -9,7 +9,7 @@ import Foundation
 import os.log
 import Protocols
 
-public class OpenBookViewModel: ObservableObject {
+public class PDFBookViewModel: ObservableObject {
     @Published
     public var book: any BookPDFable
     @Published

@@ -16,6 +16,7 @@ let package = Package(
     dependencies: [
         .package(path: "../Protocols"),
         .package(path: "../UITools"),
+        .package(path: "../PDFViewer"),
     ],
     targets: [
         .target(
@@ -23,6 +24,7 @@ let package = Package(
             dependencies: [
                 "Protocols",
                 "UITools",
+                "PDFViewer",
             ]),
         .testTarget(
             name: "LocalReaderTests",
