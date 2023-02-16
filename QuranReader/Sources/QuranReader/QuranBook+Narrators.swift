@@ -6,9 +6,25 @@
 //
 
 import Foundation
-
+import UIKit
+import UITools
 
 extension QuranBook {
+    static let narratorCoverColors: [String: UIColor] = [
+        "Abdul_Basit_Mujawwad_128kbps": UIColor(hex: "#bfe974ff")!,
+        "Abdul_Basit_Murattal_64kbps": UIColor(hex: "#efc1b4ff")!,
+        "Abdurrahmaan_As-Sudais_192kbps": UIColor(hex: "#a8e2d3ff")!,
+        "Abu_Bakr_Ash-Shaatree_128kbps": UIColor(hex: "#bb5ed1ff")!,
+        "Alafasy_128kbps": UIColor(hex: "#b1e614ff")!,
+        "Hani_Rifai_192kbps": UIColor(hex: "#ea951eff")!,
+        "Husary_64kbps": UIColor(hex: "#cdadf6ff")!,
+        "Husary_Muallim_128kbps": UIColor(hex: "#19e2fcff")!,
+        "Minshawy_Mujawwad_192kbps": UIColor(hex: "#c7f011ff")!,
+        "Minshawy_Murattal_128kbps": UIColor(hex: "#ebb453ff")!,
+        "Mohammad_al_Tablaway_128kbps": UIColor(hex: "#bacf09ff")!,
+        "Saood_ash-Shuraym_128kbps": UIColor(hex: "#babe83ff")!,
+    ]
+    
     static let narrarorIDs = [
         "Abdul_Basit_Mujawwad_128kbps",
         "Abdul_Basit_Murattal_64kbps",

@@ -17,6 +17,7 @@ let package = Package(
     dependencies: [
         .package(path: "../Protocols"),
         .package(path: "../Tools"),
+        .package(path: "../UITools"),
     ],
     targets: [
         .target(
@@ -24,6 +25,7 @@ let package = Package(
             dependencies: [
                 "Protocols",
                 "Tools",
+                "UITools",
             ]),
         .testTarget(
             name: "QuranReaderTests",

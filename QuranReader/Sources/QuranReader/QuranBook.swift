@@ -12,9 +12,8 @@ import Protocols
 public struct QuranBook: Codable, Identifiable {
     public var id: UUID = UUID()
     
-    
-    
     var recitation: QuranRecitation
+    var arabic: QuranEdition
     var translation: QuranEdition?
     var translationTransliteration: QuranEdition?
     var arabicTrasliteration: QuranEdition?

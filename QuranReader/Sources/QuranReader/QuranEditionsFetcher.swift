@@ -9,7 +9,6 @@ import Foundation
 
 
 class QuranEditionsFetcher {
-    let quranApi = QuranAPI()
     let everyAyahApi = EveryAyahAPI()
 
     
@@ -18,7 +17,7 @@ class QuranEditionsFetcher {
             Task {
                 do {
                     
-                    let editions: [QuranEdition] = try await quranApi.fetchEditions()
+                    let editions: [QuranEdition] = try await QuranAPI.shared.fetchEditions()
                     let allReciters: [QuranRecitation] = try await everyAyahApi.fetchReciters()
 
                     let reciters = allReciters.filter { r in
@@ -38,23 +37,31 @@ class QuranEditionsFetcher {
                         e.language == "Arabic" &&
                         e.author == "Quran Transliteration"
                     }
+                    
+                    let arabics = editions.filter { e in
+                        e.language == "Arabic" &&
+                        e.author != "Quran Transliteration"
+                    }
+
+                    
                     let arabicTransliteration = arabicTransliterations.first!
+                    let arabic = arabics.first!
 
                     
                     print("Fetched Qurans: reciters: \(reciters.count) nonArabic: \(nonArabic.count) nonArabicTranslit: \(nonArabicTranslit.count)   arabicTranslit: \(arabicTransliterations.count) ")
                     
                     for reciter in reciters {
-                        c.yield(QuranBook(recitation: reciter))
-                        c.yield(QuranBook(recitation: reciter, arabicTrasliteration: arabicTransliteration))
+                        c.yield(QuranBook(recitation: reciter, arabic: arabic))
+                        c.yield(QuranBook(recitation: reciter, arabic: arabic, arabicTrasliteration: arabicTransliteration))
                         for translation in nonArabic {
-                            c.yield(QuranBook(recitation: reciter,
+                            c.yield(QuranBook(recitation: reciter, arabic: arabic,
                                               translation:translation, arabicTrasliteration: arabicTransliteration))
 
                             let translationTransliteration = nonArabicTranslit.filter { t in
                                 t.language == translation.language &&
                                 t.author == translation.author
                             }.first
-                            c.yield(QuranBook(recitation: reciter,
+                            c.yield(QuranBook(recitation: reciter, arabic: arabic,
                                               translation:translation, translationTransliteration:translationTransliteration, arabicTrasliteration: arabicTransliteration))
 
                             

@@ -8,8 +8,9 @@
 import SwiftUI
 import Protocols
 
+public let BookCoverWidth: CGFloat = 150
+
 public struct BookThumbnailURLView: View {
-    let imageWidth: CGFloat = 150
 
     var book: BookThumbnailURL
     public var body: some View {
@@ -18,10 +19,10 @@ public struct BookThumbnailURLView: View {
                 .resizable()
                 .scaledToFit()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: imageWidth)
+                .frame(width: BookCoverWidth)
         } placeholder: {
             ProgressView()
-                .frame(width: imageWidth)
+                .frame(width: BookCoverWidth)
         }
 
     }
