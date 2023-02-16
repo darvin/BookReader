@@ -14,7 +14,7 @@ public protocol BookOpenPDFable: BookOpenable where Body == PDFBookView {
 
 
 public extension BookPDFable {
-    var bodyPDFBook:  PDFBookView {
+    var viewPDFBook:  PDFBookView {
         PDFBookView(book: self)
     }
 }

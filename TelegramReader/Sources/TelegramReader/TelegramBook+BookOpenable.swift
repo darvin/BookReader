@@ -10,6 +10,6 @@ import PDFViewer
 
 extension TelegramBook: BookOpenPDFable {
     public var view: PDFViewer.PDFBookView {
-        bodyPDFBook
+        viewPDFBook
     }
 }

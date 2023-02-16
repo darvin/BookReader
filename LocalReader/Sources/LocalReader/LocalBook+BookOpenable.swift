@@ -13,6 +13,6 @@ import Protocols
 
 extension LocalBook: BookOpenPDFable {
     public var view: PDFViewer.PDFBookView {
-        bodyPDFBook
+        viewPDFBook
     }
 }
