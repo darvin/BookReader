@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import Protocols
 
 let ImageWidth: CGFloat = 150
 

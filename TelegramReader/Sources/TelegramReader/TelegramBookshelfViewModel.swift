@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import Models
+import Protocols
 
 public class TelegramBookshelfViewModel: Bookshelfable {
     public typealias Book = TelegramBook

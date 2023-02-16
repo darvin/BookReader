@@ -10,7 +10,7 @@ import PDFKit
 import SwiftUI
 import PDFViewer
 import Tools
-import Models
+import Protocols
 import ViewModels
 import UITools
 

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import Protocols
 
 struct NavigationLazyView<Content: View>: View {
     let build: () -> Content

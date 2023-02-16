@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Models
+import Protocols
 
 struct GutenResponse: Codable {
     let count: Int

@@ -3,24 +3,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "Models",
+    name: "Protocols",
     platforms: [
         .macOS(.v12),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "Models",
-            targets: ["Models"]),
+            name: "Protocols",
+            targets: ["Protocols"]),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "Models",
+            name: "Protocols",
             dependencies: []),
         .testTarget(
-            name: "ModelsTests",
-            dependencies: ["Models"]),
+            name: "ProtocolsTests",
+            dependencies: ["Protocols"]),
     ]
 )

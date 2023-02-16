@@ -14,13 +14,13 @@ let package = Package(
             targets: ["ViewModels"]),
     ],
     dependencies: [
-        .package(path: "../Models"),
+        .package(path: "../Protocols"),
     ],
     targets: [
         .target(
             name: "ViewModels",
             dependencies: [
-                "Models",
+                "Protocols",
             ]),
         .testTarget(
             name: "ViewModelsTests",

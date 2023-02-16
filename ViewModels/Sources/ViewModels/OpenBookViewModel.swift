@@ -7,7 +7,7 @@
 
 import Foundation
 import os.log
-import Models
+import Protocols
 
 public class OpenBookViewModel: ObservableObject {
     @Published

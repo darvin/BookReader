@@ -10,7 +10,7 @@ import SwiftUI
 #if !targetEnvironment(macCatalyst)
 import TelegramReader
 #endif
-import Models
+import Protocols
 import ViewModels
 import Views
 import GutenReader

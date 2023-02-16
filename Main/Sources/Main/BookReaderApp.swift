@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import Protocols
 import PDFViewer
 #if !targetEnvironment(macCatalyst)
 import TelegramReader

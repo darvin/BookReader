@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import Models
+import Protocols
 import Views
 
 struct MainView: View {

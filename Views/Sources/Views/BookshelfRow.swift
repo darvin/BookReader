@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import Protocols
 
 
 public struct BookshelfRow: View {

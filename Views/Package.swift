@@ -14,7 +14,7 @@ let package = Package(
             targets: ["Views"]),
     ],
     dependencies: [
-        .package(path: "../Models"),
+        .package(path: "../Protocols"),
         .package(path: "../ViewModels"),
         .package(path: "../UITools"),
         .package(path: "../PDFViewer"),
@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "Views",
             dependencies: [
-                "Models",
+                "Protocols",
                 "ViewModels",
                 "UITools",
                 "PDFViewer",

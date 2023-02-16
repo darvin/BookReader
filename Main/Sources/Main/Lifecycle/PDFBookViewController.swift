@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import UIKit
-import Models
+import Protocols
 import LocalReader
 import Views
 

@@ -14,13 +14,13 @@ let package = Package(
             targets: ["GutenReader"]),
     ],
     dependencies: [
-        .package(path: "../Models"),
+        .package(path: "../Protocols"),
     ],
     targets: [
         .target(
             name: "GutenReader",
             dependencies: [
-                "Models",
+                "Protocols",
             ]),
         .testTarget(
             name: "GutenReaderTests",

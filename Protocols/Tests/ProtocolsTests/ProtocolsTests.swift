@@ -1,11 +1,11 @@
 import XCTest
-@testable import Models
+@testable import Protocols
 
-final class ModelsTests: XCTestCase {
+final class ProtocolsTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Models().text, "Hello, World!")
+        XCTAssertEqual(Protocols().text, "Hello, World!")
     }
 }

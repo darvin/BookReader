@@ -46,7 +46,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A21F725299D300900B1B16F /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		9A3B7B29299C5058001E2CDD /* .KEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = .KEYS.plist; sourceTree = "<group>"; };
 		9A586C56299393CA0001A1EA /* BookReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C5D299393CB0001A1EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		9AB5943C299D30690051C74E /* PDFViewer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PDFViewer; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9ADAB087299D1BF100541BE4 /* Main */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Main; sourceTree = "<group>"; };
+		9AE33D0C299EABB200792D69 /* Protocols */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Protocols; sourceTree = "<group>"; };
 		9AFAA0EE299D2ED2001EB466 /* UITools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UITools; sourceTree = "<group>"; };
 		9AFAA0EF299D2EE0001EB466 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
 		9AFAA0F0299D2EEF001EB466 /* LocalReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalReader; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				9ADAB087299D1BF100541BE4 /* Main */,
-				9A21F725299D300900B1B16F /* Models */,
+				9AE33D0C299EABB200792D69 /* Protocols */,
 				9AFAA0EF299D2EE0001EB466 /* ViewModels */,
 				9AB5943A299D303F0051C74E /* Views */,
 				9AFAA0F2299D2F14001EB466 /* Tools */,

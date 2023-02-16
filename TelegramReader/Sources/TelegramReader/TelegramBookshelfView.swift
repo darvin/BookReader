@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Models
+import Protocols
 import Views
 
 public struct TelegramBookshelfView: View {

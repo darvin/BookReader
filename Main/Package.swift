@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         .package(path: "../Views"),
         .package(path: "../ViewModels"),
-        .package(path: "../Models"),
+        .package(path: "../Protocols"),
         .package(path: "../GutenReader"),
         .package(path: "../PDFViewer"),
         .package(path: "../TelegramReader"),
@@ -32,7 +32,7 @@ let package = Package(
                 "PDFViewer",
                 "LocalReader",
                 "ViewModels",
-                "Models",
+                "Protocols",
                 "Views",
 
             ]),

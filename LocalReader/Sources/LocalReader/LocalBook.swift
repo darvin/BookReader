@@ -7,7 +7,7 @@
 
 import Foundation
 import Tools
-import Models
+import Protocols
 
 public struct LocalBook: Codable, Identifiable {
     public var id: UUID = UUID()

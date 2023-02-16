@@ -14,14 +14,14 @@ let package = Package(
             targets: ["LocalReader"]),
     ],
     dependencies: [
-        .package(path: "../Models"),
+        .package(path: "../Protocols"),
         .package(path: "../UITools"),
     ],
     targets: [
         .target(
             name: "LocalReader",
             dependencies: [
-                "Models",
+                "Protocols",
                 "UITools",
             ]),
         .testTarget(
