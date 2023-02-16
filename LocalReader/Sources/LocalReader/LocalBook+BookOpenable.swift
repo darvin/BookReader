@@ -7,13 +7,12 @@
 
 import Foundation
 import PDFViewer
+import Protocols
 
 
-extension LocalBook: BookPDFOpenable {
+
+extension LocalBook: BookOpenPDFable {
     public var view: PDFViewer.PDFBookView {
-        PDFBookView(book: self)
+        bodyPDFBook
     }
-    
-    
-  
 }

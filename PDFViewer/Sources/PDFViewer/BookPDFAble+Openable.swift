@@ -8,13 +8,13 @@
 import Foundation
 import Protocols
 
-public protocol BookPDFOpenable: BookOpenable, BookPDFable where Body == PDFBookView {
+public protocol BookOpenPDFable: BookOpenable where Body == PDFBookView {
     var pdfURL: URL? { get }
 }
 
-public extension BookPDFOpenable {
-    
-    var body:  PDFBookView  {
+
+public extension BookPDFable {
+    var bodyPDFBook:  PDFBookView {
         PDFBookView(book: self)
     }
 }

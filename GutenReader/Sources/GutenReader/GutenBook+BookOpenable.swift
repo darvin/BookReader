@@ -7,11 +7,11 @@
 
 import Foundation
 import PDFViewer
+import Protocols
 
 
-extension GutenBook: BookPDFOpenable {
+extension GutenBook: BookOpenPDFable {
     public var view: PDFViewer.PDFBookView {
-        PDFBookView(book: self)
+        bodyPDFBook
     }
-    
 }

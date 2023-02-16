@@ -8,10 +8,8 @@
 import Foundation
 import PDFViewer
 
-
-extension TelegramBook: BookPDFOpenable {
+extension TelegramBook: BookOpenPDFable {
     public var view: PDFViewer.PDFBookView {
-        PDFBookView(book: self)
+        bodyPDFBook
     }
-    
 }
