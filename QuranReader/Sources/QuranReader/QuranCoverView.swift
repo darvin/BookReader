@@ -104,6 +104,8 @@ struct CurvedMultilineText: View {
 }
 
 
+
+
 public struct QuranCoverView: View {
     @Environment(\.presentationMode) var presentationMode
 
@@ -121,9 +123,19 @@ public struct QuranCoverView: View {
         let lineOffset = "X".heightOfString(usingFont: uiFont)
         let padding: CGFloat = 1.0
         let paddingInner: CGFloat = 2.0
+        let c = viewModel.color
+        let pageGradientColors = [
+            Color(c.darker(0.3)),
+            Color(c),
+            Color(c),
+            Color(c.darker(0.01)),
+            Color(c.darker(0.1)),
+            Color(c.darker(0.455)) ,
+
+        ]
         if viewModel.isReady {
             GeometryReader { r in
-                HStack {
+                HStack(spacing:0) {
                     
                     
 
@@ -136,6 +148,10 @@ public struct QuranCoverView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(paddingInner)
+                    .background(
+                        LinearGradient(colors: pageGradientColors, startPoint: .leading, endPoint: .trailing)
+                    )
+
                     Divider()
 
                     ZStack {
@@ -149,12 +165,16 @@ public struct QuranCoverView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(paddingInner)
+                    .background(
+                        LinearGradient(colors: pageGradientColors, startPoint: .trailing, endPoint: .leading)
+                    )
+
 
                     
 
                     
                 }
-                .padding(padding)
+                .padding(0)
                 .background(Color(viewModel.color))
                 .frame(width: BookCoverWidth, height: r.size.height)
 
