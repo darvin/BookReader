@@ -17,7 +17,10 @@ public class QuranViewModel: ObservableObject {
     private var arabicTranslit = [Verse]()
     private var translation = [Verse]()
     private var translationTranslit = [Verse]()
+    private var recitationAligment = [AyahRecitationAlignment]()
 
+    private let quranAligmentAPI = QuranAlignAPI()
+    
     @Published
     var verseIndex: Int = 0 {
         didSet {
@@ -84,6 +87,8 @@ public class QuranViewModel: ObservableObject {
             let arabicTranliterationVerses = (book.arabicTrasliteration != nil) ? try await QuranAPI.shared.fetchVerses(book.arabicTrasliteration!) : []
             let translationVerses = (book.translation != nil) ? try await QuranAPI.shared.fetchVerses(book.translation!) : []
             let translationTransliterationVerses = (book.translationTransliteration != nil) ? try await QuranAPI.shared.fetchVerses(book.translationTransliteration!) : []
+            
+            recitationAligment = try await quranAligmentAPI.fetch(for: book.recitation)
             
             await MainActor.run {
                 arabic = arabicVerses
