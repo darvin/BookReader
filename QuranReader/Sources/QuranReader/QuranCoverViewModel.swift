@@ -52,9 +52,22 @@ class QuranCoverViewModel: ObservableObject {
     
     let book: QuranBook
 
-    init(book: QuranBook) {
+
+    
+    init(book: QuranBook,
+         isReady: Bool = false,
+         arabic: String? = nil,
+         arabicTranslit: String? = nil,
+         translation: String? = nil,
+         translationTranslit: String? = nil) {
+        print("VIEW MODEL CONSTRUCTED FROM BOOK: \n \(book)")
         self.book = book
+        self.isReady = isReady
         color = QuranBook.narratorCoverColors[book.recitation.subfolder]!
+        self.arabic = arabic
+        self.arabicTranslit = arabicTranslit
+        self.translation = translation
+        self.translationTranslit = translationTranslit
     }
     
     func load() async {
@@ -68,11 +81,12 @@ class QuranCoverViewModel: ObservableObject {
             let translationTransliterationVerse = (book.translationTransliteration != nil) ? try await QuranAPI.shared.fetchVerse(book.translationTransliteration!, chapter: c, verse: v) : nil
             
             await MainActor.run {
-                arabic = arabicVerse.text.firstWords
-                arabicTranslit = arabicTranliterationVerse?.text.firstWords
-                translation = translationVerse?.text.firstWords
-                translationTranslit = translationTransliterationVerse?.text.firstWords
+                arabic = arabicVerse.text
+                arabicTranslit = arabicTranliterationVerse?.text
+                translation = translationVerse?.text
+                translationTranslit = translationTransliterationVerse?.text
                 isReady = true
+                print("VIEW MODEL FETCHED: \n\(self)(book:QuranBook.previewQurans[0]\n isReady:\(isReady),\n arabic:\"\(arabic ?? "nil")\",\n arabicTranslit:\"\(arabicTranslit ?? "nil")\",\n translation:\"\(translation ?? "nil")\",\n translationTranslit:\"\(translationTranslit ?? "nil")\" ),\n")
             }
             
         } catch {

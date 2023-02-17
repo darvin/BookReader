@@ -40,7 +40,7 @@ extension QuranBook: BookMetadatable {
     }
     
     var arabicTransliterationSuffix: String {
-        if let t = arabicTrasliteration {
+        if let _ = arabicTrasliteration {
             return " AR "
         } else {
             return ""
@@ -48,7 +48,7 @@ extension QuranBook: BookMetadatable {
     }
     
     var translationTransliterationSuffix: String {
-        if let t = translationTransliteration {
+        if let _ = translationTransliteration {
             return " TR "
         } else {
             return ""

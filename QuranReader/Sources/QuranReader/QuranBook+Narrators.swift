@@ -15,7 +15,7 @@ extension QuranBook {
         "Abdul_Basit_Murattal_64kbps": UIColor(hex: "#efc1b4ff")!,
         "Abdurrahmaan_As-Sudais_192kbps": UIColor(hex: "#a8e2d3ff")!,
         "Abu_Bakr_Ash-Shaatree_128kbps": UIColor(hex: "#bb5ed1ff")!,
-        "Alafasy_128kbps": UIColor(hex: "#b1e614ff")!,
+        "Alafasy_128kbps": UIColor(hex: "#e1e614ff")!,
         "Hani_Rifai_192kbps": UIColor(hex: "#ea951eff")!,
         "Husary_64kbps": UIColor(hex: "#cdadf6ff")!,
         "Husary_Muallim_128kbps": UIColor(hex: "#19e2fcff")!,

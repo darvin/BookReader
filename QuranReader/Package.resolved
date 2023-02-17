@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "crookedtext",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/duemunk/CrookedText.git",
+      "state" : {
+        "revision" : "70ae8691bdfb62698571e69bd855acf4030795ea",
+        "version" : "0.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}

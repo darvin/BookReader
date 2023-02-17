@@ -16,7 +16,6 @@ func HightlightSyntaxIn(page: PDFPage, book: String) -> [(
     guard let pageText: NSString = page.string as NSString? else { return [] }
 
     let highlightedFragments = monospacedFragments.map { (range, rect) in
-        []
 
         let str = pageText.substring(with: range)
 

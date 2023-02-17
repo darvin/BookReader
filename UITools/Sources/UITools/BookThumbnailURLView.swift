@@ -8,7 +8,7 @@
 import SwiftUI
 import Protocols
 
-public let BookCoverWidth: CGFloat = 150
+let BookCoverWidth: CGFloat = 150
 
 public struct BookThumbnailURLView: View {
 

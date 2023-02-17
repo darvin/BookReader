@@ -15,6 +15,7 @@ let package = Package(
             targets: ["QuranReader"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/duemunk/CrookedText.git", from: "0.0.1"),
         .package(path: "../Protocols"),
         .package(path: "../Tools"),
         .package(path: "../UITools"),
@@ -26,6 +27,7 @@ let package = Package(
                 "Protocols",
                 "Tools",
                 "UITools",
+                "CrookedText",
             ]),
         .testTarget(
             name: "QuranReaderTests",
