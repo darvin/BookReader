@@ -138,6 +138,8 @@ public struct QuranCoverView: View {
                     
                     
                     ZStack {
+                        KaleidoscopeView().opacity(0.6)
+
                         ZStack {
                             CurvedMultilineText("\(viewModel.translation ?? "" )")
 
@@ -145,7 +147,6 @@ public struct QuranCoverView: View {
                                 .offset(y:lineOffset)
 
                         }
-                        KaleidoscopeView().opacity(0.6)
                     }
                     
                     .frame(maxWidth: .infinity)
