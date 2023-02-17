@@ -12,20 +12,39 @@ import SwiftUI
 public struct QuranView: View {
 //    @Environment(\.presentationMode) var presentationMode
 //
-//    @StateObject
-//    var viewModel: OpenQuranViewModel
+    @StateObject
+    var viewModel: QuranViewModel
 
-    public init(book: QuranBook) {
-//        _viewModel = StateObject(wrappedValue: OpenBookViewModel(book: book))
+    @State private var opacity = 1.0
+
+    
+    init(viewModel: QuranViewModel) {
+        _viewModel = StateObject(wrappedValue:viewModel)
     }
+    public init(book: QuranBook) {
+        self.init(viewModel:QuranViewModel(book: book))
+    }
+
+    
     public var body: some View {
-//        if let data = viewModel.pdfData {
-//
-//        else {
+        
+        if viewModel.isReady {
+                VerseView(viewModel: viewModel.verseViewModel!)
+                .opacity(opacity)
+                .onTapGesture {
+                    viewModel.verseIndex += 1
+                }
+                .onReceive(viewModel.$verseViewModel) { _ in
+                    opacity = 0.1
+                    withAnimation(.easeInOut(duration: 1.0)) {
+                        opacity = 1.0
+                    }
+                }
+        } else {
             ProgressView().task {
-//                await viewModel.load()
+                await viewModel.load()
             }
-//        }
+        }
 
     }
 }

@@ -14,6 +14,10 @@ struct Verse: Codable {
     let text: String
 }
 
+struct AllVersesResponse: Codable {
+    let quran: [Verse]
+}
+
 struct QuranEdition: Codable {
     let name: String
     let author: String
@@ -50,6 +54,12 @@ class QuranAPI {
         let url = url(path: "editions/\(edition.name)/\(chapter)/\(verse)")
         let resp: Verse = try await fetchJSONDecodableAPI(url: url)
         return resp
+    }
+    
+    func fetchVerses(_ edition:QuranEdition) async throws -> [Verse] {
+        let url = url(path: "editions/\(edition.name)")
+        let resp: AllVersesResponse = try await fetchJSONDecodableAPI(url: url)
+        return resp.quran
     }
     
     func fetchEditions() async throws -> [QuranEdition] {

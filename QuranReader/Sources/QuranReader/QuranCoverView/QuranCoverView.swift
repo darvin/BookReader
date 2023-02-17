@@ -107,7 +107,7 @@ struct CurvedMultilineText: View {
 
 
 public struct QuranCoverView: View {
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
 
     @StateObject
     var viewModel: QuranCoverViewModel
