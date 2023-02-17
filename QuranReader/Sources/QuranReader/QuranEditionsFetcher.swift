@@ -53,6 +53,9 @@ class QuranEditionsFetcher {
                     for reciter in reciters {
                         c.yield(QuranBook(recitation: reciter, arabic: arabic))
                         c.yield(QuranBook(recitation: reciter, arabic: arabic, arabicTrasliteration: arabicTransliteration))
+                    }
+                    
+                    for reciter in reciters {
                         for translation in nonArabic {
                             c.yield(QuranBook(recitation: reciter, arabic: arabic,
                                               translation:translation, arabicTrasliteration: arabicTransliteration))

@@ -34,6 +34,8 @@ public class QuranBookshelfViewModel: Bookshelfable {
             for try await book in booksAsyncSequence {
                 await MainActor.run {
                     books.append(book)
+//                    let index = books.count > 0 ? Int.random(in: 0..<books.count) : 0
+//                    books.insert(book, at: index)
                     print("QURAN BOOKS: \(books.count)")
                 }
             }

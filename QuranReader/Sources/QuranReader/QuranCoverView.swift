@@ -121,7 +121,6 @@ public struct QuranCoverView: View {
     public var body: some View {
         let uiFont = UIFont.systemFont(ofSize: 8.0)
         let lineOffset = "X".heightOfString(usingFont: uiFont)
-        let padding: CGFloat = 1.0
         let paddingInner: CGFloat = 2.0
         let c = viewModel.color
         let pageGradientColors = [
@@ -138,14 +137,17 @@ public struct QuranCoverView: View {
                 HStack(spacing:0) {
                     
                     
-
                     ZStack {
-                        CurvedMultilineText("\(viewModel.translation ?? "" )")
+                        ZStack {
+                            CurvedMultilineText("\(viewModel.translation ?? "" )")
 
-                        CurvedMultilineText("\(viewModel.translationTranslit ?? "" )")
-                            .offset(y:lineOffset)
+                            CurvedMultilineText("\(viewModel.translationTranslit ?? "" )")
+                                .offset(y:lineOffset)
 
+                        }
+                        KaleidoscopeView().opacity(0.6)
                     }
+                    
                     .frame(maxWidth: .infinity)
                     .padding(paddingInner)
                     .background(
@@ -155,8 +157,6 @@ public struct QuranCoverView: View {
                     Divider()
 
                     ZStack {
-//                        Text("\(viewModel.arabic ?? "" )")
-
                         CurvedMultilineText("\(viewModel.arabic ?? "" )")
 
                         CurvedMultilineText("\(viewModel.arabicTranslit ?? "" )")
