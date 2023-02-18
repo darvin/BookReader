@@ -26,16 +26,36 @@ public struct VerseView: View {
     
     public var body: some View {
         VStack {
-            if let wordIndex = viewModel.playingNowWordIndex {
-                Text("\(wordIndex)")
-            }
+//            if let wordIndex = viewModel.playingNowWordIndex {
+//                Text("\(wordIndex)")
+//            }
 
             Text("(\(viewModel.chapter.arabicNumber()):\(viewModel.verse.arabicNumber()))")
             if let arabic = viewModel.arabic {
-                Text(arabic)
+                let textViews = arabic.components(separatedBy: " ").enumerated().map { (i, word) -> Text in
+                    
+                    let isCurrentWord: Bool = (i == viewModel.playingNowWordIndex)
+                    
+                    return Text(word)
+                        .fontWeight(isCurrentWord ? .bold : .regular)
+                }
+                    
+                textViews.reduce(Text(""), { $0 + $1 + Text(" ")} )
+
             }
             if let arabicTranslit = viewModel.arabicTranslit {
-                Text(arabicTranslit)
+//                Text(arabicTranslit)
+                
+                let textViews = arabicTranslit.components(separatedBy: " ").enumerated().map { (i, word) -> Text in
+                    
+                    let isCurrentWord: Bool = (i == viewModel.playingNowWordIndex)
+                    
+                    return Text(word)
+                        .fontWeight(isCurrentWord ? .bold : .regular)
+                }
+                    
+                textViews.reduce(Text(""), { $0 + $1 + Text(" ")} )
+
             }
             if let translation = viewModel.translation {
                 Text(translation)
