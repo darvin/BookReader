@@ -36,7 +36,7 @@ public class QuranBookshelfViewModel: Bookshelfable {
                     books.append(book)
 //                    let index = books.count > 0 ? Int.random(in: 0..<books.count) : 0
 //                    books.insert(book, at: index)
-                    print("QURAN BOOKS: \(books.count)")
+//                    print("QURAN BOOKS: \(books.count)")
                 }
             }
         }

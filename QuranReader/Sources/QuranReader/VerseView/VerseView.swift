@@ -26,6 +26,10 @@ public struct VerseView: View {
     
     public var body: some View {
         VStack {
+            if let hr = viewModel.higlighedVerseRange {
+                Text("\(hr.location) ") + Text("\(hr.length)")
+            }
+
             Text("(\(viewModel.chapter.arabicNumber()):\(viewModel.verse.arabicNumber()))")
             if let arabic = viewModel.arabic {
                 Text(arabic)

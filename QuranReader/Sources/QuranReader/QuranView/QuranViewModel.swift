@@ -11,6 +11,8 @@ import AVFoundation
 public class QuranViewModel: ObservableObject {
     @Published
     var verseViewModel: VerseViewModel? = nil
+    
+    
 
     let book: QuranBook
     
@@ -133,13 +135,28 @@ public class QuranViewModel: ObservableObject {
     
     
     var audioPlayer: AVPlayer?
-
+    private var timeObserver: Any?
+    private func killTimeObserver() {
+        guard let timeObserver = timeObserver else { return }
+        audioPlayer?.removeTimeObserver(timeObserver)
+        self.timeObserver = nil
+    }
+    
+    private func killAudioPlayer() {
+        guard let audioPlayer = audioPlayer else { return }
+        killTimeObserver()
+        audioPlayer.pause()
+        self.audioPlayer = nil
+    }
+    
     func playRecitation(){
+        killAudioPlayer()
+        
         let url = EveryAyahAPI.shared.url(recitation: book.recitation, verseInChapter: verseInChapterIndex, chapter: chapterIndex)
         let player = AVPlayer(url: url)
 
         let observedTimes = aligmentMilliseconds.map { ms in
-            let cmTime = CMTime(seconds: Double(ms)/1000.0, preferredTimescale: 1)
+            let cmTime = CMTime(seconds: Double(ms)/1000.0, preferredTimescale: 1000)
             return cmTime
         }
         
@@ -149,18 +166,31 @@ public class QuranViewModel: ObservableObject {
         
         let segments = aligment.segments
         
-        let timeObserver = player.addBoundaryTimeObserver(forTimes: observedTimesValues, queue: .main) {
+        timeObserver = player.addBoundaryTimeObserver(forTimes: observedTimesValues, queue: .main) {
             let currentTime = player.currentTime()
             let currentTimeMs = Int(currentTime.seconds * 1000.0)
-            let currentAligment = segments.filter {
+            
+            let filteredSegments = segments.filter {
                 return $0.msStart <= currentTimeMs && currentTimeMs <= $0.msEnd
-            }.first!
+            }
+            guard let currentAligment = filteredSegments.first else {
+                print("ALIGMENT ERROR: \(currentTimeMs)  not found in \(segments)")
+                return
+            }
+            
+            
             
             let aligmentIndex = segments.firstIndex(of: currentAligment)!
             
-            if aligmentIndex == segments.count && currentTimeMs == segments[aligmentIndex].msEnd {
-                player.removeTimeObserver(timeObserver)
-//                    verseIndex += 1
+            self.verseViewModel?.higlighedVerseRange = NSRange(location: currentAligment.indexStart, length: currentAligment.indexStart - currentAligment.indexEnd)
+            
+            if aligmentIndex == (segments.count - 1) {
+                print("CURR: \(currentTimeMs) end \(segments[aligmentIndex].msEnd)")
+            }
+//
+            if aligmentIndex == (segments.count - 1) && currentTimeMs >= segments[aligmentIndex].msEnd {
+                self.killTimeObserver()
+                self.verseIndex += 1
 
             }
         }

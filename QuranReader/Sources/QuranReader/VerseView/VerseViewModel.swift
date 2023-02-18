@@ -24,6 +24,8 @@ class VerseViewModel: ObservableObject {
     
     let book: QuranBook
 
+    @Published
+    var higlighedVerseRange: NSRange?
 
     
     init(book:QuranBook,

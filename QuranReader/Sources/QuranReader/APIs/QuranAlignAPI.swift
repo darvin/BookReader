@@ -38,7 +38,10 @@ public struct AyahRecitationAlignment: Codable {
         self.ayah = try container.decode(Int.self, forKey: .ayah)
         self.surah = try container.decode(Int.self, forKey: .surah)
         
-        let segmentsRaw = try container.decode([[Int]].self, forKey: .segments)
+        guard let segmentsRaw = try? container.decode([[Int]].self, forKey: .segments) else {
+            self.segments = []
+            return
+        }
         
         self.segments = segmentsRaw.flatMap({ (rawSegment: [Int]) in
             AyahRecitationSegment(
