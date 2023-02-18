@@ -18,6 +18,8 @@ extension Int {
 }
 
 
+let QuranFontName = "Amiri Quran Colored"
+
 public struct VerseView: View {
     
     @ObservedObject
@@ -25,10 +27,9 @@ public struct VerseView: View {
     
     
     public var body: some View {
+        let verseColorCurrentWord = Color(UIColor.label)
+        let verseColor = Color(UIColor.lightText)
         VStack {
-//            if let wordIndex = viewModel.playingNowWordIndex {
-//                Text("\(wordIndex)")
-//            }
 
             Text("(\(viewModel.chapter.arabicNumber()):\(viewModel.verse.arabicNumber()))")
             if let arabic = viewModel.arabic {
@@ -37,24 +38,39 @@ public struct VerseView: View {
                     let isCurrentWord: Bool = (i == viewModel.playingNowWordIndex)
                     
                     return Text(word)
-                        .fontWeight(isCurrentWord ? .bold : .regular)
+                        .foregroundColor(isCurrentWord ? verseColorCurrentWord : verseColor)
+                        .font(Font.custom(QuranFontName, size: 600, relativeTo: .body))
                 }
                     
-                textViews.reduce(Text(""), { $0 + $1 + Text(" ")} )
+                textViews.reduce(Text(""), { $0 + $1 +
+                    Text(" ")
+                        .font(Font.custom(QuranFontName, size: 600, relativeTo: .body))
+                    
+                } )
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
+
 
             }
             if let arabicTranslit = viewModel.arabicTranslit {
 //                Text(arabicTranslit)
-                
-                let textViews = arabicTranslit.components(separatedBy: " ").enumerated().map { (i, word) -> Text in
+                let reversedTranslit = String(arabicTranslit.reversed())
+                let reversedTranslitWords = reversedTranslit.components(separatedBy: " ")
+                let textViews = reversedTranslitWords.enumerated().map { (i, word) -> Text in
                     
-                    let isCurrentWord: Bool = (i == viewModel.playingNowWordIndex)
+                    let isCurrentWord: Bool = (reversedTranslitWords.count - 1 - i == viewModel.playingNowWordIndex)
                     
                     return Text(word)
-                        .fontWeight(isCurrentWord ? .bold : .regular)
+                        .font(Font.custom(QuranFontName, size: 200, relativeTo: .body).smallCaps())
+                        .foregroundColor(isCurrentWord ? verseColorCurrentWord : verseColor)
                 }
                     
-                textViews.reduce(Text(""), { $0 + $1 + Text(" ")} )
+                textViews.reduce(Text(""), { $0 + $1 +
+                    Text(" ")
+                        .font(Font.custom(QuranFontName, size: 200, relativeTo: .body))
+                } )
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.1)
 
             }
             if let translation = viewModel.translation {

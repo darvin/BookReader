@@ -13,6 +13,7 @@
 		9A586C76299393CB0001A1EA /* BookReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C75299393CB0001A1EA /* BookReaderUITests.swift */; };
 		9A586C78299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */; };
 		9A6F6130299D1D910036B037 /* Main in Frameworks */ = {isa = PBXBuildFile; productRef = 9A6F612F299D1D910036B037 /* Main */; };
+		9A7064B429A0F02A0049E29B /* amiri-quran-colored-full.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A7064B329A0F02A0049E29B /* amiri-quran-colored-full.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		9A586C71299393CB0001A1EA /* BookReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A586C75299393CB0001A1EA /* BookReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITests.swift; sourceTree = "<group>"; };
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9A7064B329A0F02A0049E29B /* amiri-quran-colored-full.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "amiri-quran-colored-full.ttf"; sourceTree = "<group>"; };
 		9AB5943A299D303F0051C74E /* Views */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Views; sourceTree = "<group>"; };
 		9AB5943C299D30690051C74E /* PDFViewer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PDFViewer; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		9A586C58299393CA0001A1EA /* BookReader */ = {
 			isa = PBXGroup;
 			children = (
+				9A7064B229A0F0150049E29B /* Fonts */,
 				9A3B7B29299C5058001E2CDD /* .KEYS.plist */,
 				9AC2F7A12993A3F70053EA37 /* Info.plist */,
 				9A586C5D299393CB0001A1EA /* Assets.xcassets */,
@@ -152,6 +155,14 @@
 				9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */,
 			);
 			path = BookReaderUITests;
+			sourceTree = "<group>";
+		};
+		9A7064B229A0F0150049E29B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9A7064B329A0F02A0049E29B /* amiri-quran-colored-full.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			files = (
 				9A3B7B2A299C5058001E2CDD /* .KEYS.plist in Resources */,
 				9A586C5E299393CB0001A1EA /* Assets.xcassets in Resources */,
+				9A7064B429A0F02A0049E29B /* amiri-quran-colored-full.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
