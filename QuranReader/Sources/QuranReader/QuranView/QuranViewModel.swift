@@ -135,6 +135,8 @@ public class QuranViewModel: ObservableObject {
     
     
     var audioPlayer: AVPlayer?
+    var nextAudioPlayer: AVPlayer?
+    
     private var timeObserver: Any?
     private func killTimeObserver() {
         guard let timeObserver = timeObserver else { return }
@@ -149,12 +151,31 @@ public class QuranViewModel: ObservableObject {
         self.audioPlayer = nil
     }
     
+    func makeAudioPlayer() -> AVPlayer {
+        if let nextAudioPlayer = nextAudioPlayer {
+            return nextAudioPlayer
+        } else {
+            let url = EveryAyahAPI.shared.url(recitation: book.recitation, verseInChapter: verseInChapterIndex, chapter: chapterIndex)
+            let player = AVPlayer(url: url)
+            return player
+        }
+    }
+    
+    func makeNextAudioPlayer() -> AVPlayer? {
+        guard arabic.count > verseIndex + 1 else { return nil }
+        let nextVerse = arabic[verseIndex+1]
+        let nextVerseInChapterIndex = nextVerse.verse
+        let nextChapterIndex = nextVerse.chapter
+        let url = EveryAyahAPI.shared.url(recitation: book.recitation, verseInChapter: nextVerseInChapterIndex, chapter: nextChapterIndex)
+        let player = AVPlayer(url: url)
+        return player
+    }
+    
     func playRecitation(){
         killAudioPlayer()
         
-        let url = EveryAyahAPI.shared.url(recitation: book.recitation, verseInChapter: verseInChapterIndex, chapter: chapterIndex)
-        let player = AVPlayer(url: url)
-
+        let player = makeAudioPlayer()
+        nextAudioPlayer = makeNextAudioPlayer()
         let observedTimes = aligmentMilliseconds.map { ms in
             let cmTime = CMTime(seconds: Double(ms)/1000.0, preferredTimescale: 1000)
             return cmTime
