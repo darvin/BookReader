@@ -173,26 +173,24 @@ public class QuranViewModel: ObservableObject {
             let filteredSegments = segments.filter {
                 return $0.msStart <= currentTimeMs && currentTimeMs <= $0.msEnd
             }
+            
+            
+            guard let lastSegment = segments.sorted().last else {
+                return
+            }
+            
             guard let currentAligment = filteredSegments.first else {
-                print("ALIGMENT ERROR: \(currentTimeMs)  not found in \(segments)")
+                if currentTimeMs >= lastSegment.msEnd {
+                    self.killTimeObserver()
+                    self.verseIndex += 1
+                }
                 return
             }
             
             
+                        
+            self.verseViewModel?.playingNowWordIndex = currentAligment.indexStart
             
-            let aligmentIndex = segments.firstIndex(of: currentAligment)!
-            
-            self.verseViewModel?.higlighedVerseRange = NSRange(location: currentAligment.indexStart, length: currentAligment.indexStart - currentAligment.indexEnd)
-            
-            if aligmentIndex == (segments.count - 1) {
-                print("CURR: \(currentTimeMs) end \(segments[aligmentIndex].msEnd)")
-            }
-//
-            if aligmentIndex == (segments.count - 1) && currentTimeMs >= segments[aligmentIndex].msEnd {
-                self.killTimeObserver()
-                self.verseIndex += 1
-
-            }
         }
 
         player.play()

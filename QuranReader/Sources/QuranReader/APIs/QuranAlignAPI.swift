@@ -21,6 +21,14 @@ extension AyahRecitationSegment: Equatable {
     
 }
 
+extension AyahRecitationSegment: Comparable {
+    public static func < (lhs: AyahRecitationSegment, rhs: AyahRecitationSegment) -> Bool {
+        return lhs.msEnd < rhs.msEnd
+    }
+    
+    
+}
+
 public struct AyahRecitationAlignment: Codable {
     public let ayah: Int
     public let segments: [AyahRecitationSegment]
