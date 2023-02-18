@@ -28,10 +28,15 @@ public struct VerseView: View {
     
     public var body: some View {
         let verseColorCurrentWord = Color(UIColor.label)
-        let verseColor = Color(UIColor.lightText)
+        let verseColor = Color(UIColor.systemGray)
+        let verseNumberColor = Color(UIColor.systemGray5)
         VStack {
 
-            Text("(\(viewModel.chapter.arabicNumber()):\(viewModel.verse.arabicNumber()))")
+            Text("\(viewModel.chapter.arabicNumber()):\(viewModel.verse.arabicNumber())")
+                .foregroundColor(verseNumberColor)
+            
+            Spacer()
+            
             if let arabic = viewModel.arabic {
                 let textViews = arabic.components(separatedBy: " ").enumerated().map { (i, word) -> Text in
                     
@@ -48,7 +53,7 @@ public struct VerseView: View {
                     
                 } )
                     .lineLimit(1)
-                    .minimumScaleFactor(0.1)
+                    .minimumScaleFactor(0.01)
 
 
             }
@@ -70,16 +75,26 @@ public struct VerseView: View {
                         .font(Font.custom(QuranFontName, size: 200, relativeTo: .body))
                 } )
                     .lineLimit(1)
-                    .minimumScaleFactor(0.1)
+                    .minimumScaleFactor(0.01)
 
             }
+            
             if let translation = viewModel.translation {
+                Spacer()
+
                 Text(translation)
+                    .foregroundColor(verseColor)
             }
             if let translationTranslit = viewModel.translationTranslit {
                 Text(translationTranslit)
+                    .foregroundColor(verseColor)
             }
-            Text("(\(viewModel.chapter):\(viewModel.verse))")
+            
+            Spacer()
+
+            Text("\(viewModel.chapter):\(viewModel.verse)")
+                .foregroundColor(verseNumberColor)
+
 
         }
     }
