@@ -21,15 +21,19 @@ class VerseViewModel: ObservableObject {
     let verse: Int
     
     let chapter: Int
+    
+    let book: QuranBook
 
 
     
-    init(verse: Int,
+    init(book:QuranBook,
+        verse: Int,
          chapter: Int,
         arabic: String,
          arabicTranslit: String? = nil,
          translation: String? = nil,
          translationTranslit: String? = nil) {
+        self.book = book
         self.verse = verse
         self.chapter = chapter
         self.arabic = arabic
@@ -37,6 +41,8 @@ class VerseViewModel: ObservableObject {
         self.translation = translation
         self.translationTranslit = translationTranslit
     }
-    
+
         
+    
+
 }

@@ -39,6 +39,8 @@ public struct QuranView: View {
                     withAnimation(.easeInOut(duration: 1.0)) {
                         opacity = 1.0
                     }
+                    viewModel.playRecitation()
+
                 }
         } else {
             ProgressView().task {

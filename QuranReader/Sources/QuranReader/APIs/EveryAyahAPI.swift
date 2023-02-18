@@ -57,7 +57,12 @@ struct RecitationsResponce: Decodable {
 class EveryAyahAPI {
     let apiRoot = "https://everyayah.com/"
 
+    private init() {
+        
+    }
     
+    static let shared = EveryAyahAPI()
+
     func url(path:String) -> URL {
         return URL(string: "\(apiRoot)\(path)")!
     }
@@ -68,5 +73,11 @@ class EveryAyahAPI {
         
         
         return resp.recitationFolders
+    }
+    
+    func url(recitation: QuranRecitation, verseInChapter:Int, chapter:Int) -> URL {
+        let filename = String(format: "%03d%03d", chapter,verseInChapter)
+        let url = url(path: "data/\(recitation.subfolder)/\(filename).mp3")
+        return url
     }
 }

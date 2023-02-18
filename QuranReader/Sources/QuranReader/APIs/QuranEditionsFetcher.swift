@@ -9,8 +9,6 @@ import Foundation
 
 
 class QuranEditionsFetcher {
-    let everyAyahApi = EveryAyahAPI()
-
     
     public func fetchBooks() -> AsyncThrowingStream<QuranBook, Error> {
         return AsyncThrowingStream { c in
@@ -18,7 +16,7 @@ class QuranEditionsFetcher {
                 do {
                     
                     let editions: [QuranEdition] = try await QuranAPI.shared.fetchEditions()
-                    let allReciters: [QuranRecitation] = try await everyAyahApi.fetchReciters()
+                    let allReciters: [QuranRecitation] = try await EveryAyahAPI.shared.fetchReciters()
 
                     let reciters = allReciters.filter { r in
                         QuranBook.narrarorIDs.contains(r.subfolder)

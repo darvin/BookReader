@@ -31,6 +31,9 @@ let package = Package(
             ]),
         .testTarget(
             name: "QuranReaderTests",
-            dependencies: ["QuranReader"]),
+            dependencies: ["QuranReader"],
+            resources: [
+                .copy("Fixtures")]
+        ),
     ]
 )

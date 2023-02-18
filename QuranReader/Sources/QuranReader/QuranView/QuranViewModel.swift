@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 public class QuranViewModel: ObservableObject {
     @Published
@@ -20,6 +21,26 @@ public class QuranViewModel: ObservableObject {
     private var recitationAligment = [AyahRecitationAlignment]()
 
     private let quranAligmentAPI = QuranAlignAPI()
+    
+    var aligment: AyahRecitationAlignment {
+        let a = recitationAligment.filter {
+            $0.ayah == verseInChapterIndex && $0.surah == chapterIndex
+        }.first
+        return a!
+    }
+    
+    var aligmentMilliseconds: [Int] {
+        let msWordBoundaries = aligment.segments.map {
+            return [$0.msStart, $0.msEnd]
+        }
+      
+        let flattenArray = msWordBoundaries.reduce([], { (result: [Int], element: [Int]) -> [Int] in
+            return result + element
+        })
+
+        return flattenArray
+        
+    }
     
     @Published
     var verseIndex: Int = 0 {
@@ -72,12 +93,14 @@ public class QuranViewModel: ObservableObject {
 
     
     private func makeVerseViewModel() -> VerseViewModel  {
-        return VerseViewModel(verse: verseInChapterIndex,
-                              chapter: chapterIndex,
-                              arabic: arabicText(),
-                              arabicTranslit: arabicTranliterationText(),
-                              translation: translationText(),
-                              translationTranslit: translationTranslitText())
+        return VerseViewModel(
+            book: book,
+            verse: verseInChapterIndex,
+          chapter: chapterIndex,
+          arabic: arabicText(),
+          arabicTranslit: arabicTranliterationText(),
+          translation: translationText(),
+          translationTranslit: translationTranslitText())
     }
     
     
@@ -100,11 +123,52 @@ public class QuranViewModel: ObservableObject {
             }
             
         } catch {
-            print("Error fecthing cover: \(error)")
+            print("Error fecthing quran: \(error)")
         }
         
         
 
+    }
+    
+    
+    
+    var audioPlayer: AVPlayer?
+
+    func playRecitation(){
+        let url = EveryAyahAPI.shared.url(recitation: book.recitation, verseInChapter: verseInChapterIndex, chapter: chapterIndex)
+        let player = AVPlayer(url: url)
+
+        let observedTimes = aligmentMilliseconds.map { ms in
+            let cmTime = CMTime(seconds: Double(ms)/1000.0, preferredTimescale: 1)
+            return cmTime
+        }
+        
+        let observedTimesValues = observedTimes.map { cmTime in
+            NSValue(time: cmTime)
+        }
+        
+        let segments = aligment.segments
+        
+        let timeObserver = player.addBoundaryTimeObserver(forTimes: observedTimesValues, queue: .main) {
+            let currentTime = player.currentTime()
+            let currentTimeMs = Int(currentTime.seconds * 1000.0)
+            let currentAligment = segments.filter {
+                return $0.msStart <= currentTimeMs && currentTimeMs <= $0.msEnd
+            }.first!
+            
+            let aligmentIndex = segments.firstIndex(of: currentAligment)!
+            
+            if aligmentIndex == segments.count && currentTimeMs == segments[aligmentIndex].msEnd {
+                player.removeTimeObserver(timeObserver)
+//                    verseIndex += 1
+
+            }
+        }
+
+        player.play()
+        
+        audioPlayer = player
+        
     }
 
 }
