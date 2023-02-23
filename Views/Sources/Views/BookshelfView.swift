@@ -1,56 +1,23 @@
 //
-//  BookshelfView.swift
-//  BookReader
+//  File.swift
+//  
 //
-//  Created by standard on 2/8/23.
+//  Created by standard on 2/23/23.
 //
 
 import SwiftUI
 import Protocols
 
-struct NavigationLazyView<Content: View>: View {
-    let build: () -> Content
-    init(_ build: @autoclosure @escaping () -> Content) {
-        self.build = build
-    }
-    var body: Content {
-        build()
-    }
-}
-
-struct BookItemView<Book: BookMetadatable & BookOpenable & BookCover>: View {
-
-    let book: Book
-
-    var body: some View {
-        NavigationLink {
-            NavigationLazyView<VStack>(
-                VStack {
-                    book.view
-                }
-            )
-        } label: {
-            BookView(book: book)
-        }.buttonStyle(PlainButtonStyle())
-
-    }
-
-}
-
-public struct BookshelfView<BookshelfViewModel>: View where BookshelfViewModel: Bookshelfable {
-    @ObservedObject
-    var viewModel: BookshelfViewModel
+struct BookshelfView<Book: BookMetadatable & BookOpenable & BookCover>: View {
+    let books: [Book]
+    let isLoading: Bool
+    let onScrolledAtBottom: () -> Void
 
     @State
     var isGridLayout = true
+
     
-    public init(viewModel: any Bookshelfable, isGridLayout: Bool = true) {
-        self.viewModel = viewModel as! BookshelfViewModel
-        self.isGridLayout = isGridLayout
-    }
-
-    public var body: some View {
-
+    var body: some View {
         GeometryReader { r in
 
             ScrollView(.vertical) {
@@ -66,12 +33,17 @@ public struct BookshelfView<BookshelfViewModel>: View where BookshelfViewModel: 
                     )
 
                     LazyVGrid(columns: columns) {
-                        ForEach(viewModel.books, id: \.self) { book in
+                        ForEach(books, id: \.self) { book in
                             BookItemView(book: book)
                                 .frame(
                                     width: columnWidth,
                                     height: 150
                                 )
+                                .onAppear {
+                                                if self.books.last == book {
+                                                    self.onScrolledAtBottom()
+                                                }
+                                            }
 
                         }
 
@@ -80,9 +52,14 @@ public struct BookshelfView<BookshelfViewModel>: View where BookshelfViewModel: 
                 }
                 else {
                     LazyVStack(alignment: .leading, spacing: 10) {
-                        ForEach(viewModel.books, id: \.self) { book in
+                        ForEach(books, id: \.self) { book in
                             BookItemView(book: book)
                                 .frame(height: 150)
+                                .onAppear {
+                                                if self.books.last == book {
+                                                    self.onScrolledAtBottom()
+                                                }
+                                            }
 
                         }
                     }
@@ -110,10 +87,9 @@ public struct BookshelfView<BookshelfViewModel>: View where BookshelfViewModel: 
 
         }
     }
+    
+    private var loadingIndicator: some View {
+        Spinner(style: .medium)
+            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+    }
 }
-
-//struct BookshelfView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BookshelfView<GutenPreviewViewModel>(viewModel: GutenPreviewViewModel())
-//    }
-//}

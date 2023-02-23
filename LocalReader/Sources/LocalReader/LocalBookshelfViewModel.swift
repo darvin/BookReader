@@ -11,6 +11,11 @@ import Protocols
 import UITools
 
 public class LocalBookshelfViewModel: Bookshelfable {
+    public var canLoadNextPage: Bool = true
+    
+    public func fetchNextPageIfPossible() {
+        
+    }
     public typealias Book = LocalBook
 
     @Published

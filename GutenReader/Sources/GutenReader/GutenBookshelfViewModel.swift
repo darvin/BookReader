@@ -8,50 +8,45 @@
 import Foundation
 import SwiftUI
 import Protocols
+import Combine
 
 public class GutenBookshelfViewModel: Bookshelfable {
+    @Published private(set) public var canLoadNextPage = true
     
+    @Published private(set) public var books = [Book]()
+
     public typealias Book = GutenBook
 
     public init() {}
 
-    let api = GutenFetcher()
-
-    @Published
-    public var books = [Book]()
-
-    public func getFirstHundred() async {
-        await fetchBooks()
+    
+    private var subscriptions = Set<AnyCancellable>()
+    
+    public func fetchNextPageIfPossible() {
+        guard canLoadNextPage else { return }
+        let fetch = (nextPageURL != nil) ? GutenFetcher.shared.fetchBooks(url: nextPageURL!) : GutenFetcher.shared.fetchBooks(query: [:])
+        
+        fetch.sink(receiveCompletion: onReceive,
+                  receiveValue: onReceive)
+            .store(in: &subscriptions)
     }
-
-    public func getAnotherHundred() async {
-        await fetchBooks(query: [
-            "page": "30"
-        ])
-
-    }
-
-    func fetchBooks(query: [String: String] = [String: String](), limitBooks: Int = 100) async {
-        await MainActor.run {
-            books = []
-        }
-        let booksAsyncSequence = await api.fetchBooks(query: query, limitBooks: limitBooks)
-        do {
-            for try await book in booksAsyncSequence.filter({ book in
-                book.formats[GutenFormat.pdf.rawValue] != nil
-            }) {
-                await MainActor.run {
-                    books.append(book)
-                    print("BOOKS: \(books.count)")
-                }
-            }
-        }
-        catch {
-            print("error: ", error)
+    
+    private func onReceive(_ completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure:
+            canLoadNextPage = false
         }
     }
 
-    func search(searchTerm: String) {
-
+    private func onReceive(_ result: ([Book], URL?)) {
+        let (books, nextPageURL) = result
+        self.books += books
+        self.nextPageURL = nextPageURL
+        canLoadNextPage = nextPageURL != nil
     }
+
+    private var nextPageURL: URL?
+
 }

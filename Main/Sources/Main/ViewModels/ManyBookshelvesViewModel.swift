@@ -85,25 +85,25 @@ class ManyBookshelvesViewModel : ObservableObject {
 
         case .gutenberg1:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return AnyView(BookshelfView<GutenBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<GutenBookshelfViewModel>(viewModel:vm))
                         .task {
-                            await vm.getFirstHundred()
+//                            await vm.getFirstHundred()
                         }
         case .gutenberg2:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return AnyView(BookshelfView<GutenBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<GutenBookshelfViewModel>(viewModel:vm))
                         .task {
-                            await vm.getAnotherHundred()
+//                            await vm.getAnotherHundred()
                         }
         case .local:
             let vm = viewModel(bookshelf: bookshelf) as! LocalBookshelfViewModel
-            return AnyView(BookshelfView<LocalBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<LocalBookshelfViewModel>(viewModel:vm))
                 .task {
                     await vm.fetch()
                 }
         case .quran:
             let vm = viewModel(bookshelf: bookshelf) as! QuranBookshelfViewModel
-            return AnyView(BookshelfView<QuranBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<QuranBookshelfViewModel>(viewModel:vm))
                 .task {
                     await vm.fetch()
                 }

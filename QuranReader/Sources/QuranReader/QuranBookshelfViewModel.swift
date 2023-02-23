@@ -14,6 +14,12 @@ import SwiftUI
 import Protocols
 
 public class QuranBookshelfViewModel: Bookshelfable {
+    public var canLoadNextPage: Bool = true
+    
+    public func fetchNextPageIfPossible() {
+        
+    }
+    
         
     public typealias Book = QuranBook
 

@@ -18,7 +18,7 @@ public struct TelegramBookshelfView: View {
     public var body: some View {
         if !viewModel.showingLoginScreen {
             VStack {
-                BookshelfView<TelegramBookshelfViewModel>(viewModel: viewModel)
+                BookshelfViewContainer<TelegramBookshelfViewModel>(viewModel: viewModel)
             }
 
         } else {

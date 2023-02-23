@@ -10,11 +10,12 @@ import Foundation
 import Tools
 
 
-public actor GutenFetcher {
-    public init() {}
+public class GutenFetcher {
+    public static var shared = GutenFetcher()
+    private init() {}
 
-    public func fetchBooks(query: [String: String] = [String: String](), limitBooks: Int = 100)
-        -> AsyncThrowingStream<GutenBook, Error>
+    public func fetchBooks(query: [String: String] = [String: String]())
+        -> AnyPublisher<([GutenBook], URL?), Error>
     {
         var components = URLComponents()
         components.scheme = "http"
@@ -28,43 +29,21 @@ public actor GutenFetcher {
         let url = components.url!
         let fixedURL = URL(string: "\(url.absoluteString)&mime_type=application%2Fpdf")!
 
-        return fetchBooks(url: fixedURL, limitBooks: limitBooks)
+        return fetchBooks(url: fixedURL)
     }
 
-    private func fetchBooks(url: URL, limitBooks: Int) -> AsyncThrowingStream<GutenBook, Error> {
-        return AsyncThrowingStream { continuation in
-            Task {
-                var i = 0
-                var currentPageUrl = url
-                while true {
-                    do {
-                        let url = currentPageUrl
-
-                        let gutenResp: GutenResponse = try await fetchJSONDecodableAPI(url: url)
-                        for book in gutenResp.results {
-                            i += 1
-                            continuation.yield(book)
-
-                        }
-                        if i >= limitBooks {
-                            continuation.finish(throwing: nil)
-                            break
-                        }
-
-                        guard let nextPageUrl = gutenResp.next else {
-                            continuation.finish(throwing: nil)
-                            break
-                        }
-
-                        currentPageUrl = URL(string: nextPageUrl)!
-                    }
-                    catch {
-                        continuation.finish(throwing: error)
-                        break
-                    }
-                }
+    public func fetchBooks(url: URL) -> AnyPublisher<([GutenBook], URL?), Error>  {
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: url)
+            .handleEvents(receiveOutput: { print(NSString(data: $0.data, encoding: String.Encoding.utf8.rawValue)!) })
+            .tryMap {
+                let r = try JSONDecoder().decode(GutenResponse.self, from: $0.data)
+                return (r.results, (r.next != nil) ? URL(string: r.next!) : nil)
             }
-        }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+
 
     }
 }

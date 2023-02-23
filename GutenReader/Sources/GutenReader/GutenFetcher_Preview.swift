@@ -10,6 +10,12 @@ import SwiftUI
 import Protocols
 
 class GutenPreviewViewModel: Bookshelfable {
+    var canLoadNextPage: Bool = false
+    
+    func fetchNextPageIfPossible() {
+        
+    }
+    
     @State
     var books = GutenFetcher.dummyBooks
 }

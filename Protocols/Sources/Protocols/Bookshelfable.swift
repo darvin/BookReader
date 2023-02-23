@@ -10,4 +10,6 @@ import Foundation
 public protocol Bookshelfable: ObservableObject {
     associatedtype Book: BookMetadatable & BookOpenable & BookCover
     var books: [Book] { get }
+    var canLoadNextPage: Bool { get }
+    func fetchNextPageIfPossible()
 }
