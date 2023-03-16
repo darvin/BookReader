@@ -16,9 +16,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/duemunk/CrookedText.git", from: "0.0.1"),
-        .package(path: "../Protocols"),
-        .package(path: "../Tools"),
-        .package(path: "../UITools"),
+        .package(path: "../../Protocols"),
+        .package(path: "../../Tools"),
+        .package(path: "../../UITools"),
     ],
     targets: [
         .target(

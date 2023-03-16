@@ -58,17 +58,12 @@
 		9A586C77299393CB0001A1EA /* BookReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9A7064B329A0F02A0049E29B /* amiri-quran-colored-full.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "amiri-quran-colored-full.ttf"; sourceTree = "<group>"; };
 		9AB5943A299D303F0051C74E /* Views */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Views; sourceTree = "<group>"; };
-		9AB5943C299D30690051C74E /* PDFViewer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PDFViewer; sourceTree = "<group>"; };
 		9AC2F7A12993A3F70053EA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9ADAB087299D1BF100541BE4 /* Main */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Main; sourceTree = "<group>"; };
-		9ADAF62A299EACC90048F5F7 /* QuranReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QuranReader; sourceTree = "<group>"; };
 		9AE33D0C299EABB200792D69 /* Protocols */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Protocols; sourceTree = "<group>"; };
 		9AFAA0EE299D2ED2001EB466 /* UITools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UITools; sourceTree = "<group>"; };
 		9AFAA0EF299D2EE0001EB466 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
-		9AFAA0F0299D2EEF001EB466 /* LocalReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalReader; sourceTree = "<group>"; };
 		9AFAA0F2299D2F14001EB466 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Tools; sourceTree = "<group>"; };
-		9AFAA0F3299D2F20001EB466 /* GutenReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GutenReader; sourceTree = "<group>"; };
-		9AFAA0F5299D2F34001EB466 /* TelegramReader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TelegramReader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +101,6 @@
 				9AB5943A299D303F0051C74E /* Views */,
 				9AFAA0F2299D2F14001EB466 /* Tools */,
 				9AFAA0EE299D2ED2001EB466 /* UITools */,
-				9AB5943C299D30690051C74E /* PDFViewer */,
-				9AFAA0F0299D2EEF001EB466 /* LocalReader */,
-				9AFAA0F3299D2F20001EB466 /* GutenReader */,
-				9AFAA0F5299D2F34001EB466 /* TelegramReader */,
-				9ADAF62A299EACC90048F5F7 /* QuranReader */,
 				9A586C58299393CA0001A1EA /* BookReader */,
 				9A586C6A299393CB0001A1EA /* BookReaderTests */,
 				9A586C74299393CB0001A1EA /* BookReaderUITests */,
@@ -459,6 +449,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BookReader/BookReader.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BookReader/Preview Content\"";
@@ -487,6 +478,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.standard.BookReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -505,6 +497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BookReader/BookReader.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BookReader/Preview Content\"";
@@ -533,6 +526,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.standard.BookReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;

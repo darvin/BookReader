@@ -18,11 +18,11 @@ let package = Package(
         .package(path: "../Views"),
         .package(path: "../ViewModels"),
         .package(path: "../Protocols"),
-        .package(path: "../GutenReader"),
-        .package(path: "../PDFViewer"),
-        .package(path: "../TelegramReader"),
-        .package(path: "../QuranReader"),
-        .package(path: "../LocalReader"),
+        .package(path: "../Plugins/GutenReader"),
+        .package(path: "../Plugins/PDFViewer"),
+        .package(path: "../Plugins/TelegramReader"),
+        .package(path: "../Plugins/QuranReader"),
+        .package(path: "../Plugins/LocalReader"),
     ],
     targets: [
         .target(

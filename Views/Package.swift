@@ -17,7 +17,7 @@ let package = Package(
         .package(path: "../Protocols"),
         .package(path: "../ViewModels"),
         .package(path: "../UITools"),
-        .package(path: "../PDFViewer"),
+        .package(path: "../Plugins/PDFViewer"),
 
     ],
     targets: [

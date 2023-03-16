@@ -5,7 +5,9 @@ import PackageDescription
 let package = Package(
     name: "PDFViewer",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v16),
+        .macCatalyst(.v15),
+        .macOS(.v12),
     ],
     products: [
         .library(
@@ -14,8 +16,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url:"https://github.com/raspu/Highlightr.git", from: "2.1.2"),
-        .package(path: "../Tools"),
-        .package(path: "../UITools"),
+        .package(path: "../../Tools"),
+        .package(path: "../../UITools"),
     ],
     targets: [
         .target(

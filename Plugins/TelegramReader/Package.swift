@@ -5,7 +5,8 @@ import PackageDescription
 let package = Package(
     name: "TelegramReader",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v16),
+        .macOS(.v12),
     ],
     products: [
         .library(
@@ -13,10 +14,10 @@ let package = Package(
             targets: ["TelegramReader"]),
     ],
     dependencies: [
-         .package(path: "../tdlibkit"),
-         .package(path: "../Protocols"),
+         .package(path: "./tdlibkit"),
+         .package(path: "../../Protocols"),
          .package(path: "../PDFViewer"),
-         .package(path: "../Tools"),
+         .package(path: "../../Tools"),
 
     ],
     targets: [

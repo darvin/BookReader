@@ -10,6 +10,11 @@ import SwiftUI
 import Protocols
 
 public class TelegramBookshelfViewModel: Bookshelfable {
+    public var canLoadNextPage: Bool = true
+    
+    public func fetchNextPageIfPossible() {
+    }
+    
     public typealias Book = TelegramBook
 
     @Published

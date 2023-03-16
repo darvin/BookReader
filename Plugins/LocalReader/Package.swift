@@ -3,31 +3,31 @@
 import PackageDescription
 
 let package = Package(
-    name: "GutenReader",
+    name: "LocalReader",
     platforms: [
         .macOS(.v12),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "GutenReader",
-            targets: ["GutenReader"]),
+            name: "LocalReader",
+            targets: ["LocalReader"]),
     ],
     dependencies: [
-        .package(path: "../Protocols"),
+        .package(path: "../../Protocols"),
+        .package(path: "../../UITools"),
         .package(path: "../PDFViewer"),
-        .package(path: "../Tools"),
     ],
     targets: [
         .target(
-            name: "GutenReader",
+            name: "LocalReader",
             dependencies: [
                 "Protocols",
-                "Tools",
+                "UITools",
                 "PDFViewer",
             ]),
         .testTarget(
-            name: "GutenReaderTests",
-            dependencies: ["GutenReader"]),
+            name: "LocalReaderTests",
+            dependencies: ["LocalReader"]),
     ]
 )
