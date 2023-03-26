@@ -1,16 +1,14 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by standard on 2/23/23.
 //
 
-import SwiftUI
 import Protocols
-
+import SwiftUI
 
 struct BookItemView<Book: BookMetadatable & BookOpenable & BookCover>: View {
-
     let book: Book
 
     var body: some View {
@@ -22,8 +20,10 @@ struct BookItemView<Book: BookMetadatable & BookOpenable & BookCover>: View {
             )
         } label: {
             BookView(book: book)
-        }.buttonStyle(PlainButtonStyle())
-
+        }
+        .buttonStyle(PlainButtonStyle())
+        .padding(.top, 3)
+        .padding(.bottom, 3)
+        .padding(.leading, 9)
     }
-
 }

@@ -8,119 +8,99 @@
 import Foundation
 import SwiftUI
 #if !targetEnvironment(macCatalyst)
-import TelegramReader
+    import TelegramReader
 #endif
-import Protocols
-import ViewModels
-import Views
 import GutenReader
 import LocalReader
+import Protocols
 import QuranReader
+import ViewModels
+import Views
 
 #if !targetEnvironment(macCatalyst)
-let platformSpecficBookshelfes =       [
-    Bookshelf.telegram
+    let platformSpecficBookshelfes = [
+        Bookshelf.telegram,
     ]
 #else
-let platformSpecficBookshelfes: [Bookshelf] =   []
+    let platformSpecficBookshelfes: [Bookshelf] = []
 
 #endif
-
 
 extension Bookshelf {
     static let local = Bookshelf(id: 0, name: "Local")
-    static let gutenberg1 = Bookshelf(id: 1, name: "Gutenberg 1")
-    static let gutenberg2 = Bookshelf(id: 2, name: "Gutenberg 2")
+    static let gutenberg = Bookshelf(id: 1, name: "Gutenberg")
     static let telegram = Bookshelf(id: 3, name: "Telegram")
     static let quran = Bookshelf(id: 4, name: "Quran")
-
-    
 }
 
-class ManyBookshelvesViewModel : ObservableObject {
-  
+class ManyBookshelvesViewModel: ObservableObject {
     @Published
     var bookshelfs: [Bookshelf] = [
         .local,
-        .gutenberg1,
-        .gutenberg2,
+        .gutenberg,
         .quran,
-        ] + platformSpecficBookshelfes
+    ] + platformSpecficBookshelfes
 
+    private var viewModels: [Bookshelf: any Bookshelfable] = .init()
 
-    
-    private var viewModels: [Bookshelf: any Bookshelfable] = [Bookshelf: any Bookshelfable]()
-    
-    private func viewModel(bookshelf:Bookshelf) -> any Bookshelfable {
+    private func viewModel(bookshelf: Bookshelf) -> any Bookshelfable {
         if !viewModels.keys.contains(bookshelf) {
-            switch (bookshelf) {
+            switch bookshelf {
             case .local:
                 viewModels[bookshelf] = LocalBookshelfViewModel()
 
-            case .gutenberg1:
+            case .gutenberg:
                 viewModels[bookshelf] = GutenBookshelfViewModel()
-                
-            case .gutenberg2:
-                viewModels[bookshelf] = GutenBookshelfViewModel()
+
             case .quran:
                 viewModels[bookshelf] = QuranBookshelfViewModel()
-#if !targetEnvironment(macCatalyst)
+            #if !targetEnvironment(macCatalyst)
 
-            case .telegram:
-                viewModels[bookshelf] = TelegramReader.TelegramBookshelfViewModel()
-#endif
+                case .telegram:
+                    viewModels[bookshelf] = TelegramReader.TelegramBookshelfViewModel()
+            #endif
 
-                
             default:
                 fatalError()
             }
         }
         return viewModels[bookshelf]!
-
     }
 
 //    @ViewBuilder
-    func view(bookshelf:Bookshelf) throws -> some View {
-        switch (bookshelf) {
-
-        case .gutenberg1:
+    func view(bookshelf: Bookshelf) throws -> some View {
+        switch bookshelf {
+        case .gutenberg:
             let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return AnyView(BookshelfViewContainer<GutenBookshelfViewModel>(viewModel:vm))
-                        .task {
+            return AnyView(BookshelfViewContainer<GutenBookshelfViewModel>(viewModel: vm))
+                .task {
 //                            await vm.getFirstHundred()
-                        }
-        case .gutenberg2:
-            let vm = viewModel(bookshelf: bookshelf) as! GutenBookshelfViewModel
-            return AnyView(BookshelfViewContainer<GutenBookshelfViewModel>(viewModel:vm))
-                        .task {
-//                            await vm.getAnotherHundred()
-                        }
+                }
         case .local:
             let vm = viewModel(bookshelf: bookshelf) as! LocalBookshelfViewModel
-            return AnyView(BookshelfViewContainer<LocalBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<LocalBookshelfViewModel>(viewModel: vm))
                 .task {
                     await vm.fetch()
                 }
         case .quran:
             let vm = viewModel(bookshelf: bookshelf) as! QuranBookshelfViewModel
-            return AnyView(BookshelfViewContainer<QuranBookshelfViewModel>(viewModel:vm))
+            return AnyView(BookshelfViewContainer<QuranBookshelfViewModel>(viewModel: vm))
                 .task {
                     await vm.fetch()
                 }
 
-#if !targetEnvironment(macCatalyst)
+        #if !targetEnvironment(macCatalyst)
 
-        case .telegram:
-            let vm = viewModel(bookshelf: bookshelf) as! TelegramReader.TelegramBookshelfViewModel
-            return AnyView(TelegramReader.TelegramBookshelfView(viewModel:vm))
-                .task {
-                    await vm.fetch()
-                }
+            case .telegram:
+                let vm = viewModel(bookshelf: bookshelf) as! TelegramReader.TelegramBookshelfViewModel
+                return AnyView(TelegramReader.TelegramBookshelfView(viewModel: vm))
+                    .task {
+                        await vm.fetch()
+                    }
 
-#endif
+        #endif
         default:
             fatalError()
         }
     }
 }
-
