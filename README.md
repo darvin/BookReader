@@ -1,5 +1,16 @@
 # BookReader
 
+
+
+https://user-images.githubusercontent.com/309302/227768838-9c5f7142-8089-4fe2-84b3-784f360ba7e4.mp4
+
+
+
+https://user-images.githubusercontent.com/309302/227768882-ee4138d5-a74f-49c4-bb8b-27be9fd6aa73.mp4
+
+
+
+
 BookReader is a SwiftUI based iOS/Mac application for reading PDF books. It is designed using MVVM pattern and uses Combine and UIKit to wrap PDFKit and some other GUI elements. The application supports seamless zoom preserving scrolling, invert colors accessibility support, and programming languages syntax highlighting in the [PDF books](Plugins/PDFReader/README.md).
 
 ## Features
