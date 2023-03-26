@@ -27,5 +27,5 @@ QuranReader provides the following features:
 
 The QuranReader plugin uses recitations from [everyayah.com](https://everyayah.com) and [fawazahmed0/quran-api](https://github.com/fawazahmed0/quran-api), and Quran recitations align data from [cpfair/quran-align](https://github.com/cpfair/quran-align).
 
-You can select your preferred combination of recitation, translation, and transliteration from the settings screen. Once you have selected your preferences, the recitation will automatically synchronize with the text as you read.
+You can select your preferred combination of recitation, translation, and transliteration from the bookshelf screen. Once you have selected your preferences, the recitation will automatically synchronize with the text as you read.
 
