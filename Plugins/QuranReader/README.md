@@ -1,5 +1,11 @@
 # QuranReader Plugin for BookReader
 
+
+
+https://user-images.githubusercontent.com/309302/227768920-d71c93a6-a10f-49c4-a90b-e6285aacf196.mp4
+
+
+
 QuranReader is a plugin for BookReader that allows you to read and listen to the Quran at the same time. The plugin synchronizes the recitation with the text, highlighting the current verse being recited. This plugin is especially useful for those who want to learn the Quran and memorize it.
 
 ## The Beauty and Importance of the Quran
