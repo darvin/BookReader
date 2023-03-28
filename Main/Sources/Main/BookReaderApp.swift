@@ -5,11 +5,11 @@
 //  Created by standard on 2/8/23.
 //
 
-import SwiftUI
-import Protocols
 import PDFViewer
+import Protocols
+import SwiftUI
 #if !targetEnvironment(macCatalyst)
-import TelegramReader
+    import TelegramReader
 #endif
 
 @main
@@ -18,19 +18,18 @@ public struct BookReaderApp: App {
     @State private var showingDocumentPicker = false
     @State private var filePathURL: URL?
 
-    
     public init() {
-#if !targetEnvironment(macCatalyst)
-        TelegramReaderInitialize()
-#endif
+        #if !targetEnvironment(macCatalyst)
+            TelegramReaderInitialize()
+        #endif
     }
+
     public var body: some Scene {
         WindowGroup(Scenes.MainScene.rawValue) {
             MainView()
                 .sheet(isPresented: $showingDocumentPicker) {
                     DocumentPicker(filePath: $filePathURL)
                 }
-
         }
         .commands {
             CommandGroup(replacing: .importExport) {
@@ -41,17 +40,15 @@ public struct BookReaderApp: App {
             CommandMenu("Navigation") {
                 Button("Prev Page") {
                     NotificationCenter.default.post(name: MyPDFView.pdfViewPrevPage, object: nil)
-
-                }.keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
+                }
+                .keyboardShortcut("/", modifiers: [])
+                .keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
                 Button("Next Page") {
                     NotificationCenter.default.post(name: MyPDFView.pdfViewNextPage, object: nil)
-
                 }
                 .keyboardShortcut(KeyEquivalent.space, modifiers: [])
-                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])  //fixme only first seems to work
-
+                .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: []) // fixme only first seems to work
             }
         }
     }
-
 }

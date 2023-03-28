@@ -86,14 +86,15 @@ extension PDFView {
 public extension PDFView {
     func turnPage(_ isForwardDirection: Bool = true) {
         guard let scrollView = scrollView else { return }
+        let overlapHeight = 20.0
+        let offsetY = scrollView.contentOffset.y + (isForwardDirection ? scrollView.bounds.height - overlapHeight : -scrollView.bounds.height + overlapHeight)
 
-        let offsetY = scrollView.contentOffset.y + (isForwardDirection ? scrollView.bounds.height : -scrollView.bounds.height)
         let offsetX = scrollView.contentOffset.x
         let contentSize = scrollView.contentSize
 
         if offsetY >= 0, offsetY <= contentSize.height - scrollView.bounds.height {
             let newOffset = CGPoint(x: offsetX, y: offsetY)
-            UIView.animate(withDuration: 0.03) {
+            UIView.animate(withDuration: 0.01) {
                 scrollView.contentOffset = newOffset
             }
         }
